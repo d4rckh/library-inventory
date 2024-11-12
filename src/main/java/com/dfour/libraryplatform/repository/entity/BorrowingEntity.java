@@ -42,6 +42,6 @@ public class BorrowingEntity {
     @Column(nullable = false)
     private OffsetDateTime returnDate;
 
-    @Column(nullable = true)
+    @Column
     private OffsetDateTime returnedDate;
 }

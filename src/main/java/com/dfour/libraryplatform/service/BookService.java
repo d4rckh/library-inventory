@@ -20,16 +20,11 @@ public class BookService {
 
     private final BookRepository books;
 
-    public List<BookEntity> findAll(List<String> tags) {
+    public List<BookEntity> findAll() {
         return books.findAll(
-                tags, tags.isEmpty(), tags.size(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
-    }
-
-    public List<BookEntity> findAll() {
-        return this.findAll(new ArrayList<>());
     }
 
     public BookEntity patch(long bookId, BookEntity incompleteBookEntity) {

@@ -3,6 +3,8 @@ package com.dfour.libraryplatform.controller;
 import com.dfour.libraryplatform.repository.BookRepository;
 import com.dfour.libraryplatform.repository.entity.BookEntity;
 import com.dfour.libraryplatform.service.BookService;
+import com.dfour.libraryplatform.service.security.UserSecurity;
+import com.dfour.libraryplatform.service.security.authentication.AppAuthentication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    private List<BookEntity> findAll(
-            @RequestParam(required = false) List<String> tags
-    ) {
-        return bookService.findAll(Objects.isNull(tags) ? new ArrayList<>() : tags);
+    private List<BookEntity> findAll() {
+        return bookService.findAll();
     }
 
     @PatchMapping("/{bookId}")
@@ -31,11 +31,15 @@ public class BookController {
             @PathVariable Long bookId,
             @RequestBody BookEntity incompleteBookEntity
     ) {
+        UserSecurity userSecurity = AppAuthentication.GetUserDetails();
+        log.info("Updating book as {} ", userSecurity.getUsername());
         return bookService.patch(bookId, incompleteBookEntity);
     }
 
     @PostMapping
     BookEntity create(@RequestBody BookEntity bookEntity) {
+        UserSecurity userSecurity = AppAuthentication.GetUserDetails();
+        log.info("Creating book as {} ", userSecurity.getUsername());
         return bookService.create(bookEntity);
     }
 
