@@ -3,6 +3,9 @@ package com.dfour.libraryplatform.service;
 import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
 import com.dfour.libraryplatform.domain.dto.UserSignInRequestDto;
 import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
+import com.dfour.libraryplatform.exception.EmailAlreadyRegisteredException;
+import com.dfour.libraryplatform.exception.NotFoundException;
+import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
 import com.dfour.libraryplatform.repository.UserRepository;
 import com.dfour.libraryplatform.repository.entity.UserEntity;
 import com.dfour.libraryplatform.service.security.JwtService;
@@ -35,22 +38,27 @@ public class UserService {
 
     public boolean signUp(UserSignUpRequestDto userSignUpRequestDto) {
         if (users.findByEmail(userSignUpRequestDto.getEmail()).isPresent())
-            return false;
+            throw new EmailAlreadyRegisteredException();
 
         UserEntity savedUser = users.save(UserEntity.builder()
-                        .email(userSignUpRequestDto.getEmail())
-                        .firstName(userSignUpRequestDto.getFirstName())
-                        .lastName(userSignUpRequestDto.getLastName())
-                        .hashedPassword(passwordEncoder.encode(userSignUpRequestDto.getPassword()))
+                .email(userSignUpRequestDto.getEmail())
+                .firstName(userSignUpRequestDto.getFirstName())
+                .lastName(userSignUpRequestDto.getLastName())
+                .hashedPassword(passwordEncoder.encode(userSignUpRequestDto.getPassword()))
                 .build()
         );
 
         return savedUser.getId() > 0;
     }
 
-    public Optional<AccessInformationResponseDto> signIn(UserSignInRequestDto userSignInRequestDto) {
-        Optional<UserEntity> optionalUser = users.findByEmail(userSignInRequestDto.getEmail());
+    public AccessInformationResponseDto signIn(UserSignInRequestDto userSignInRequestDto) {
+        UserEntity user = users.findByEmail(userSignInRequestDto.getEmail())
+                .orElseThrow(NotFoundException::new);
 
-        return optionalUser.map(userEntity -> new AccessInformationResponseDto(jwtService.generateToken(userEntity)));
+        if (!passwordEncoder.matches(userSignInRequestDto.getPassword(), user.getHashedPassword())) {
+            throw new PasswordDoesNotMatchException();
+        }
+
+        return new AccessInformationResponseDto(jwtService.generateToken(user));
     }
 }

@@ -2,6 +2,7 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
+import com.dfour.libraryplatform.exception.ItemIsAlreadyBorrowedException;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
 import com.dfour.libraryplatform.repository.entity.BorrowingEntity;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class BorrowingService {
 
     public BorrowingEntity create(BorrowingRequestDto borrowingRequest) {
         if (borrowings.isBorrowed(borrowingRequest.getItemId()).isPresent())
-            throw new RuntimeException("Item is already borrowed");
+            throw new ItemIsAlreadyBorrowedException();
 
         BorrowingEntity borrowingEntity = new BorrowingEntity();
         borrowingEntity.setBorrowDate(OffsetDateTime.now(ZoneOffset.UTC));
@@ -41,8 +42,8 @@ public class BorrowingService {
 
     public List<BorrowingEntity> findByUserId(long userId) {
         return borrowings.findByUserId(userId,
-            PageRequest.of(0, 100,
-                    Sort.by(Sort.Direction.DESC, "id"))
+                PageRequest.of(0, 100,
+                        Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
     }
 }

@@ -2,15 +2,12 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
-import com.dfour.libraryplatform.repository.TagRepository;
 import com.dfour.libraryplatform.repository.entity.BookEntity;
-import com.dfour.libraryplatform.repository.entity.TagEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

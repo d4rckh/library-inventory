@@ -1,9 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.repository.InventoryRepository;
-import com.dfour.libraryplatform.repository.entity.BookEntity;
 import com.dfour.libraryplatform.repository.entity.InventoryEntity;
-import com.dfour.libraryplatform.service.BookService;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
