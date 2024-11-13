@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,10 @@ public class BookService {
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
+    }
+
+    public Optional<BookEntity> findById(Long id) {
+        return books.findById(id);
     }
 
     public BookEntity patch(long bookId, BookEntity incompleteBookEntity) {

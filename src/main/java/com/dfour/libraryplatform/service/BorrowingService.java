@@ -21,7 +21,7 @@ public class BorrowingService {
     private final BorrowingRepository borrowings;
 
     public BorrowingEntity create(BorrowingRequestDto borrowingRequest) {
-        if (borrowings.isBorrowed(borrowingRequest.getItemId()).isPresent())
+        if (borrowings.isItemBorrowed(borrowingRequest.getItemId()).isPresent())
             throw new ItemIsAlreadyBorrowedException();
 
         BorrowingEntity borrowingEntity = new BorrowingEntity();
@@ -35,7 +35,7 @@ public class BorrowingService {
 
     public BorrowingStatsDto getStats(long itemId) {
         return BorrowingStatsDto.builder()
-                .borrowed(borrowings.isBorrowed(itemId).isPresent())
+                .borrowed(borrowings.isItemBorrowed(itemId).isPresent())
                 .times(borrowings.countByItemId(itemId))
                 .build();
     }

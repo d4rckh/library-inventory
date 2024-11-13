@@ -18,7 +18,6 @@ import java.util.List;
 public class BorrowingController {
 
     private final BorrowingService borrowingService;
-
     private final InventoryService inventoryService;
 
     @PostMapping

@@ -23,8 +23,8 @@ public class InventoryService {
         ).getContent();
     }
 
-    public List<InventoryEntity> findByFilter(long bookId) {
-        return inventory.findByFilter(bookId,
+    public List<InventoryEntity> findByBookId(long bookId) {
+        return inventory.findByBookId(bookId,
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
