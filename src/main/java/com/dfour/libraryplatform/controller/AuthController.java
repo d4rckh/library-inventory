@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
-import com.dfour.libraryplatform.domain.dto.UserSignInDto;
+import com.dfour.libraryplatform.domain.dto.UserSignInRequestDto;
 import com.dfour.libraryplatform.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +18,8 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping
-    Optional<AccessInformationResponseDto> signIn(@RequestBody UserSignInDto userSignInDto) {
-        return userService.signIn(userSignInDto);
+    Optional<AccessInformationResponseDto> signIn(@RequestBody UserSignInRequestDto userSignInRequestDto) {
+        return userService.signIn(userSignInRequestDto);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.UserSignUpDto;
+import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
 import com.dfour.libraryplatform.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +16,8 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    boolean signUp(@RequestBody UserSignUpDto userSignUpDto) {
-        return userService.signUp(userSignUpDto);
+    boolean signUp(@RequestBody UserSignUpRequestDto userSignUpRequestDto) {
+        return userService.signUp(userSignUpRequestDto);
     }
 
 }
