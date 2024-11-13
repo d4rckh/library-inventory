@@ -8,7 +8,7 @@ import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
 import com.dfour.libraryplatform.repository.UserRepository;
 import com.dfour.libraryplatform.repository.entity.UserEntity;
-import com.dfour.libraryplatform.service.security.JwtService;
+import com.dfour.libraryplatform.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

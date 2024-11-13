@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.service.security;
+package com.dfour.libraryplatform.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

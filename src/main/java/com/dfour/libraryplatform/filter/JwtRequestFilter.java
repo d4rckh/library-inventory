@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.filter;
 
-import com.dfour.libraryplatform.service.security.JwtService;
-import com.dfour.libraryplatform.service.security.JwtUserDetailsService;
+import com.dfour.libraryplatform.security.JwtService;
+import com.dfour.libraryplatform.security.JwtUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -18,7 +18,7 @@ public class InventoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JoinColumn(name = "book_id", insertable = false, updatable = false)
+    @JoinColumn(name = "book_id", insertable = false, updatable = false, nullable = false)
     @ManyToOne(targetEntity = BookEntity.class, fetch = FetchType.EAGER)
     private BookEntity book;
 

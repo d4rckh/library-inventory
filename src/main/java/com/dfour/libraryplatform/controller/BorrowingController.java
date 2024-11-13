@@ -4,6 +4,7 @@ import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.entity.BorrowingEntity;
+import com.dfour.libraryplatform.manager.BorrowingManager;
 import com.dfour.libraryplatform.service.BorrowingService;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 public class BorrowingController {
 
     private final BorrowingService borrowingService;
+    private final BorrowingManager borrowingManager;
     private final InventoryService inventoryService;
 
     @PostMapping
@@ -27,7 +29,7 @@ public class BorrowingController {
     ) {
         inventoryService.findById(requestDto.getItemId())
                 .orElseThrow(NotFoundException::new);
-        return borrowingService.create(requestDto);
+        return borrowingManager.borrowBook(requestDto);
     }
 
     @GetMapping("/stats/{itemId}")

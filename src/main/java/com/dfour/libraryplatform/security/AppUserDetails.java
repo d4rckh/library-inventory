@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.service.security;
+package com.dfour.libraryplatform.security;
 
 import com.dfour.libraryplatform.repository.entity.UserEntity;
 import org.springframework.security.core.userdetails.User;

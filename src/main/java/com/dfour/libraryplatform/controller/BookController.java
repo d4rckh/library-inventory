@@ -2,8 +2,8 @@ package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.repository.entity.BookEntity;
 import com.dfour.libraryplatform.service.BookService;
-import com.dfour.libraryplatform.service.security.AppUserDetails;
-import com.dfour.libraryplatform.service.security.authentication.AppAuthentication;
+import com.dfour.libraryplatform.security.AppUserDetails;
+import com.dfour.libraryplatform.security.authentication.AppAuthentication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

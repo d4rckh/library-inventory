@@ -1,0 +1,43 @@
+package com.dfour.libraryplatform.manager;
+
+import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
+import com.dfour.libraryplatform.exception.ItemIsBorrowed;
+import com.dfour.libraryplatform.repository.entity.BorrowingEntity;
+import com.dfour.libraryplatform.repository.entity.ReservationEntity;
+import com.dfour.libraryplatform.service.BorrowingService;
+import com.dfour.libraryplatform.service.ReservationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Optional;
+
+@RequiredArgsConstructor
+@Component
+public class BorrowingManager {
+    private final ReservationService reservationService;
+    private final BorrowingService borrowingService;
+
+    public BorrowingEntity borrowBook(BorrowingRequestDto borrowingRequest) {
+        if (borrowingService.isItemBorrowed(borrowingRequest.getItemId()).isPresent())
+            throw new ItemIsBorrowed();
+
+        Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(borrowingRequest.getItemId());
+
+        if (optionalReservationEntity.isPresent()) {
+            if (optionalReservationEntity.get().getUserId() != borrowingRequest.getUserId()) {
+                throw new ItemIsBorrowed();
+            }
+            reservationService.invalidateReservation(optionalReservationEntity.get());
+        }
+
+        BorrowingEntity borrowingEntity = new BorrowingEntity();
+        borrowingEntity.setBorrowDate(OffsetDateTime.now(ZoneOffset.UTC));
+        borrowingEntity.setReturnDate(borrowingEntity.getBorrowDate().plusWeeks(2));
+        borrowingEntity.setUserId(borrowingRequest.getUserId());
+        borrowingEntity.setItemId(borrowingRequest.getItemId());
+
+        return borrowingService.save(borrowingEntity);
+    }
+}
