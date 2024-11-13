@@ -7,6 +7,7 @@ import com.dfour.libraryplatform.repository.entity.BorrowingEntity;
 import com.dfour.libraryplatform.service.BorrowingService;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,9 +22,10 @@ public class BorrowingController {
     private final InventoryService inventoryService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public BorrowingEntity borrow(
             @RequestBody BorrowingRequestDto requestDto
-            ) {
+    ) {
         inventoryService.findById(requestDto.getItemId())
                 .orElseThrow(NotFoundException::new);
         return borrowingService.create(requestDto);
@@ -38,7 +40,7 @@ public class BorrowingController {
 
     @GetMapping
     public List<BorrowingEntity> getBorrowings(
-            @RequestParam(name = "userId", required = true) long userId
+            @RequestParam(name = "userId") long userId
     ) {
         return borrowingService.findByUserId(userId);
     }

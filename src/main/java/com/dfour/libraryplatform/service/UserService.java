@@ -1,13 +1,15 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
-import com.dfour.libraryplatform.domain.dto.UserSignInDto;
-import com.dfour.libraryplatform.domain.dto.UserSignUpDto;
+import com.dfour.libraryplatform.domain.dto.UserSignInRequestDto;
+import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
+import com.dfour.libraryplatform.exception.EmailAlreadyRegisteredException;
+import com.dfour.libraryplatform.exception.NotFoundException;
+import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
 import com.dfour.libraryplatform.repository.UserRepository;
 import com.dfour.libraryplatform.repository.entity.UserEntity;
 import com.dfour.libraryplatform.service.security.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,24 +36,29 @@ public class UserService {
         return users.findByEmail(email);
     }
 
-    public boolean signUp(UserSignUpDto userSignUpDto) {
-        if (users.findByEmail(userSignUpDto.getEmail()).isPresent())
-            return false;
+    public boolean signUp(UserSignUpRequestDto userSignUpRequestDto) {
+        if (users.findByEmail(userSignUpRequestDto.getEmail()).isPresent())
+            throw new EmailAlreadyRegisteredException();
 
         UserEntity savedUser = users.save(UserEntity.builder()
-                        .email(userSignUpDto.getEmail())
-                        .firstName(userSignUpDto.getFirstName())
-                        .lastName(userSignUpDto.getLastName())
-                        .hashedPassword(passwordEncoder.encode(userSignUpDto.getPassword()))
+                .email(userSignUpRequestDto.getEmail())
+                .firstName(userSignUpRequestDto.getFirstName())
+                .lastName(userSignUpRequestDto.getLastName())
+                .hashedPassword(passwordEncoder.encode(userSignUpRequestDto.getPassword()))
                 .build()
         );
 
         return savedUser.getId() > 0;
     }
 
-    public Optional<AccessInformationResponseDto> signIn(UserSignInDto userSignInDto) {
-        Optional<UserEntity> optionalUser = users.findByEmail(userSignInDto.getEmail());
+    public AccessInformationResponseDto signIn(UserSignInRequestDto userSignInRequestDto) {
+        UserEntity user = users.findByEmail(userSignInRequestDto.getEmail())
+                .orElseThrow(NotFoundException::new);
 
-        return optionalUser.map(userEntity -> new AccessInformationResponseDto(jwtService.generateToken(userEntity)));
+        if (!passwordEncoder.matches(userSignInRequestDto.getPassword(), user.getHashedPassword())) {
+            throw new PasswordDoesNotMatchException();
+        }
+
+        return new AccessInformationResponseDto(jwtService.generateToken(user));
     }
 }

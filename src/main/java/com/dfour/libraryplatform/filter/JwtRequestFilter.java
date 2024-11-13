@@ -2,7 +2,6 @@ package com.dfour.libraryplatform.filter;
 
 import com.dfour.libraryplatform.service.security.JwtService;
 import com.dfour.libraryplatform.service.security.JwtUserDetailsService;
-import com.dfour.libraryplatform.service.security.UserSecurity;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component @RequiredArgsConstructor @Slf4j
+@Component
+@RequiredArgsConstructor
+@Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final JwtUserDetailsService userDetailsService;

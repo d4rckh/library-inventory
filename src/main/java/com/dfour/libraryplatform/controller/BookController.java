@@ -1,17 +1,15 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.repository.BookRepository;
 import com.dfour.libraryplatform.repository.entity.BookEntity;
 import com.dfour.libraryplatform.service.BookService;
-import com.dfour.libraryplatform.service.security.UserSecurity;
+import com.dfour.libraryplatform.service.security.AppUserDetails;
 import com.dfour.libraryplatform.service.security.authentication.AppAuthentication;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -31,15 +29,16 @@ public class BookController {
             @PathVariable Long bookId,
             @RequestBody BookEntity incompleteBookEntity
     ) {
-        UserSecurity userSecurity = AppAuthentication.GetUserDetails();
-        log.info("Updating book as {} ", userSecurity.getUsername());
+        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        log.info("Updating book as {} ", appUserDetails.getUsername());
         return bookService.patch(bookId, incompleteBookEntity);
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     BookEntity create(@RequestBody BookEntity bookEntity) {
-        UserSecurity userSecurity = AppAuthentication.GetUserDetails();
-        log.info("Creating book as {} ", userSecurity.getUsername());
+        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        log.info("Creating book as {} ", appUserDetails.getUsername());
         return bookService.create(bookEntity);
     }
 

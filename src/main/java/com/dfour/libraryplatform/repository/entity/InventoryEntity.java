@@ -6,9 +6,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity @Data @Builder
+@Entity
+@Data
+@Builder
 @Table(name = "inventory")
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class InventoryEntity {
 
     @Id
