@@ -29,8 +29,6 @@ public class BookController {
             @PathVariable Long bookId,
             @RequestBody BookEntity incompleteBookEntity
     ) {
-        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
-        log.info("Updating book as {} ", appUserDetails.getUsername());
         return bookService.patch(bookId, incompleteBookEntity);
     }
 
@@ -38,8 +36,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     BookEntity create(@RequestBody BookEntity bookEntity) {
         AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
-        log.info("Creating book as {} ", appUserDetails.getUsername());
-        return bookService.create(bookEntity);
+        return bookService.createAsUser(bookEntity, appUserDetails.getEntity());
     }
 
 }

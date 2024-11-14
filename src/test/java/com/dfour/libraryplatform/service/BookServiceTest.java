@@ -9,28 +9,27 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
+@Sql(scripts = "classpath:test-data.sql")
 public class BookServiceTest {
 
     @Autowired
     private BookService bookService;
 
     @Test
-    void whenFindAll_thenReturn0() {
-        assertEquals(0, bookService.findAll().size());
+    void whenFindAll_thenReturnCount() {
+        assertEquals(2, bookService.findAll().size());
     }
 
     @Test
     void whenFindById_thenReturnEmpty() {
-        assertEquals(Optional.empty(), bookService.findById(1L));
+        assertTrue(bookService.findById(3L).isEmpty());
     }
 
     @Test
-    @Sql(scripts = "classpath:test-data.sql")
     void whenFindById_thenReturnBook() {
         Optional<BookEntity> book = bookService.findById(1L);
 

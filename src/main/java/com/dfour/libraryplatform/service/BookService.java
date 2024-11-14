@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
 import com.dfour.libraryplatform.entity.BookEntity;
@@ -56,6 +57,11 @@ public class BookService {
     }
 
     public BookEntity create(BookEntity bookEntity) {
+        return books.save(bookEntity);
+    }
+
+    public BookEntity createAsUser(BookEntity bookEntity, UserEntity userEntity) {
+        bookEntity.setUserId(userEntity.getId());
         return books.save(bookEntity);
     }
 }

@@ -21,7 +21,7 @@ public class ReservationManager {
     private final BorrowingService borrowingService;
 
     public ReservationEntity reserveItem(ReservationRequestDto reservationRequestDto) {
-        Optional<ReservationEntity> optionalReservationEntity = reservationService.findById(reservationRequestDto.getItemId());
+        Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(reservationRequestDto.getItemId());
 
         if (borrowingService.isItemBorrowed(reservationRequestDto.getItemId()).isPresent()) {
             throw new ItemIsBorrowed();

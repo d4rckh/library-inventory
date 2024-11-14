@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +35,14 @@ public class BookEntity {
 
     @Column(nullable = false)
     private OffsetDateTime publishedDate;
+
+    @ManyToOne
+    @JoinColumn(updatable = false, insertable = false)
+    @JsonIgnore
+    private UserEntity user;
+
+    @Column(name = "user_id")
+    private long userId;
 
     @ManyToMany
     private List<TagEntity> tags;
