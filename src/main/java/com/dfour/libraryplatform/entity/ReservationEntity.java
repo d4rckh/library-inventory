@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.repository.entity;
+package com.dfour.libraryplatform.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

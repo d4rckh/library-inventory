@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.repository.InventoryRepository;
-import com.dfour.libraryplatform.repository.entity.InventoryEntity;
+import com.dfour.libraryplatform.entity.InventoryEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

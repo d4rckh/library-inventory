@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.repository.ReservationRepository;
-import com.dfour.libraryplatform.repository.entity.ReservationEntity;
+import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

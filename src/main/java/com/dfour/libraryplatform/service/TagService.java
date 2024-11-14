@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.repository.TagRepository;
-import com.dfour.libraryplatform.repository.entity.TagEntity;
+import com.dfour.libraryplatform.entity.TagEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

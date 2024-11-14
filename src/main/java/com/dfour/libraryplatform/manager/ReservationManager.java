@@ -4,7 +4,7 @@ import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
 import com.dfour.libraryplatform.exception.ItemIsBorrowed;
 import com.dfour.libraryplatform.exception.ItemIsReservedBySomeoneElseException;
 import com.dfour.libraryplatform.exception.ItemIsReservedByYouException;
-import com.dfour.libraryplatform.repository.entity.ReservationEntity;
+import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.service.BorrowingService;
 import com.dfour.libraryplatform.service.ReservationService;
 import lombok.RequiredArgsConstructor;

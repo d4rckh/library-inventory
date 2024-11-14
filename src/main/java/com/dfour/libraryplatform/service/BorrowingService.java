@@ -2,7 +2,7 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
-import com.dfour.libraryplatform.repository.entity.BorrowingEntity;
+import com.dfour.libraryplatform.entity.BorrowingEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.security;
 
-import com.dfour.libraryplatform.repository.entity.UserEntity;
+import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

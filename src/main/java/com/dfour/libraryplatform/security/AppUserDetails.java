@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.security;
 
-import com.dfour.libraryplatform.repository.entity.UserEntity;
+import com.dfour.libraryplatform.entity.UserEntity;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collections;
