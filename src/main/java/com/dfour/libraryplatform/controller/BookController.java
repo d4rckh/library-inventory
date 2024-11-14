@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.repository.entity.BookEntity;
+import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.service.BookService;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;

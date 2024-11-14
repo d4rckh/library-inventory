@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.exception.NotFoundException;
-import com.dfour.libraryplatform.repository.entity.InventoryEntity;
+import com.dfour.libraryplatform.entity.InventoryEntity;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -27,4 +27,14 @@ public class ArchitureTests {
             .that().resideInAPackage("com.dfour.libraryplatform.controller")
             .should().dependOnClassesThat().resideInAPackage("com.dfour.libraryplatform.controller");
 
+    @ArchTest
+    private final ArchRule repositories_should_not_depend_on_repositories = noClasses()
+            .that().resideInAPackage("com.dfour.libraryplatform.repository")
+            .should().dependOnClassesThat().resideInAPackage("com.dfour.libraryplatform.repository");
+
+    @ArchTest
+    private final ArchRule controllers_should_not_depend_on_repositories = noClasses()
+            .that().resideInAPackage("com.dfour.libraryplatform.controller")
+            .should().dependOnClassesThat().resideInAPackage("com.dfour.libraryplatform.repository");
+
 }

@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.repository.entity;
+package com.dfour.libraryplatform.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 
 import java.time.OffsetDateTime;
 

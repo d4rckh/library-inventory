@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.repository.entity.TagEntity;
+import com.dfour.libraryplatform.entity.TagEntity;
 import com.dfour.libraryplatform.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

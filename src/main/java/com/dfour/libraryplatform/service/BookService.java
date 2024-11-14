@@ -2,7 +2,7 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
-import com.dfour.libraryplatform.repository.entity.BookEntity;
+import com.dfour.libraryplatform.entity.BookEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

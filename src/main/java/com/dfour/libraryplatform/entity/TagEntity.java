@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.repository.entity;
+package com.dfour.libraryplatform.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
