@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 
 export default function RootLayout({
@@ -9,8 +8,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` antialiased`}
+        className={`max-w-5xl mx-auto pt-5`}
       >
+        <h1 className={"text-2xl text-center"}>Library</h1>
         {children}
       </body>
     </html>
