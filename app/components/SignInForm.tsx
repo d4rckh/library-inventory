@@ -9,7 +9,9 @@ export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  return <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
+  return <form
+    className={"flex flex-col gap-1"}
+    onSubmit={(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signIn(email, password).then(r => {
       if (r) alert(r);
@@ -18,6 +20,6 @@ export default function SignInForm() {
     <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
     <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-    <Button type={"submit"} />
+    <Button type={"submit"}>Log in</Button>
   </form>
 }

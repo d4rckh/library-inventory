@@ -6,6 +6,6 @@ export type UserInformation = {
   id: number
 }
 
-export async function getUser(): Promise<UserInformation | null> {
+export async function getLoggedInUser(): Promise<UserInformation | null> {
   return (await getApi<UserInformation>("/auth", ["AUTH"], "GET")).data ?? null;
 }

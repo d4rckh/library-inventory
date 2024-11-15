@@ -2,6 +2,7 @@ import {getInventoryByBook} from "@/app/lib/actions/getInventoryByBook";
 import {getBook} from "@/app/lib/actions/getBook";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import ItemsGrid from "@/app/components/ItemsGrid";
+import CreateItemForm from "@/app/components/CreateItemForm";
 
 export default async function Page({ params }: {
     params: Promise<{ bookId: number }>
@@ -23,6 +24,7 @@ export default async function Page({ params }: {
                 <p>Author: {book.author}</p>
             </CardContent>
         </Card>
+        <CreateItemForm bookId={book.id} />
         <ItemsGrid items={items} />
     </>
 
