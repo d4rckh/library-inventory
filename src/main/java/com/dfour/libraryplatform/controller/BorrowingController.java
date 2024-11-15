@@ -39,9 +39,9 @@ public class BorrowingController {
         return borrowingService.getStats(itemId);
     }
 
-    @GetMapping
-    public List<BorrowingEntity> getBorrowings(
-            @RequestParam(name = "userId") long userId
+    @GetMapping("/user/{userId}")
+    public List<BorrowingEntity> getBorrowingsByUserId(
+            @PathVariable(name = "userId") long userId
     ) {
         return borrowingService.findByUserId(userId);
     }

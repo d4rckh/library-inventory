@@ -5,6 +5,7 @@ import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
 import com.dfour.libraryplatform.entity.BookEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -62,6 +64,7 @@ public class BookService {
 
     public BookEntity createAsUser(BookEntity bookEntity, UserEntity userEntity) {
         bookEntity.setUserId(userEntity.getId());
+        bookEntity.setUser(userEntity);
         return books.save(bookEntity);
     }
 }

@@ -15,9 +15,9 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
-    @GetMapping
-    private List<InventoryEntity> findAll(
-            @RequestParam(name = "bookId", required = false) Long bookId
+    @GetMapping("/book/{bookId}")
+    private List<InventoryEntity> findByBookId(
+            @PathVariable(name = "bookId") Long bookId
     ) {
         return inventoryService.findByBookId(bookId);
     }

@@ -1,6 +1,7 @@
 package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.entity.BookEntity;
+import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.service.BookService;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;
@@ -30,6 +31,14 @@ public class BookController {
             @RequestBody BookEntity incompleteBookEntity
     ) {
         return bookService.patch(bookId, incompleteBookEntity);
+    }
+
+    @GetMapping("/{bookId}")
+    BookEntity getById(
+            @PathVariable Long bookId
+    ) {
+        return bookService.findById(bookId)
+                .orElseThrow(NotFoundException::new);
     }
 
     @PostMapping
