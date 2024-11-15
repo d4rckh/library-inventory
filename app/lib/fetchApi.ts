@@ -1,4 +1,7 @@
+"use server";
+
 import {cookies} from "next/headers";
+import {revalidateTag} from "next/cache";
 
 export type APIError = {
   status: string,
@@ -32,11 +35,16 @@ export default async function fetchApi<D>(
     body: method == "GET" ? null : JSON.stringify(body),
   })
 
-  if (result.status.toString().startsWith("2"))
+  if (result.status.toString().startsWith("2")) {
+    if (method != "GET") {
+      tags.forEach(revalidateTag);
+    }
+
     return {
       error: undefined,
       data: await result.json() as D
     }
+  }
   else
     return {
       error: await result.json(),

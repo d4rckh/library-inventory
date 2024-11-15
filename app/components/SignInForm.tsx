@@ -2,6 +2,8 @@
 
 import {FormEvent, useState} from "react";
 import {signIn} from "@/app/lib/actions/signIn";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
 export default function SignInForm() {
   const [email, setEmail] = useState('');
@@ -13,9 +15,9 @@ export default function SignInForm() {
       if (r) alert(r);
     });
   }}>
-    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+    <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-    <input type={"submit"} />
+    <Button type={"submit"} />
   </form>
 }

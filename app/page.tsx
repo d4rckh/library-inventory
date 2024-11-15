@@ -1,6 +1,8 @@
 import {getAllBooks} from "@/app/lib/actions/getBooks";
 import SignInForm from "@/app/components/SignInForm";
 import {getUser} from "@/app/lib/actions/getUser";
+import CreateBookForm from "@/app/components/CreateBookForm";
+import BookGrid from "@/app/components/BookGrid";
 
 export default async function Home() {
   const books = await getAllBooks();
@@ -10,8 +12,9 @@ export default async function Home() {
     <>
       {!user && <SignInForm />}
       {user && "Logged in as " + user.email}
+      {user && <CreateBookForm />}
 
-      {JSON.stringify(books)}
+      <BookGrid books={books} />
     </>
   );
 }
