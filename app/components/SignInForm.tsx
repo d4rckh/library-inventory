@@ -12,13 +12,13 @@ export default function SignInForm() {
   return <form
     className={"flex flex-col gap-1"}
     onSubmit={(e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    signIn(email, password).then(r => {
-      if (r) alert(r);
-    });
-  }}>
-    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-    <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      e.preventDefault();
+      signIn(email, password).then(r => {
+        if (r) alert(r);
+      });
+    }}>
+    <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+    <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
 
     <Button type={"submit"}>Log in</Button>
   </form>

@@ -13,7 +13,7 @@ export async function signIn(email: string, password: string): Promise<APIError 
   });
   if (access.error != undefined) return access.error;
 
-  const { set } = await cookies();
+  const {set} = await cookies();
 
   if (access.data)
     set("auth", access.data.jwtToken, {

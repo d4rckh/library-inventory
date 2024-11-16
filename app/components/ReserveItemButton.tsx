@@ -3,7 +3,7 @@
 import {Button} from "@/components/ui/button";
 import {createReservation} from "@/app/lib/actions/createReservation";
 
-export default function ReserveItemButton({ itemId }: { itemId: number }) {
+export default function ReserveItemButton({itemId}: { itemId: number }) {
   return <Button onClick={() => {
     createReservation(itemId).then(r => {
       if (!r.error) alert("Item reserved successfully");

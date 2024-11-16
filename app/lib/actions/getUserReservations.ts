@@ -1,5 +1,5 @@
-import {Book} from "@/app/lib/types/Book";
 import fetchApi from "@/app/lib/fetchApi";
+import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 
 export type Reservation = {
   userId: number;
@@ -7,13 +7,10 @@ export type Reservation = {
   itemId: number;
   createdAt: string;
   expiresAt: string;
+  item: Inventory;
   expiredAt: string;
 }
 
-export async function getUserReservations({
-  userId
-                                          }: {
-  userId: number;
-}): Promise<Reservation[]> {
+export async function getUserReservations(userId: number): Promise<Reservation[]> {
   return (await fetchApi<Reservation[]>("/reservation/user/" + userId, ["reservation"])).data ?? [];
 }

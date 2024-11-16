@@ -13,13 +13,13 @@ export default function CreateBookForm() {
   const [publishedDate, setPublishedDate] = useState("");
 
   return <form
-      className={"flex flex-col gap-1"}
-      onSubmit={(e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    createBook(title, publisher, author, isbn, [], publishedDate).then(({error}) => {
-      if (error) alert(error.message)
-    });
-  }}>
+    className={"flex flex-col gap-1"}
+    onSubmit={(e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      createBook(title, publisher, author, isbn, [], publishedDate).then(({error}) => {
+        if (error) alert(error.message)
+      });
+    }}>
     <Input placeholder={"Title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
     <Input placeholder={"Publisher"} value={publisher} onChange={(e) => setPublisher(e.target.value)}/>
     <Input placeholder={"Author"} value={author} onChange={(e) => setAuthor(e.target.value)}/>
@@ -32,7 +32,7 @@ export default function CreateBookForm() {
       setPublishedDate(utcTimestamp);
     }}/>
 
-    <Button type={"submit"} >
+    <Button type={"submit"}>
       Create book
     </Button>
   </form>

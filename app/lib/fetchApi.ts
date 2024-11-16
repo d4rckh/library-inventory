@@ -20,7 +20,7 @@ export default async function fetchApi<D>(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' = "GET",
   body: object = {},
 ): Promise<APIResult<D>> {
-  const { get } = await cookies();
+  const {get} = await cookies();
   const authToken = get("auth")?.value;
 
   const result = await fetch(process.env.BACKEND as string + path, {
@@ -44,8 +44,7 @@ export default async function fetchApi<D>(
       error: undefined,
       data: await result.json() as D
     }
-  }
-  else
+  } else
     return {
       error: await result.json(),
       data: undefined
