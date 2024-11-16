@@ -3,6 +3,7 @@ package com.dfour.libraryplatform.service;
 import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
 import com.dfour.libraryplatform.domain.dto.UserSignInRequestDto;
 import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
+import com.dfour.libraryplatform.domain.dto.UserStatsDto;
 import com.dfour.libraryplatform.exception.EmailAlreadyRegisteredException;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
@@ -35,6 +36,9 @@ public class UserService {
     public Optional<UserEntity> findByEmail(String email) {
         return users.findByEmail(email);
     }
+    public Optional<UserEntity> findById(Long id) {
+        return users.findById(id);
+    }
 
     public boolean signUp(UserSignUpRequestDto userSignUpRequestDto) {
         if (users.findByEmail(userSignUpRequestDto.getEmail()).isPresent())
@@ -60,5 +64,11 @@ public class UserService {
         }
 
         return new AccessInformationResponseDto(jwtService.generateToken(user));
+    }
+
+    public UserStatsDto userStats() {
+        return UserStatsDto.builder()
+                .registeredUsers(users.count())
+                .build();
     }
 }

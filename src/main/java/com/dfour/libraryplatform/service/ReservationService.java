@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.ReservationStatsDto;
 import com.dfour.libraryplatform.repository.ReservationRepository;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,15 +36,22 @@ public class ReservationService {
         return reservations.findAllByUserId(userId);
     }
 
+    public boolean isValid(ReservationEntity reservation) {
+        return Objects.isNull(reservation.getExpiredAt()) &&
+                reservation.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC));
+    }
+
     public Optional<ReservationEntity> getItemValidReservation(long itemId) {
         return reservations.findAllByItemId(itemId)
                 .stream()
-                .filter(r ->
-                        Objects.isNull(r.getExpiredAt()) &&
-                                r.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC))
-                ).findFirst();
+                .filter(this::isValid).findFirst();
     }
 
+    public List<ReservationEntity> getUserValidReservation(long userId) {
+        return reservations.findAllByUserId(userId)
+                .stream()
+                .filter(this::isValid).collect(Collectors.toList());
+    }
 
     public void invalidateReservation(ReservationEntity reservation) {
         reservation.setExpiredAt(OffsetDateTime.now(ZoneOffset.UTC));
@@ -51,5 +60,11 @@ public class ReservationService {
 
     public ReservationEntity save(ReservationEntity reservation) {
         return reservations.save(reservation);
+    }
+
+    public ReservationStatsDto reservationStats() {
+        return ReservationStatsDto.builder()
+                .currentReservations(reservations.countValidReservations())
+                .build();
     }
 }

@@ -19,4 +19,12 @@ public interface BorrowingRepository extends JpaRepository<BorrowingEntity, Long
     long countByItemId(long itemId);
 
     Slice<BorrowingEntity> findByUserId(long userId, Pageable pageable);
+
+    @Query(value = "SELECT COUNT(*) FROM borrowings WHERE " +
+            "public.borrowings.returned_date IS NULL", nativeQuery = true)
+    long countNotReturned();
+
+    @Query(value = "SELECT COUNT(*) FROM borrowings WHERE " +
+            "public.borrowings.returned_date IS NULL AND NOW() > public.borrowings.return_date", nativeQuery = true)
+    long countLateBorrows();
 }

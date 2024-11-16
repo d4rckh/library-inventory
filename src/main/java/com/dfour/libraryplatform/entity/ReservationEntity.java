@@ -30,7 +30,6 @@ public class ReservationEntity {
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
-    @JsonIgnore
     private InventoryEntity item;
 
     @Column(name = "item_id", nullable = false)

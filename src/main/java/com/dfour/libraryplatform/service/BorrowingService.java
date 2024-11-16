@@ -1,6 +1,7 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
+import com.dfour.libraryplatform.domain.dto.ItemBorrowingStatsDto;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class BorrowingService {
 
     private final BorrowingRepository borrowings;
 
-    public BorrowingStatsDto getStats(long itemId) {
-        return BorrowingStatsDto.builder()
+    public ItemBorrowingStatsDto getStats(long itemId) {
+        return ItemBorrowingStatsDto.builder()
                 .borrowed(borrowings.isItemBorrowed(itemId).isPresent())
                 .times(borrowings.countByItemId(itemId))
                 .build();
@@ -37,5 +38,12 @@ public class BorrowingService {
 
     public BorrowingEntity save(BorrowingEntity borrowingEntity) {
         return borrowings.save(borrowingEntity);
+    }
+
+    public BorrowingStatsDto getBorrowingStats() {
+        return BorrowingStatsDto.builder()
+                .currentBorrows(borrowings.countNotReturned())
+                .currentLateBorrows(borrowings.countLateBorrows())
+                .build();
     }
 }

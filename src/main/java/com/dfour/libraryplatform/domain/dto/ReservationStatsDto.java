@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class BorrowingStatsDto {
-    private long currentBorrows;
-    private long currentLateBorrows;
+public class ReservationStatsDto {
+    private long currentReservations;
 }

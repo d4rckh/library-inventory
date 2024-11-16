@@ -1,10 +1,11 @@
 package com.dfour.libraryplatform.manager;
 
 import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
-import com.dfour.libraryplatform.exception.ItemIsBorrowed;
+import com.dfour.libraryplatform.exception.ItemIsBorrowedException;
 import com.dfour.libraryplatform.exception.ItemIsReservedBySomeoneElseException;
 import com.dfour.libraryplatform.exception.ItemIsReservedByYouException;
 import com.dfour.libraryplatform.entity.ReservationEntity;
+import com.dfour.libraryplatform.exception.TooManyReservationsException;
 import com.dfour.libraryplatform.service.BorrowingService;
 import com.dfour.libraryplatform.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class ReservationManager {
         Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(reservationRequestDto.getItemId());
 
         if (borrowingService.isItemBorrowed(reservationRequestDto.getItemId()).isPresent()) {
-            throw new ItemIsBorrowed();
+            throw new ItemIsBorrowedException();
         }
 
         if (optionalReservationEntity.isPresent()) {
@@ -33,6 +34,10 @@ public class ReservationManager {
             } else {
                 throw new ItemIsReservedBySomeoneElseException();
             }
+        }
+
+        if (reservationService.getUserValidReservation(reservationRequestDto.getUserId()).size() > 3) {
+            throw new TooManyReservationsException();
         }
 
         ReservationEntity reservation = ReservationEntity.builder()

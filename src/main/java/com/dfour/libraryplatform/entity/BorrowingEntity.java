@@ -23,7 +23,6 @@ public class BorrowingEntity {
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
-    @JsonIgnore
     private UserEntity user;
 
     @Column(name = "user_id", nullable = false)
@@ -31,7 +30,6 @@ public class BorrowingEntity {
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
-    @JsonIgnore
     private InventoryEntity item;
 
     @Column(name = "item_id", nullable = false)

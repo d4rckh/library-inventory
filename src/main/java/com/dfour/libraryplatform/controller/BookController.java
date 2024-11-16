@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.service.BookService;
@@ -46,6 +47,11 @@ public class BookController {
     BookEntity create(@RequestBody BookEntity bookEntity) {
         AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
         return bookService.createAsUser(bookEntity, appUserDetails.getEntity());
+    }
+
+    @GetMapping("/stats")
+    BookStatsDto bookStats() {
+        return bookService.bookStats();
     }
 
 }

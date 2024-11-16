@@ -1,7 +1,10 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.InventoryStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.InventoryEntity;
+import com.dfour.libraryplatform.security.AppUserDetails;
+import com.dfour.libraryplatform.security.authentication.AppAuthentication;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,4 +33,16 @@ public class InventoryController {
                 .orElseThrow(NotFoundException::new);
     }
 
+    @PostMapping
+    private InventoryEntity createInventoryAsUser(
+            @RequestBody InventoryEntity inventoryEntity
+    ) {
+        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        return inventoryService.createInventoryAsUser(inventoryEntity, appUserDetails.getEntity());
+    }
+
+    @GetMapping("/stats")
+    private InventoryStatsDto getInventoryStats() {
+        return inventoryService.inventoryStats();
+    }
 }

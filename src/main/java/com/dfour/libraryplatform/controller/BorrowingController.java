@@ -2,6 +2,7 @@ package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
+import com.dfour.libraryplatform.domain.dto.ItemBorrowingStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.manager.BorrowingManager;
@@ -33,10 +34,15 @@ public class BorrowingController {
     }
 
     @GetMapping("/stats/{itemId}")
-    public BorrowingStatsDto borrowingStats(@PathVariable long itemId) {
+    public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable long itemId) {
         inventoryService.findById(itemId)
                 .orElseThrow(NotFoundException::new);
         return borrowingService.getStats(itemId);
+    }
+
+    @GetMapping("/stats")
+    public BorrowingStatsDto borrowingStats() {
+        return borrowingService.getBorrowingStats();
     }
 
     @GetMapping("/user/{userId}")

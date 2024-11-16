@@ -3,7 +3,7 @@ package com.dfour.libraryplatform.manager;
 import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.entity.ReservationEntity;
-import com.dfour.libraryplatform.exception.ItemIsBorrowed;
+import com.dfour.libraryplatform.exception.ItemIsBorrowedException;
 import com.dfour.libraryplatform.exception.ItemIsReservedBySomeoneElseException;
 import com.dfour.libraryplatform.exception.ItemIsReservedByYouException;
 import com.dfour.libraryplatform.service.BorrowingService;
@@ -42,6 +42,7 @@ public class ReservationManagerTest {
 
     @Test
     void reservationManagerShouldReserve() {
+        // Given
         long itemId = 1;
         long userId = 1;
 
@@ -59,11 +60,14 @@ public class ReservationManagerTest {
         when(reservationService.getItemValidReservation(itemId))
                 .thenReturn(Optional.empty());
 
+        // When reserve item
         reservationManager.reserveItem(reservationRequestDto);
 
+        // There should be a reservation
         verify(reservationService).save(reservationEntityArgumentCaptor.capture());
         ReservationEntity reservationEntity = reservationEntityArgumentCaptor.getValue();
 
+        // That has
         assertEquals(itemId, reservationEntity.getItemId());
         assertEquals(userId, reservationEntity.getUserId());
         assertTrue(
@@ -154,7 +158,7 @@ public class ReservationManagerTest {
                         .returnedDate(null)
                         .build()));
 
-        assertThrows(ItemIsBorrowed.class, () -> {
+        assertThrows(ItemIsBorrowedException.class, () -> {
             reservationManager.reserveItem(reservationRequestDto);
         });
     }

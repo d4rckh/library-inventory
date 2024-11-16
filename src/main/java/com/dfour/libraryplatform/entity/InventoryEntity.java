@@ -31,4 +31,6 @@ public class InventoryEntity {
     @ManyToOne(targetEntity = BookEntity.class, fetch = FetchType.EAGER)
     private BookEntity book;
 
+    @Column(name = "book_id")
+    private long bookId;
 }

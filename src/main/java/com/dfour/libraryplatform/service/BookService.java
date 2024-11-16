@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.BookStatsDto;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
@@ -24,7 +25,7 @@ public class BookService {
     public List<BookEntity> findAll() {
         return books.findAll(
                 PageRequest.of(0, 100,
-                        Sort.by(Sort.Direction.DESC, "id"))
+                        Sort.by(Sort.Direction.ASC, "id"))
         ).getContent();
     }
 
@@ -66,5 +67,10 @@ public class BookService {
         bookEntity.setUserId(userEntity.getId());
         bookEntity.setUser(userEntity);
         return books.save(bookEntity);
+    }
+
+    public BookStatsDto bookStats() {
+        return BookStatsDto.builder()
+                .uniqueTitles(books.count()).build();
     }
 }
