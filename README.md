@@ -9,6 +9,8 @@
 - Keep inventory of different books
 - Users can reserve books to borrow at the library
 - Users can borrow books at the library
+- Librarians can view stats of active or late borrows
+- Books can be tagged
 
 ## Setup
 ```md
