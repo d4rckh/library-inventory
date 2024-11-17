@@ -1,5 +1,6 @@
 import fetchApi from "@/app/lib/fetchApi";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
+import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
 
 export type Reservation = {
   userId: number;
@@ -8,6 +9,7 @@ export type Reservation = {
   createdAt: string;
   expiresAt: string;
   item: Inventory;
+  user: UserInformation;
   expiredAt: string;
 }
 

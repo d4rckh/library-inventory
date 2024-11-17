@@ -23,7 +23,7 @@ export default function RootLayout({
       <UserButtons/>
     </div>
 
-    <div className={`max-w-5xl mx-auto pt-5`}>
+    <div className={`max-w-7xl mx-auto pt-5`}>
       <h1 className={"text-4xl mb-5 text-center"}>Library</h1>
       {children}
     </div>

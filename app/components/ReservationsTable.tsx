@@ -8,11 +8,11 @@ export default function ReservationsTable({reservations}: {
   return <Table className={"mt-2"}>
     <TableHeader>
       <TableRow>
+        <TableHead>Reservation ID</TableHead>
         <TableHead>Book Title (Inventory ID)</TableHead>
-        <TableHead>User ID</TableHead>
         <TableHead>Reserved at</TableHead>
         <TableHead>Pick-up by</TableHead>
-        <TableHead>Picked-up?</TableHead>
+        <TableHead>Status</TableHead>
       </TableRow>
     </TableHeader>
     <TableBody>
