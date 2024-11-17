@@ -12,8 +12,12 @@
 - Keep inventory of different books
 - Users can reserve books to borrow at the library
 - Users can borrow books at the library
-- Librarians can view stats of active or late borrows
 - Books can be tagged
+- Librarians can view stats of active or late borrows
+- Librarians can view the inventory of books
+- Librarians can register borrows of books for users
+- Librarians can see active and expired reservations
+- Librarians can see active, late and the history of borrows for each item
 
 ## Screenshots
 
