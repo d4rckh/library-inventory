@@ -3,6 +3,7 @@ import ReservationsDataTable from "@/components/ReservationsDataTable";
 import BorrowingsDataTable from "@/components/BorrowingsDataTable";
 import {getBookById} from "@/app/lib/actions/getBookById";
 import ItemsDataTable from "@/components/ItemsDataTable";
+import CreateItemForm from "@/components/CreateItemForm";
 
 export default async function Page({params}: {
   params: Promise<{ bookId: number }>
@@ -29,6 +30,7 @@ export default async function Page({params}: {
         <CardTitle className={"text-2xl"}>Items</CardTitle>
       </CardHeader>
       <CardContent>
+        <CreateItemForm bookId={book.id}/>
         <ItemsDataTable bookId={book.id} />
       </CardContent>
     </Card>

@@ -26,7 +26,6 @@ export default async function Page({params}: {
         <p>ISBN: {book.isbn}</p>
       </CardContent>
     </Card>
-    <CreateItemForm bookId={book.id}/>
     <ItemsTable items={items}/>
   </>
 
