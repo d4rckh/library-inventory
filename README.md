@@ -17,9 +17,9 @@
 
 ## Screenshots
 
-![stats](screenshots\stats.png)
-![inventory](screenshots\inventory.png)
-![reservations](screenshots\reservations.png)
+![stats](screenshots/stats.png)
+![inventory](screenshots/inventory.png)
+![reservations](screenshots/reservations.png)
 
 ## Setup Backend
 ```md
