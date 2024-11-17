@@ -1,7 +1,7 @@
 package com.dfour.libraryplatform.service;
 
-import com.dfour.libraryplatform.domain.dto.ReservationFilterDto;
-import com.dfour.libraryplatform.domain.dto.ReservationStatsDto;
+import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
+import com.dfour.libraryplatform.domain.dto.stats.ReservationStatsDto;
 import com.dfour.libraryplatform.repository.ReservationRepository;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;

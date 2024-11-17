@@ -1,7 +1,9 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.*;
-import com.dfour.libraryplatform.entity.ReservationEntity;
+import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.BorrowingRequestDto;
+import com.dfour.libraryplatform.domain.dto.stats.BorrowingStatsDto;
+import com.dfour.libraryplatform.domain.dto.stats.ItemBorrowingStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.manager.BorrowingManager;

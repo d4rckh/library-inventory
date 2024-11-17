@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.manager;
 
-import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
+import com.dfour.libraryplatform.domain.dto.requests.ReservationRequestDto;
 import com.dfour.libraryplatform.exception.ItemIsBorrowedException;
 import com.dfour.libraryplatform.exception.ItemIsReservedBySomeoneElseException;
 import com.dfour.libraryplatform.exception.ItemIsReservedByYouException;
@@ -24,7 +24,7 @@ public class ReservationManager {
     public ReservationEntity reserveItem(ReservationRequestDto reservationRequestDto) {
         Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(reservationRequestDto.getItemId());
 
-        if (borrowingService.isItemBorrowed(reservationRequestDto.getItemId()).isPresent()) {
+        if (borrowingService.getItemValidBorrowing(reservationRequestDto.getItemId()).isPresent()) {
             throw new ItemIsBorrowedException();
         }
 

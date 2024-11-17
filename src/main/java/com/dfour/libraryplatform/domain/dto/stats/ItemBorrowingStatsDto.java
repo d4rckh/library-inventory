@@ -1,4 +1,4 @@
-package com.dfour.libraryplatform.domain.dto;
+package com.dfour.libraryplatform.domain.dto.stats;
 
 import lombok.Builder;
 import lombok.Data;

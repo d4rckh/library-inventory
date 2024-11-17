@@ -1,8 +1,8 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.ReservationFilterDto;
-import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
-import com.dfour.libraryplatform.domain.dto.ReservationStatsDto;
+import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.ReservationRequestDto;
+import com.dfour.libraryplatform.domain.dto.stats.ReservationStatsDto;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.manager.ReservationManager;

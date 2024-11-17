@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.manager;
 
-import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
+import com.dfour.libraryplatform.domain.dto.requests.BorrowingRequestDto;
 import com.dfour.libraryplatform.exception.ItemIsBorrowedException;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.entity.ReservationEntity;
@@ -20,7 +20,7 @@ public class BorrowingManager {
     private final BorrowingService borrowingService;
 
     public BorrowingEntity borrowBook(BorrowingRequestDto borrowingRequest) {
-        if (borrowingService.isItemBorrowed(borrowingRequest.getItemId()).isPresent())
+        if (borrowingService.getItemValidBorrowing(borrowingRequest.getItemId()).isPresent())
             throw new ItemIsBorrowedException();
 
         Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(borrowingRequest.getItemId());

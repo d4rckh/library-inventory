@@ -1,13 +1,11 @@
 package com.dfour.libraryplatform.service;
 
-import com.dfour.libraryplatform.domain.dto.InventoryFilterDto;
-import com.dfour.libraryplatform.domain.dto.InventoryStatsDto;
+import com.dfour.libraryplatform.domain.dto.filters.InventoryFilterDto;
+import com.dfour.libraryplatform.domain.dto.stats.InventoryStatsDto;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.repository.InventoryRepository;
 import com.dfour.libraryplatform.entity.InventoryEntity;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class InventoryService {
 
-    private static final Logger log = LoggerFactory.getLogger(InventoryService.class);
     private final InventoryRepository inventory;
+    private final BorrowingService borrowingService;
+    private final ReservationService reservationService;
 
     public List<InventoryEntity> findAll() {
         return inventory.findAll(

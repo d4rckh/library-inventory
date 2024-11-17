@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.BookStatsDto;
+import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.service.BookService;

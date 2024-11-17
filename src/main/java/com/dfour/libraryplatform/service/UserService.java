@@ -1,9 +1,10 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
-import com.dfour.libraryplatform.domain.dto.UserSignInRequestDto;
-import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
-import com.dfour.libraryplatform.domain.dto.UserStatsDto;
+import com.dfour.libraryplatform.domain.dto.filters.UserFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.UserSignInRequestDto;
+import com.dfour.libraryplatform.domain.dto.requests.UserSignUpRequestDto;
+import com.dfour.libraryplatform.domain.dto.stats.UserStatsDto;
 import com.dfour.libraryplatform.exception.EmailAlreadyRegisteredException;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +38,11 @@ public class UserService {
     public Optional<UserEntity> findByEmail(String email) {
         return users.findByEmail(email);
     }
+
+    public ArrayList<UserEntity> findFiltered(UserFilterDto filter) {
+        return users.findFiltered(filter.getEmailSearch());
+    }
+
     public Optional<UserEntity> findById(Long id) {
         return users.findById(id);
     }

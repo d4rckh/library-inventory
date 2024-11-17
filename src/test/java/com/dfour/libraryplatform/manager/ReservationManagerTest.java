@@ -1,6 +1,6 @@
 package com.dfour.libraryplatform.manager;
 
-import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
+import com.dfour.libraryplatform.domain.dto.requests.ReservationRequestDto;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.ItemIsBorrowedException;
@@ -53,7 +53,7 @@ public class ReservationManagerTest {
                         .build();
 
         // Item is not currently borrowed
-        when(borrowingService.isItemBorrowed(itemId))
+        when(borrowingService.getItemValidBorrowing(itemId))
                 .thenReturn(Optional.empty());
 
         // No other reservation for this item exists
@@ -90,7 +90,7 @@ public class ReservationManagerTest {
                         .build();
 
         // Item is not currently borrowed
-        when(borrowingService.isItemBorrowed(itemId))
+        when(borrowingService.getItemValidBorrowing(itemId))
                 .thenReturn(Optional.empty());
 
         when(reservationService.getItemValidReservation(itemId))
@@ -120,7 +120,7 @@ public class ReservationManagerTest {
                         .build();
 
         // Item is not currently borrowed
-        when(borrowingService.isItemBorrowed(itemId))
+        when(borrowingService.getItemValidBorrowing(itemId))
                 .thenReturn(Optional.empty());
 
         when(reservationService.getItemValidReservation(itemId))
@@ -149,7 +149,7 @@ public class ReservationManagerTest {
                         .build();
 
         // Item is currently borrowed
-        when(borrowingService.isItemBorrowed(itemId))
+        when(borrowingService.getItemValidBorrowing(itemId))
                 .thenReturn(Optional.of(BorrowingEntity.builder()
                         .itemId(itemId)
                         .userId(userId)

@@ -1,7 +1,8 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.UserSignUpRequestDto;
-import com.dfour.libraryplatform.domain.dto.UserStatsDto;
+import com.dfour.libraryplatform.domain.dto.filters.UserFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.UserSignUpRequestDto;
+import com.dfour.libraryplatform.domain.dto.stats.UserStatsDto;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.service.UserService;
@@ -31,8 +32,14 @@ public class UserController {
     }
 
     @GetMapping
-    List<UserEntity> getUsers() {
-        return userService.findAll();
+    List<UserEntity> getUsers(
+            @RequestParam(name = "email", required = false) String emailSearch
+    ) {
+        return userService.findFiltered(
+                UserFilterDto.builder()
+                        .emailSearch(emailSearch)
+                        .build()
+        );
     }
 
     @GetMapping("/stats")
