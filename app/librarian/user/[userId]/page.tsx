@@ -1,5 +1,7 @@
 import {getUserById} from "@/app/lib/actions/getUserById";
-import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import ReservationsDataTable from "@/components/ReservationsDataTable";
+import BorrowingsDataTable from "@/components/BorrowingsDataTable";
 
 export default async function Page({params}: {
   params: Promise<{ userId: number }>
@@ -15,6 +17,24 @@ export default async function Page({params}: {
         <CardTitle>{user.firstName} {user.lastName} ({user.email})</CardTitle>
         <CardDescription>User Management</CardDescription>
       </CardHeader>
+    </Card>
+
+    <Card className={"mt-2"}>
+      <CardHeader>
+        <CardTitle className={"text-2xl"}>User Reservations</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ReservationsDataTable userId={userId} />
+      </CardContent>
+    </Card>
+
+    <Card className={"mt-2"}>
+      <CardHeader>
+        <CardTitle className={"text-2xl"}>User Borrowings</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <BorrowingsDataTable userId={userId} />
+      </CardContent>
     </Card>
   </>
 }

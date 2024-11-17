@@ -5,14 +5,18 @@ import {useEffect, useState} from "react";
 import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/ui/table";
-import ReservationTableRow from "@/app/components/ReservationTableRow";
-import CreateBorrowingDialog from "@/app/components/CreateBorrowingDialog";
+import ReservationTableRow from "@/components/ReservationTableRow";
+import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
 
-export default function ReservationsDataTable() {
+export default function ReservationsDataTable({
+  userId
+                                              }: {
+  userId?: number
+}) {
   const [reservations, setReservations] = useState<Reservation[]>([]);
 
   const [reservationFilters, setReservationFilters] = useState<ReservationFilters>({
-
+    userId
   });
 
   useEffect(() => {
@@ -45,8 +49,9 @@ export default function ReservationsDataTable() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableCell>Reservation ID</TableCell>
-          <TableCell>Book (Inventory ID)</TableCell>
+          <TableCell>ID</TableCell>
+          <TableCell>Book</TableCell>
+          <TableCell>Item ID</TableCell>
           <TableCell>User</TableCell>
           <TableCell>Created at</TableCell>
           <TableCell>Pick-up by</TableCell>

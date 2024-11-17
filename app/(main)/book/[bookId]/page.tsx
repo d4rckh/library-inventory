@@ -1,8 +1,8 @@
-import {getInventoryByBook} from "@/app/lib/actions/getInventoryByBook";
-import {getBook} from "@/app/lib/actions/getBook";
+import {getBookById} from "@/app/lib/actions/getBookById";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import ItemsTable from "@/app/components/ItemsTable";
-import CreateItemForm from "@/app/components/CreateItemForm";
+import ItemsTable from "@/components/ItemsTable";
+import CreateItemForm from "@/components/CreateItemForm";
+import {getItems} from "@/app/lib/actions/getItems";
 
 export default async function Page({params}: {
   params: Promise<{ bookId: number }>
@@ -10,8 +10,8 @@ export default async function Page({params}: {
 
   const {bookId} = await params;
 
-  const items = await getInventoryByBook(bookId);
-  const book = await getBook(bookId);
+  const items = await getItems({bookId});
+  const book = await getBookById(bookId);
 
   if (!book) return <>Not found</>;
 

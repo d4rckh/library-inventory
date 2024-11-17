@@ -24,5 +24,7 @@ export default function Countdown({ targetDate }: { targetDate: Date }) {
 
   const formattedDuration = formatDuration(durationInSeconds);
 
+  if (durationInSeconds == 0) return <Badge variant={"destructive"}>Late</Badge>;
+
   return <Badge variant={"secondary"}>{formattedDuration}</Badge>;
 }

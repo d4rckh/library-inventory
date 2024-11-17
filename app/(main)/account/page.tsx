@@ -1,5 +1,5 @@
 import {getLoggedInUser} from "@/app/lib/actions/getLoggedInUser";
-import SignInForm from "@/app/components/SignInForm";
+import SignInForm from "@/components/SignInForm";
 
 export default async function Page() {
   const user = await getLoggedInUser();

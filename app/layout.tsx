@@ -1,7 +1,7 @@
 import "./globals.css";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import UserButtons from "@/app/components/UserButtons";
+import UserButtons from "@/components/UserButtons";
 
 export default function RootLayout({
                                      children,
@@ -19,12 +19,10 @@ export default function RootLayout({
           Home
         </Button>
       </Link>
-
       <UserButtons/>
     </div>
 
-    <div className={`max-w-7xl mx-auto pt-5`}>
-      <h1 className={"text-4xl mb-5 text-center"}>Library</h1>
+    <div className={"px-3"}>
       {children}
     </div>
 

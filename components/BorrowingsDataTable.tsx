@@ -4,14 +4,18 @@ import {Suspense, useEffect, useState} from "react";
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
-import BorrowingTableRow from "@/app/components/BorrowingTableRow";
+import BorrowingTableRow from "@/components/BorrowingTableRow";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 
-export default function BorrowingsDataTable() {
+export default function BorrowingsDataTable({
+  userId
+                                            }: {
+  userId?: number
+}) {
   const [borrowings, setBorrowings] = useState<Borrowing[]>([]);
 
   const [borrowingFilters, setBorrowingFilters] = useState<BorrowingFilters>({
-
+    userId
   });
 
   useEffect(() => {
@@ -44,7 +48,9 @@ export default function BorrowingsDataTable() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Book Title (Inventory ID)</TableHead>
+          <TableHead>ID</TableHead>
+          <TableHead>Book</TableHead>
+          <TableHead>Item ID</TableHead>
           <TableHead>User</TableHead>
           <TableHead>Borrowed at</TableHead>
           <TableHead>Should return at</TableHead>
@@ -56,7 +62,7 @@ export default function BorrowingsDataTable() {
           {
             borrowings.map(borrowing =>
               <Suspense  key={borrowing.id} fallback={"loading"}>
-                <BorrowingTableRow borrowing={borrowing} userInfo />
+                <BorrowingTableRow borrowing={borrowing} userInfo librarianLink />
               </Suspense>
             )
           }

@@ -3,8 +3,8 @@ import {getReservationStats} from "@/app/lib/actions/getReservationStats";
 import {getBookStats} from "@/app/lib/actions/getBookStats";
 import {getInventoryStats} from "@/app/lib/actions/getInventoryStats";
 import {getUserStats} from "@/app/lib/actions/getUserStats";
-import LibrarianDashboard from "@/app/components/LibrarianDashboard";
-import LibrarianMetrics from "@/app/components/LibrarianMetrics";
+import LibrarianDashboard from "@/components/LibrarianDashboard";
+import LibrarianMetrics from "@/components/LibrarianMetrics";
 
 export default async function Page() {
   const borrowStats = await getBorrowingStats();

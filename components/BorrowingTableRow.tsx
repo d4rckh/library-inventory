@@ -1,18 +1,21 @@
 import {TableCell, TableRow} from "@/components/ui/table";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
-import DateDisplay from "@/app/components/DateDisplay";
+import DateDisplay from "@/components/DateDisplay";
 import {Badge} from "@/components/ui/badge";
-import DurationDisplay from "@/app/components/DurationDisplay";
-import UserBadgeInformation from "@/app/components/UserBadgeInformation";
+import DurationDisplay from "@/components/DurationDisplay";
+import UserBadgeInformation from "@/components/UserBadgeInformation";
+import BookBadgeInformation from "@/components/BookBadgeInformation";
 
 export default function BorrowingTableRow({
-                                                  borrowing, userInfo
+                                                  borrowing, userInfo, librarianLink
                                                 }: {
-  borrowing: Borrowing, userInfo?: boolean
+  borrowing: Borrowing, userInfo?: boolean, librarianLink?: boolean
 }) {
 
   return <TableRow>
-    <TableCell>{borrowing.item.book.title} ({borrowing.itemId})</TableCell>
+    <TableCell>{borrowing.id}</TableCell>
+    <TableCell><BookBadgeInformation book={borrowing.item.book} librarianLink={librarianLink} /></TableCell>
+    <TableCell>{borrowing.itemId}</TableCell>
     { userInfo && <TableCell><UserBadgeInformation user={borrowing.user} /></TableCell> }
     <TableCell><DateDisplay date={new Date(borrowing.borrowDate)} /></TableCell>
     <TableCell><DateDisplay date={new Date(borrowing.returnDate)} /></TableCell>
