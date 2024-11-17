@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.InventoryFilterDto;
 import com.dfour.libraryplatform.domain.dto.InventoryStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.InventoryEntity;
@@ -17,6 +18,17 @@ import java.util.List;
 public class InventoryController {
 
     private final InventoryService inventoryService;
+
+    @GetMapping
+    public List<InventoryEntity> findFiltered(
+            @RequestParam(name="bookId", required = false) Long bookId
+    ) {
+        return inventoryService.findFiltered(
+                InventoryFilterDto.builder()
+                        .bookId(bookId)
+                        .build()
+        );
+    }
 
     @GetMapping("/book/{bookId}")
     private List<InventoryEntity> findByBookId(

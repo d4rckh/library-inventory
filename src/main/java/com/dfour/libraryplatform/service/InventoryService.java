@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.InventoryFilterDto;
 import com.dfour.libraryplatform.domain.dto.InventoryStatsDto;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.repository.InventoryRepository;
@@ -26,6 +27,10 @@ public class InventoryService {
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
+    }
+
+    public List<InventoryEntity> findFiltered(InventoryFilterDto filter) {
+        return inventory.findFiltered(filter.getBookId());
     }
 
     public List<InventoryEntity> findByBookId(long bookId) {

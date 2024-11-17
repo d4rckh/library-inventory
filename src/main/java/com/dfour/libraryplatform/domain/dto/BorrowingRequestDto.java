@@ -9,5 +9,6 @@ public class BorrowingRequestDto {
 
     private final long userId;
     private final long itemId;
+    private final long borrowDays;
 
 }

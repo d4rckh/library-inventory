@@ -34,7 +34,7 @@ public class BorrowingManager {
 
         BorrowingEntity borrowingEntity = new BorrowingEntity();
         borrowingEntity.setBorrowDate(OffsetDateTime.now(ZoneOffset.UTC));
-        borrowingEntity.setReturnDate(borrowingEntity.getBorrowDate().plusWeeks(2));
+        borrowingEntity.setReturnDate(borrowingEntity.getBorrowDate().plusDays(borrowingRequest.getBorrowDays()).plusHours(12));
         borrowingEntity.setUserId(borrowingRequest.getUserId());
         borrowingEntity.setItemId(borrowingRequest.getItemId());
 

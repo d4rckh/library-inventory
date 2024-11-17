@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.BorrowingFilterDto;
 import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
 import com.dfour.libraryplatform.domain.dto.ItemBorrowingStatsDto;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +47,9 @@ public class BorrowingService {
                 .currentBorrows(borrowings.countNotReturned())
                 .currentLateBorrows(borrowings.countLateBorrows())
                 .build();
+    }
+
+    public ArrayList<BorrowingEntity> findFiltered(BorrowingFilterDto filter) {
+        return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned());
     }
 }

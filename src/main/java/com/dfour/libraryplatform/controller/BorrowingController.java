@@ -1,8 +1,7 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.BorrowingRequestDto;
-import com.dfour.libraryplatform.domain.dto.BorrowingStatsDto;
-import com.dfour.libraryplatform.domain.dto.ItemBorrowingStatsDto;
+import com.dfour.libraryplatform.domain.dto.*;
+import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.manager.BorrowingManager;
@@ -12,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +22,21 @@ public class BorrowingController {
     private final BorrowingService borrowingService;
     private final BorrowingManager borrowingManager;
     private final InventoryService inventoryService;
+
+    @GetMapping
+    ArrayList<BorrowingEntity> findBorrowings(
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "itemId", required = false) Long itemId,
+            @RequestParam(name = "isReturned", required = false) Boolean isReturned
+    ) {
+        return borrowingService.findFiltered(
+                BorrowingFilterDto.builder()
+                        .userId(userId)
+                        .itemId(itemId)
+                        .isReturned(isReturned)
+                        .build()
+        );
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
