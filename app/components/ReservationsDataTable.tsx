@@ -6,9 +6,7 @@ import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservat
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/ui/table";
 import ReservationTableRow from "@/app/components/ReservationTableRow";
-import {Button} from "@/components/ui/button";
-import {createBorrowing} from "@/app/lib/actions/createBorrowing";
-import {Input} from "@/components/ui/input";
+import CreateBorrowingDialog from "@/app/components/CreateBorrowingDialog";
 
 export default function ReservationsDataTable() {
   const [reservations, setReservations] = useState<Reservation[]>([]);
@@ -61,15 +59,7 @@ export default function ReservationsDataTable() {
             reservations.map(reservation =>
               <ReservationTableRow reservation={reservation} userInfo={true} key={reservation.id}>
                 <TableCell>
-                  <Button size={"sm"} onClick={() => {
-                    createBorrowing(reservation.userId, reservation.itemId).then(a => {
-                      if (a.error) alert(a.error.message);
-                      else alert("Successfully borrowed");
-                      getReservations(reservationFilters).then((newReservations) => {
-                        setReservations(newReservations);
-                      });
-                    })
-                  }}>Accept borrow</Button>
+                  <CreateBorrowingDialog user={reservation.user} item={reservation.item} />
                 </TableCell>
               </ReservationTableRow>
             )

@@ -9,9 +9,9 @@ export default function BorrowingsTable({borrowings}: {
     <TableHeader>
       <TableRow>
         <TableHead>Book Title (Inventory ID)</TableHead>
-        <TableHead>User ID</TableHead>
         <TableHead>Borrowed at</TableHead>
         <TableHead>Should return at</TableHead>
+        <TableHead>Time left</TableHead>
         <TableHead>Returned?</TableHead>
       </TableRow>
     </TableHeader>
