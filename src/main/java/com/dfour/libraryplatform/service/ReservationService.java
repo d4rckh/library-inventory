@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.ReservationStatsDto;
 import com.dfour.libraryplatform.repository.ReservationRepository;
 import com.dfour.libraryplatform.entity.ReservationEntity;
@@ -66,5 +67,9 @@ public class ReservationService {
         return ReservationStatsDto.builder()
                 .currentReservations(reservations.countValidReservations())
                 .build();
+    }
+
+    public ArrayList<ReservationEntity> findFiltered(ReservationFilterDto filters) {
+        return reservations.findFiltered(filters.getUserId(), filters.getItemId(), filters.getIsActive());
     }
 }

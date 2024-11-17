@@ -22,7 +22,6 @@ public class ReservationEntity {
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
-    @JsonIgnore
     private UserEntity user;
 
     @Column(name = "user_id", nullable = false)

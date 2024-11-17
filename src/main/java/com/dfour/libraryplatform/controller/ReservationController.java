@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.ReservationRequestDto;
 import com.dfour.libraryplatform.domain.dto.ReservationStatsDto;
 import com.dfour.libraryplatform.entity.ReservationEntity;
@@ -21,6 +22,21 @@ public class ReservationController {
 
     private final ReservationService reservationService;
     private final ReservationManager reservationManager;
+
+    @GetMapping
+    ArrayList<ReservationEntity> findReservations(
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "isActive", required = false) Boolean isActive,
+            @RequestParam(name = "itemId", required = false) Long itemId
+            ) {
+        return reservationService.findFiltered(
+                ReservationFilterDto.builder()
+                        .userId(userId)
+                        .isActive(isActive)
+                        .itemId(itemId)
+                        .build()
+        );
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
