@@ -2,6 +2,7 @@
 
 import {cookies} from "next/headers";
 import {revalidateTag} from "next/cache";
+import {redirect} from "next/navigation";
 
 export type APIError = {
   status: string,
@@ -19,7 +20,8 @@ export default async function fetchApi<D>(
   tags: string[] = [],
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' = "GET",
   body: object = {},
-  cacheOptions: NextFetchRequestConfig = {}
+  cacheOptions: NextFetchRequestConfig = {},
+  requestCache: RequestCache = 'force-cache',
 ): Promise<APIResult<D>> {
   const {get} = await cookies();
   const authToken = get("auth")?.value;
@@ -28,8 +30,9 @@ export default async function fetchApi<D>(
     method: method,
     next: {
       tags,
-      ...cacheOptions
+      ...cacheOptions,
     },
+    cache: requestCache,
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + authToken,
@@ -47,6 +50,10 @@ export default async function fetchApi<D>(
       data: await result.json() as D
     }
   } else
+    if (method == "GET" && path == "/auth" && authToken != undefined) {
+      console.log(method, path, authToken, result.status);
+      redirect("/session-expired");
+    }
     return {
       error: await result.json(),
       data: undefined

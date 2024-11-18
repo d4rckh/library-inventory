@@ -1,6 +1,4 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import ReservationsDataTable from "@/components/ReservationsDataTable";
-import BorrowingsDataTable from "@/components/BorrowingsDataTable";
 import {getBookById} from "@/app/lib/actions/getBookById";
 import ItemsDataTable from "@/components/ItemsDataTable";
 import CreateItemForm from "@/components/CreateItemForm";
