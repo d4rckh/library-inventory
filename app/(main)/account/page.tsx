@@ -4,8 +4,9 @@ import SignInForm from "@/components/SignInForm";
 export default async function Page() {
   const user = await getLoggedInUser();
 
-  if (!user)
-    return <SignInForm/>;
+  if (!user) {
+    return <SignInForm/>
+  };
 
   return <>
     <h2 className={"text-2xl"}>Hello {user.email}</h2>

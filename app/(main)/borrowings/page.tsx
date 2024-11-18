@@ -8,6 +8,7 @@ import ReservationsTable from "@/components/ReservationsTable";
 export default async function Page() {
   const user = await getLoggedInUser();
 
+  console.log(user);
   if (!user) redirect("/");
 
   const borrowings = await getUserBorrowings(user.id);

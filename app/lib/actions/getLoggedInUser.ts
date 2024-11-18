@@ -8,5 +8,7 @@ export type UserInformation = {
 }
 
 export async function getLoggedInUser(): Promise<UserInformation | null> {
-  return (await getApi<UserInformation>("/auth", ["AUTH"], "GET")).data ?? null;
+  return (await getApi<UserInformation>("/auth", ["auth"], "GET", {}, {
+    revalidate: 10
+  })).data ?? null;
 }

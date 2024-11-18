@@ -5,11 +5,12 @@ import {Badge} from "@/components/ui/badge";
 import DurationDisplay from "@/components/DurationDisplay";
 import UserBadgeInformation from "@/components/UserBadgeInformation";
 import BookBadgeInformation from "@/components/BookBadgeInformation";
+import {ReactNode} from "react";
 
 export default function BorrowingTableRow({
-                                                  borrowing, userInfo, librarianLink
+                                                  borrowing, userInfo, librarianLink, children
                                                 }: {
-  borrowing: Borrowing, userInfo?: boolean, librarianLink?: boolean
+  borrowing: Borrowing, userInfo?: boolean, librarianLink?: boolean, children?: ReactNode
 }) {
 
   return <TableRow>
@@ -21,5 +22,6 @@ export default function BorrowingTableRow({
     <TableCell><DateDisplay date={new Date(borrowing.returnDate)} /></TableCell>
     <TableCell>{borrowing.returnedDate ? "-" : <DurationDisplay targetDate={new Date(borrowing.returnDate)} />}</TableCell>
     <TableCell>{borrowing.returnedDate ? <Badge variant={"outline"}>Yes</Badge> : <Badge>No</Badge>}</TableCell>
+    {children}
   </TableRow>
 }

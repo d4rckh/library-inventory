@@ -11,6 +11,7 @@ export type Reservation = {
   item: Inventory;
   user: UserInformation;
   expiredAt: string;
+  cancelled: boolean
 }
 
 export async function getUserReservations(userId: number): Promise<Reservation[]> {

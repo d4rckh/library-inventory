@@ -19,9 +19,9 @@ import {InventoryDto} from "@/app/lib/actions/getItems";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 
 export default function CreateBorrowingDialog({
-  user, item
+  user, item, refreshData
                                               }: {
-  user: UserInformation | null, item: InventoryDto | Inventory
+  user: UserInformation | null, item: InventoryDto | Inventory, refreshData: () => void
 }) {
   const [days, setDays] = useState(14);
   const [selectedUser, setSelectedUser] = useState(user);
@@ -49,9 +49,12 @@ export default function CreateBorrowingDialog({
       <DialogClose asChild>
         <Button
           onClick={() => {
-            if (user == null) return alert("Select a user");
-            createBorrowing(user.id, item.id, days).then(r => {
-              if (r.data) alert("Successfully created borrowing");
+            if (selectedUser == null) return alert("Select a user");
+            createBorrowing(selectedUser.id, item.id, days).then(r => {
+              if (r.data) {
+                refreshData();
+                alert("Successfully created borrowing");
+              }
               else if (r.error) alert(r.error.message);
             });
           }}

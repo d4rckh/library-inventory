@@ -7,6 +7,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/ui/table";
 import ReservationTableRow from "@/components/ReservationTableRow";
 import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
+import CancelReservationDialog from "@/components/CancelReservationDialog";
 
 export default function ReservationsDataTable({
   userId
@@ -19,10 +20,14 @@ export default function ReservationsDataTable({
     userId
   });
 
-  useEffect(() => {
+  const refreshData = () => {
     getReservations(reservationFilters).then((reservations) => {
       setReservations(reservations);
     });
+  }
+
+  useEffect(() => {
+    refreshData();
   }, [reservationFilters]);
 
   return <>
@@ -64,7 +69,9 @@ export default function ReservationsDataTable({
             reservations.map(reservation =>
               <ReservationTableRow reservation={reservation} userInfo={true} key={reservation.id}>
                 <TableCell>
-                  <CreateBorrowingDialog user={reservation.user} item={reservation.item} />
+                  <CreateBorrowingDialog user={reservation.user} item={reservation.item} refreshData={refreshData} />
+                  {!reservation.expiredAt && !reservation.cancelled &&
+                      (Date.now() < (new Date(reservation.expiresAt)).getDate()) && <CancelReservationDialog reservation={reservation} refreshData={refreshData}/>}
                 </TableCell>
               </ReservationTableRow>
             )

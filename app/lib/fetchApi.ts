@@ -19,6 +19,7 @@ export default async function fetchApi<D>(
   tags: string[] = [],
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' = "GET",
   body: object = {},
+  cacheOptions: NextFetchRequestConfig = {}
 ): Promise<APIResult<D>> {
   const {get} = await cookies();
   const authToken = get("auth")?.value;
@@ -26,7 +27,8 @@ export default async function fetchApi<D>(
   const result = await fetch(process.env.BACKEND as string + path, {
     method: method,
     next: {
-      tags
+      tags,
+      ...cacheOptions
     },
     headers: {
       'Content-Type': 'application/json',

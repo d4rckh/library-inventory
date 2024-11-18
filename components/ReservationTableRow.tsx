@@ -24,7 +24,8 @@ export default function ReservationTableRow({
     { userInfo && <TableCell><UserBadgeInformation user={reservation.user} /></TableCell> }
     <TableCell><DateDisplay date={createdAt}/></TableCell>
     <TableCell><DateDisplay date={expiresAt}/></TableCell>
-    <TableCell>{reservation.expiredAt ? <Badge variant={"outline"}>Picked-up</Badge> : (expired ? <Badge variant={"destructive"}>Expired</Badge> : <Badge>Active</Badge>)}</TableCell>
+    <TableCell>
+      {reservation.expiredAt ? <Badge variant={"outline"}>Picked-up</Badge> : (expired ? <Badge variant={"destructive"}>Expired</Badge> : (reservation.cancelled ? <Badge variant={"destructive"}>Cancelled</Badge> : <Badge>Active</Badge>))}</TableCell>
     {children}
   </TableRow>
 }

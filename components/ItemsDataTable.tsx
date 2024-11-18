@@ -11,10 +11,14 @@ import BookBadgeInformation from "@/components/BookBadgeInformation";
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {
   const [items, setItems] = useState<InventoryDto[]>([]);
 
-  useEffect(() => {
+  const refreshData = () => {
     getItems({ bookId }).then(items => {
       setItems(items);
-    })
+    });
+  }
+
+  useEffect(() => {
+    refreshData();
   }, [bookId]);
 
   return <Table>
@@ -45,7 +49,7 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
             <Badge variant={"secondary"}>Borrowed { item.stats.times } times</Badge>
           </TableCell>
           <TableCell>
-            { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item}/>}
+            { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} refreshData={refreshData} />}
           </TableCell>
         </TableRow>
       )}

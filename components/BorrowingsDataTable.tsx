@@ -1,11 +1,12 @@
 "use client";
 
 import {Suspense, useEffect, useState} from "react";
-import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
 import BorrowingTableRow from "@/components/BorrowingTableRow";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import MarkBorrowingAsReturnedDialog from "@/components/MarkBorrowingAsReturnedDialog";
 
 export default function BorrowingsDataTable({
   userId
@@ -18,10 +19,14 @@ export default function BorrowingsDataTable({
     userId
   });
 
-  useEffect(() => {
+  const refreshData = () => {
     getBorrowings(borrowingFilters).then((borrowings) => {
       setBorrowings(borrowings);
     });
+  }
+
+  useEffect(() => {
+    refreshData();
   }, [borrowingFilters]);
 
   return <>
@@ -56,14 +61,17 @@ export default function BorrowingsDataTable({
           <TableHead>Should return at</TableHead>
           <TableHead>Time left</TableHead>
           <TableHead>Returned?</TableHead>
+          <TableHead>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
           {
             borrowings.map(borrowing =>
-              <Suspense  key={borrowing.id} fallback={"loading"}>
-                <BorrowingTableRow borrowing={borrowing} userInfo librarianLink />
-              </Suspense>
+              <BorrowingTableRow borrowing={borrowing} userInfo librarianLink key={borrowing.id}>
+                <TableCell>
+                  {!borrowing.returnedDate && <MarkBorrowingAsReturnedDialog borrowing={borrowing} refreshData={refreshData}/>}
+                </TableCell>
+              </BorrowingTableRow>
             )
           }
       </TableBody>
