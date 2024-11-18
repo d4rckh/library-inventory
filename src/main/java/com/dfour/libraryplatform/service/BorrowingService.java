@@ -1,11 +1,12 @@
 package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.ExtendBorrowingRequestDto;
 import com.dfour.libraryplatform.domain.dto.stats.BorrowingStatsDto;
 import com.dfour.libraryplatform.domain.dto.stats.ItemBorrowingStatsDto;
+import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
-import com.dfour.libraryplatform.entity.BorrowingEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -64,5 +65,16 @@ public class BorrowingService {
 
     public ArrayList<BorrowingEntity> findFiltered(BorrowingFilterDto filter) {
         return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned());
+    }
+
+    public BorrowingEntity extendBorrowing(ExtendBorrowingRequestDto requestDto) {
+        BorrowingEntity borrowingEntity = borrowings.findById(requestDto.getBorrowingId())
+                .orElseThrow(NotFoundException::new);
+
+        borrowingEntity.setReturnDate(
+                borrowingEntity.getBorrowDate().plusDays(requestDto.getExtendDays())
+        );
+
+        return borrowings.save(borrowingEntity);
     }
 }

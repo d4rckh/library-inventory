@@ -2,6 +2,7 @@ package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
 import com.dfour.libraryplatform.domain.dto.requests.BorrowingRequestDto;
+import com.dfour.libraryplatform.domain.dto.requests.ExtendBorrowingRequestDto;
 import com.dfour.libraryplatform.domain.dto.stats.BorrowingStatsDto;
 import com.dfour.libraryplatform.domain.dto.stats.ItemBorrowingStatsDto;
 import com.dfour.libraryplatform.exception.NotFoundException;
@@ -55,6 +56,13 @@ public class BorrowingController {
             @PathVariable Long id
     ) {
         return borrowingService.markAsReturned(id);
+    }
+
+    @PostMapping("/extend")
+    public BorrowingEntity extendBorrowing(
+            @RequestBody ExtendBorrowingRequestDto requestDto
+    ) {
+        return borrowingService.extendBorrowing(requestDto);
     }
 
     @GetMapping("/stats/{itemId}")
