@@ -1,3 +1,7 @@
+import "../globals.css";
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
+import UserButtons from "@/components/UserButtons";
 
 export default function RootLayout({
                                      children,
@@ -5,12 +9,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <html lang="en">
 
-      <div className={`max-w-[1800px] mx-auto pt-5`}>
-        <h1 className={"text-4xl mb-4"}>Library Management</h1>
-        {children}
-      </div>
-    </>
+    <body>
+
+    <div className={"flex flex-row gap-1 p-1"}>
+      <Link href={"/"}>
+        <Button variant={"outline"}>
+          Home
+        </Button>
+      </Link>
+      <UserButtons/>
+    </div>
+
+    <div className={"px-3"}>
+      {children}
+    </div>
+
+    </body>
+    </html>
   );
 }

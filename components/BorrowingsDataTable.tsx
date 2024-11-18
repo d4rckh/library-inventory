@@ -7,6 +7,7 @@ import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
 import BorrowingTableRow from "@/components/BorrowingTableRow";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import MarkBorrowingAsReturnedDialog from "@/components/MarkBorrowingAsReturnedDialog";
+import ExtendBorrowingDialog from "@/components/ExtendBorrowingDialog";
 
 export default function BorrowingsDataTable({
   userId
@@ -70,6 +71,7 @@ export default function BorrowingsDataTable({
               <BorrowingTableRow borrowing={borrowing} userInfo librarianLink key={borrowing.id}>
                 <TableCell>
                   {!borrowing.returnedDate && <MarkBorrowingAsReturnedDialog borrowing={borrowing} refreshData={refreshData}/>}
+                  {!borrowing.returnedDate && <ExtendBorrowingDialog borrowing={borrowing} refreshData={refreshData}/>}
                 </TableCell>
               </BorrowingTableRow>
             )
