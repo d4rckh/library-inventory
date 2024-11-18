@@ -3,6 +3,7 @@ package com.dfour.libraryplatform.controller;
 import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.requests.ReservationRequestDto;
 import com.dfour.libraryplatform.domain.dto.stats.ReservationStatsDto;
+import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.manager.ReservationManager;
@@ -53,6 +54,15 @@ public class ReservationController {
     @GetMapping("/item/{itemId}")
     ArrayList<ReservationEntity> getReservationsByItemId(@PathVariable Long itemId) {
         return reservationService.findByItemId(itemId);
+    }
+
+
+
+    @PostMapping("/{id}/cancel")
+    public ReservationEntity cancelReservation(
+            @PathVariable Long id
+    ) {
+        return reservationService.cancelReservation(id);
     }
 
     @GetMapping("/stats")

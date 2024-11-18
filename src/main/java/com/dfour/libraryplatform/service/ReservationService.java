@@ -2,6 +2,7 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.ReservationStatsDto;
+import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.ReservationRepository;
 import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,8 @@ public class ReservationService {
 
     public boolean isValid(ReservationEntity reservation) {
         return Objects.isNull(reservation.getExpiredAt()) &&
-                reservation.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC));
+                reservation.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC)) &&
+                !reservation.isCancelled();
     }
 
     public Optional<ReservationEntity> getItemValidReservation(long itemId) {
@@ -57,6 +59,13 @@ public class ReservationService {
     public void invalidateReservation(ReservationEntity reservation) {
         reservation.setExpiredAt(OffsetDateTime.now(ZoneOffset.UTC));
         reservations.save(reservation);
+    }
+
+    public ReservationEntity cancelReservation(Long reservationId) {
+        ReservationEntity reservation = reservations.findById(reservationId)
+                .orElseThrow(NotFoundException::new);
+        reservation.setCancelled(true);
+        return reservations.save(reservation);
     }
 
     public ReservationEntity save(ReservationEntity reservation) {

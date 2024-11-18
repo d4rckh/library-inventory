@@ -14,11 +14,11 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
 
     ArrayList<ReservationEntity> findAllByUserId(long userId);
 
-    @Query(value = "SELECT COUNT(*) FROM reservations WHERE reservations.expires_at > NOW() AND reservations.expired_at IS NULL", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM reservations WHERE reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND reservations.cancelled = false", nativeQuery = true)
     long countValidReservations();
 
     @Query(value = "SELECT * FROM reservations WHERE (reservations.user_id = :userId OR :userId IS NULL) AND " +
             "(reservations.item_id = :itemId OR :itemId IS NULL) AND" +
-            "(reservations.expires_at > NOW() AND reservations.expired_at IS NULL) = :isActive OR :isActive IS NULL", nativeQuery = true)
+            "(reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND cancelled = false) = :isActive OR :isActive IS NULL", nativeQuery = true)
     ArrayList<ReservationEntity> findFiltered(Long userId, Long itemId, Boolean isActive);
 }

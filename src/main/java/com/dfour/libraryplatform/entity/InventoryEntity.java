@@ -24,13 +24,13 @@ public class InventoryEntity {
     @JsonIgnore
     private UserEntity user;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", nullable = false)
     private long userId;
 
     @JoinColumn(name = "book_id", insertable = false, updatable = false, nullable = false)
     @ManyToOne(targetEntity = BookEntity.class, fetch = FetchType.EAGER)
     private BookEntity book;
 
-    @Column(name = "book_id")
+    @Column(name = "book_id", nullable = false)
     private long bookId;
 }

@@ -50,6 +50,13 @@ public class BorrowingController {
         return borrowingManager.borrowBook(requestDto);
     }
 
+    @PostMapping("/{id}/returned")
+    public BorrowingEntity markAsReturned(
+            @PathVariable Long id
+    ) {
+        return borrowingService.markAsReturned(id);
+    }
+
     @GetMapping("/stats/{itemId}")
     public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable long itemId) {
         inventoryService.findById(itemId)

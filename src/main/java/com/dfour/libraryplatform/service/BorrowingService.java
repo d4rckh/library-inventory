@@ -3,6 +3,7 @@ package com.dfour.libraryplatform.service;
 import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BorrowingStatsDto;
 import com.dfour.libraryplatform.domain.dto.stats.ItemBorrowingStatsDto;
+import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BorrowingRepository;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +27,17 @@ public class BorrowingService {
                 .borrowed(borrowings.getItemValidBorrowing(itemId).isPresent())
                 .times(borrowings.countByItemId(itemId))
                 .build();
+    }
+
+    public BorrowingEntity markAsReturned(long borrowingId) {
+        BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
+                NotFoundException::new
+        );
+        
+        entity.setReturnedDate(OffsetDateTime.now());
+
+        borrowings.save(entity);
+        return entity;
     }
 
     public List<BorrowingEntity> findByUserId(long userId) {
