@@ -1,11 +1,11 @@
-import {getAllBooks} from "@/app/lib/actions/getBooks";
-import BooksGrid from "@/components/BooksGrid";
+import {getBooks} from "@/app/lib/actions/getBooks";
+import BooksGridAndSearch from "@/components/BooksGridAndSearch";
 
 export default async function Home() {
-  const books = await getAllBooks();
+  const books = await getBooks();
   return (
     <>
-      <BooksGrid books={books}/>
+      <BooksGridAndSearch initialBooks={books}/>
     </>
   );
 }

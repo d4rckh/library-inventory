@@ -11,6 +11,5 @@ export default function ReserveItemButton({itemId}: { itemId: number }) {
     });
   }}>
     Reserve Item
-
   </Button>
 }
