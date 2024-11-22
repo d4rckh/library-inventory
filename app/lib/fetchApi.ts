@@ -21,10 +21,11 @@ export default async function fetchApi<D>(
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' = "GET",
   body: object = {},
   cacheOptions: NextFetchRequestConfig = {},
-  requestCache: RequestCache = 'force-cache',
+  requestCache: RequestCache = 'no-store',
 ): Promise<APIResult<D>> {
   const {get} = await cookies();
   const authToken = get("auth")?.value;
+  console.log("SHOULD revalidating ", tags, " REQUEST ", path, " ", method);
 
   const result = await fetch(process.env.BACKEND as string + path, {
     method: method,
@@ -39,9 +40,9 @@ export default async function fetchApi<D>(
     },
     body: method == "GET" ? null : JSON.stringify(body),
   })
-
   if (result.status.toString().startsWith("2")) {
     if (method != "GET") {
+      console.log("revalidating ", tags);
       tags.forEach(revalidateTag);
     }
 

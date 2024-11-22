@@ -70,8 +70,7 @@ export default function ReservationsDataTable({
               <ReservationTableRow reservation={reservation} userInfo={true} key={reservation.id}>
                 <TableCell>
                   <CreateBorrowingDialog user={reservation.user} item={reservation.item} refreshData={refreshData} />
-                  {!reservation.expiredAt && !reservation.cancelled &&
-                      (Date.now() < (new Date(reservation.expiresAt)).getDate()) && <CancelReservationDialog reservation={reservation} refreshData={refreshData}/>}
+                  {!reservation.expiredAt && !reservation.cancelled && <CancelReservationDialog reservation={reservation} refreshData={refreshData}/>}
                 </TableCell>
               </ReservationTableRow>
             )
