@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
@@ -22,8 +23,9 @@ public class BookService {
 
     private final BookRepository books;
 
-    public List<BookEntity> findAll() {
-        return books.findAll(
+    public List<BookEntity> findFiltered(BookFilterDto filter) {
+        return books.findFiltered(
+                filter.getTitleSearch().toLowerCase(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.ASC, "id"))
         ).getContent();

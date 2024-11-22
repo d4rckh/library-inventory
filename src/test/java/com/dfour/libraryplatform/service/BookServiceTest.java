@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.service;
 
+import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,10 @@ public class BookServiceTest {
     private BookService bookService;
 
     @Test
-    void whenFindAll_thenReturnCount() {
-        assertEquals(2, bookService.findAll().size());
+    void whenFindFiltered_thenReturnCount() {
+        assertEquals(2, bookService.findFiltered(
+                BookFilterDto.builder().build()
+        ).size());
     }
 
     @Test

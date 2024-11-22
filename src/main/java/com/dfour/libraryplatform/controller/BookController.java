@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
@@ -22,8 +23,14 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    private List<BookEntity> findAll() {
-        return bookService.findAll();
+    private List<BookEntity> findFiltered(
+            @RequestParam(name="titleSearch", required = false) String titleSearch
+    ) {
+        return bookService.findFiltered(
+                BookFilterDto.builder()
+                        .titleSearch(titleSearch)
+                        .build()
+        );
     }
 
     @PatchMapping("/{bookId}")
