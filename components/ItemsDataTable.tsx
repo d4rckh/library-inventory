@@ -1,25 +1,26 @@
 "use client";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {useEffect, useState} from "react";
-import {getItems, InventoryDto} from "@/app/lib/actions/getItems";
+import {getItems} from "@/app/lib/actions/getItems";
 import UserBadgeInformation from "@/components/UserBadgeInformation";
 import {Badge} from "@/components/ui/badge";
 import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
 import BookBadgeInformation from "@/components/BookBadgeInformation";
+import {useQuery} from "@tanstack/react-query";
 
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {
-  const [items, setItems] = useState<InventoryDto[]>([]);
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: [`items-${bookId}`],
+    queryFn: async () => {
+      return await getItems({ bookId });
+    },
+  })
 
-  const refreshData = () => {
-    getItems({ bookId }).then(items => {
-      setItems(items);
-    });
-  }
+  if (error)
+    return <>Error loading data</>;
 
-  useEffect(() => {
-    refreshData();
-  }, [bookId]);
+  if (isPending || isFetching)
+    return <>Loading...</>;
 
   return <Table>
     <TableHeader>
@@ -32,7 +33,7 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {items.map(item =>
+      {data && data.map(item =>
         <TableRow key={item.id}>
           <TableCell>
             {item.id}
