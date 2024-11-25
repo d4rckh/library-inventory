@@ -11,7 +11,7 @@ export type InventoryFilter = {
   bookId?: number;
 };
 
-export type InventoryDto = {
+export type InventoryItem = {
   id: number;
   book: Book;
   user: UserInformation;
@@ -20,11 +20,11 @@ export type InventoryDto = {
   stats: InventoryItemBorrowingStats
 }
 
-export async function getItems(filters?: InventoryFilter): Promise<InventoryDto[]> {
+export async function getItems(filters?: InventoryFilter): Promise<InventoryItem[]> {
   let params = "?";
   if (filters) {
     if (filters.bookId != undefined) params += "bookId=" + filters.bookId + "&";
   }
 
-  return (await fetchApi<InventoryDto[]>("/inventory" + params, ["inventory"])).data ?? [];
+  return (await fetchApi<InventoryItem[]>("/inventory" + params, ["inventory"])).data ?? [];
 }

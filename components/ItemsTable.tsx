@@ -1,9 +1,9 @@
 import ItemTableRow from "@/components/ItemTableRow";
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {InventoryDto} from "@/app/lib/actions/getItems";
+import {InventoryItem} from "@/app/lib/actions/getItems";
 
 export default function ItemsTable({items}: {
-  items: InventoryDto[];
+  items: InventoryItem[];
 }) {
   return <Table>
     <TableHeader>

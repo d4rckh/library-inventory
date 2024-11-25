@@ -3,12 +3,12 @@
 import ReserveItemButton from "@/components/ReserveItemButton";
 import {TableCell, TableRow} from "@/components/ui/table";
 import {Badge} from "@/components/ui/badge";
-import {InventoryDto} from "@/app/lib/actions/getItems";
+import {InventoryItem} from "@/app/lib/actions/getItems";
 
 export default async function ItemTableRow({
                                              item,
                                            }: {
-  item: InventoryDto,
+  item: InventoryItem,
 }) {
   return <TableRow>
     <TableCell>{item.id}</TableCell>

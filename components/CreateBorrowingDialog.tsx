@@ -15,13 +15,13 @@ import {Button} from "@/components/ui/button";
 import {useState} from "react";
 import {createBorrowing} from "@/app/lib/actions/createBorrowing";
 import UserSelectorFinder from "@/components/UserSelectorFinder";
-import {InventoryDto} from "@/app/lib/actions/getItems";
+import {InventoryItem} from "@/app/lib/actions/getItems";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 
 export default function CreateBorrowingDialog({
   user, item, refreshData
                                               }: {
-  user: UserInformation | null, item: InventoryDto | Inventory, refreshData: () => void
+  user: UserInformation | null, item: InventoryItem | Inventory, refreshData: () => void
 }) {
   const [days, setDays] = useState(14);
   const [selectedUser, setSelectedUser] = useState(user);
