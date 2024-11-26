@@ -7,7 +7,8 @@ import lombok.Setter;
 
 @Data
 @Builder
-@RequiredArgsConstructor @Setter
+@RequiredArgsConstructor
+@Setter
 public class ReservationRequestDto {
     private final Long userId;
     private final Long itemId;

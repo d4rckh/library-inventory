@@ -2,10 +2,10 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
+import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.BookRepository;
-import com.dfour.libraryplatform.entity.BookEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;

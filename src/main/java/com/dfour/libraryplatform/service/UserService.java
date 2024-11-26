@@ -5,11 +5,11 @@ import com.dfour.libraryplatform.domain.dto.filters.UserFilterDto;
 import com.dfour.libraryplatform.domain.dto.requests.UserSignInRequestDto;
 import com.dfour.libraryplatform.domain.dto.requests.UserSignUpRequestDto;
 import com.dfour.libraryplatform.domain.dto.stats.UserStatsDto;
+import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.exception.EmailAlreadyRegisteredException;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.exception.PasswordDoesNotMatchException;
 import com.dfour.libraryplatform.repository.UserRepository;
-import com.dfour.libraryplatform.entity.UserEntity;
 import com.dfour.libraryplatform.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +28,14 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+/*
     public List<UserEntity> findAll() {
         return users.findAll(
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
     }
+*/
 
     public Optional<UserEntity> findByEmail(String email) {
         return users.findByEmail(email);

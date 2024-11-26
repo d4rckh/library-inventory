@@ -2,9 +2,9 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.ReservationStatsDto;
+import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.ReservationRepository;
-import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,6 @@ import java.util.stream.Collectors;
 public class ReservationService {
 
     private final ReservationRepository reservations;
-
-    public List<ReservationEntity> findAll() {
-        return reservations.findAll();
-    }
 
     public Optional<ReservationEntity> findById(Long id) {
         return reservations.findById(id);

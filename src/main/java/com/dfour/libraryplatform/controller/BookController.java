@@ -4,9 +4,9 @@ import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
-import com.dfour.libraryplatform.service.BookService;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;
+import com.dfour.libraryplatform.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class BookController {
 
     @GetMapping
     private List<BookEntity> findFiltered(
-            @RequestParam(name="titleSearch", required = false) String titleSearch
+            @RequestParam(name = "titleSearch", required = false) String titleSearch
     ) {
         return bookService.findFiltered(
                 BookFilterDto.builder()

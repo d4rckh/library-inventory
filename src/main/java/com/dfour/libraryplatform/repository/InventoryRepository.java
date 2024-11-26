@@ -1,6 +1,5 @@
 package com.dfour.libraryplatform.repository;
 
-import com.dfour.libraryplatform.entity.BorrowingEntity;
 import com.dfour.libraryplatform.entity.InventoryEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

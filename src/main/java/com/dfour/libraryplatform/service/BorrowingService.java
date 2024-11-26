@@ -34,7 +34,7 @@ public class BorrowingService {
         BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
                 NotFoundException::new
         );
-        
+
         entity.setReturnedDate(OffsetDateTime.now());
 
         borrowings.save(entity);
@@ -77,4 +77,5 @@ public class BorrowingService {
 
         return borrowings.save(borrowingEntity);
     }
+
 }

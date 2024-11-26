@@ -26,9 +26,9 @@ public class AuthController {
         UserEntity user = AppAuthentication.GetLoggedUserDetails().getEntity();
 
         return UserInformationDto.builder()
-                    .id(user.getId())
-                    .email(user.getEmail())
-                    .build();
+                .id(user.getId())
+                .email(user.getEmail())
+                .build();
     }
 
 }

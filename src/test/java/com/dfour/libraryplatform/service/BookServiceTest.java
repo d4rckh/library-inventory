@@ -23,7 +23,7 @@ public class BookServiceTest {
     @Test
     void whenFindFiltered_thenReturnCount() {
         assertEquals(2, bookService.findFiltered(
-                BookFilterDto.builder().build()
+                BookFilterDto.builder().titleSearch("").build()
         ).size());
     }
 

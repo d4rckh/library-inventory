@@ -8,7 +8,8 @@ import com.dfour.libraryplatform.entity.UserEntity;
 import lombok.Builder;
 import lombok.Data;
 
-@Data @Builder
+@Data
+@Builder
 public class InventoryResponseDto {
     private long id;
 

@@ -1,10 +1,10 @@
 package com.dfour.libraryplatform.controller;
 
-import com.dfour.libraryplatform.domain.dto.filters.InventoryFilterDto;
 import com.dfour.libraryplatform.domain.dto.InventoryResponseDto;
+import com.dfour.libraryplatform.domain.dto.filters.InventoryFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.InventoryStatsDto;
-import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.entity.InventoryEntity;
+import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.InventoryEntityMapper;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;
@@ -25,7 +25,7 @@ public class InventoryController {
 
     @GetMapping
     public List<InventoryResponseDto> findFiltered(
-            @RequestParam(name="bookId", required = false) Long bookId
+            @RequestParam(name = "bookId", required = false) Long bookId
     ) {
         return inventoryService.findFiltered(
                 InventoryFilterDto.builder()
