@@ -11,7 +11,6 @@ export const useItems = (filters?: InventoryFilter) => {
   })
 }
 
-
 export const useBooks = (filters?: BookFilters) => {
   return useQuery({
     queryKey: ["books", "list", filters],

@@ -16,6 +16,8 @@ import {Badge} from "@/components/ui/badge";
 import {Reservation} from "@/app/lib/actions/getUserReservations";
 import {cancelReservation} from "@/app/lib/actions/cancelReservation";
 import {useQueryClient} from "@tanstack/react-query";
+import {useToast} from "@/hooks/use-toast";
+import {CircleX} from "lucide-react";
 
 export default function CancelReservationDialog({
   reservation
@@ -23,10 +25,13 @@ export default function CancelReservationDialog({
   reservation: Reservation;
 }) {
   const query = useQueryClient();
+  const { toast } = useToast();
 
   return <Dialog>
     <DialogTrigger asChild>
-      <Button size={"sm"} variant={"destructive"}>Cancel Reservation</Button>
+      <Button size={"icon"} variant={"destructive"}>
+        <CircleX />
+      </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
@@ -40,15 +45,19 @@ export default function CancelReservationDialog({
       <span>Item ID: <Badge>{reservation.itemId}</Badge></span>
       <DialogClose asChild>
         <Button
-            variant={"destructive"}
+          variant={"destructive"}
           onClick={() => {
-            cancelReservation(reservation.id).then(r => {
-              if (r.data) {
-                query.invalidateQueries({ queryKey: ["reservations"] });
-                query.invalidateQueries({ queryKey: ["borrowings"] });
-                alert("Successfully cancelled reservation");
+            cancelReservation(reservation.id).then(async r => {
+              if (!r.error) {
+                await query.invalidateQueries({ queryKey: ["reservations", "list"] });
+                await query.invalidateQueries({ queryKey: ["borrowings", "list"] });
+                await query.invalidateQueries({ queryKey: ["items", "list"] });
               }
-              else if (r.error) alert(r.error.message);
+
+              toast({
+                title: r.error ? "Failed to cancel reservation" : "Successfully cancelled reservation",
+                description: r.error ? r.error.message : ""
+              })
             });
           }}
         >

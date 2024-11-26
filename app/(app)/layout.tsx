@@ -2,7 +2,7 @@ import "../globals.css";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import UserButtons from "@/components/users/UserButtons";
-import QueryProvider from "@/lib/queryProvider";
+import QueryProviderAndToaster from "@/lib/queryProviderAndToaster";
 
 export default function RootLayout({
                                      children,
@@ -24,9 +24,9 @@ export default function RootLayout({
     </div>
 
     <div className={"px-3"}>
-      <QueryProvider>
+      <QueryProviderAndToaster>
         {children}
-      </QueryProvider>
+      </QueryProviderAndToaster>
     </div>
 
     </body>

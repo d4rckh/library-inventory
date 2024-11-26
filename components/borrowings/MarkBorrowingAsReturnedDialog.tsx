@@ -16,6 +16,8 @@ import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {markBorrowingAsReturned} from "@/app/lib/actions/markBorrowingAsReturned";
 import {Badge} from "@/components/ui/badge";
 import {useQueryClient} from "@tanstack/react-query";
+import {useToast} from "@/hooks/use-toast";
+import {BookCheck} from "lucide-react";
 
 export default function MarkBorrowingAsReturnedDialog({
   borrowing
@@ -23,10 +25,13 @@ export default function MarkBorrowingAsReturnedDialog({
   borrowing: Borrowing;
 }) {
   const query = useQueryClient();
+  const { toast } = useToast();
 
   return <Dialog>
     <DialogTrigger asChild>
-      <Button size={"sm"} variant={"secondary"}>Mark as returned</Button>
+      <Button size={"icon"} variant={"secondary"}>
+        <BookCheck />
+      </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
@@ -41,14 +46,17 @@ export default function MarkBorrowingAsReturnedDialog({
       <DialogClose asChild>
         <Button
           onClick={() => {
-            markBorrowingAsReturned(borrowing.id).then(r => {
+            markBorrowingAsReturned(borrowing.id).then(async r => {
               if (r.data) {
-                query.invalidateQueries({ queryKey: ['borrowings'] })
-                query.invalidateQueries({ queryKey: ["items"] });
-                query.invalidateQueries({ queryKey: ["reservations"] });
-                alert("Successfully marked as returned");
+                await query.invalidateQueries({ queryKey: ["borrowings", "list"] })
+                await query.invalidateQueries({ queryKey: ["items", "list"] });
+                await query.invalidateQueries({ queryKey: ["reservations", "list"] });
               }
-              else if (r.error) alert(r.error.message);
+
+              toast({
+                title: r.error ? "Error marking this borrowing as returned" : "Marked the borrowing as returned successfully",
+                description: r.error ? r.error.message : ""
+              })
             });
           }}
         >

@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
+import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
@@ -18,6 +10,8 @@ import UserSelectorFinder from "@/components/users/UserSelectorFinder";
 import {InventoryItem} from "@/app/lib/actions/getItems";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 import {useQueryClient} from "@tanstack/react-query";
+import {useToast} from "@/hooks/use-toast";
+import {BookUp} from "lucide-react";
 
 export default function CreateBorrowingDialog({
   user, item
@@ -28,16 +22,17 @@ export default function CreateBorrowingDialog({
   const [selectedUser, setSelectedUser] = useState(user);
   const query = useQueryClient();
 
+  const { toast } = useToast();
+
   return <Dialog>
     <DialogTrigger asChild>
-      <Button size={"sm"} variant={"secondary"}>Register Borrow</Button>
+      <Button size={"icon"} variant={"secondary"}>
+        <BookUp />
+      </Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
         <DialogTitle>Create a new borrow</DialogTitle>
-        <DialogDescription>
-
-        </DialogDescription>
       </DialogHeader>
       <UserSelectorFinder value={selectedUser} setValue={setSelectedUser} />
       <span>Book: <b>{item.book.title}</b> by <i>{item.book.author}</i> (Publisher: {item.book.publisher})</span>
@@ -51,15 +46,19 @@ export default function CreateBorrowingDialog({
       <DialogClose asChild>
         <Button
           onClick={() => {
-            if (selectedUser == null) return alert("Select a user");
-            createBorrowing(selectedUser.id, item.id, days).then(r => {
-              if (r.data) {
-                query.invalidateQueries({ queryKey: ["reservations"] });
-                query.invalidateQueries({ queryKey: ["borrowings"] });
-                query.invalidateQueries({ queryKey: ["items"] });
-                alert("Successfully created borrowing");
+            if (selectedUser == null) return toast({
+              title: "User not chosen",
+            });
+            createBorrowing(selectedUser.id, item.id, days).then(async r => {
+              if (!r.error) {
+                await query.invalidateQueries({ queryKey: ["reservations", "list"] });
+                await query.invalidateQueries({ queryKey: ["borrowings", "list"] });
+                await query.invalidateQueries({ queryKey: ["items", "list"] });
               }
-              else if (r.error) alert(r.error.message);
+              toast({
+                title: r.error ? "Failed to register the borrowing" : "Successfully registered",
+                description: r.error ? r.error.message : ""
+              })
             });
           }}
         >

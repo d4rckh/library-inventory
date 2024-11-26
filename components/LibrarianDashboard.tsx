@@ -5,6 +5,8 @@ import ReservationsDataTable from "@/components/reservations/ReservationsDataTab
 import {ReactNode} from "react";
 import BorrowingsDataTable from "@/components/borrowings/BorrowingsDataTable";
 import ItemsDataTable from "@/components/inventory/ItemsDataTable";
+import CreateBookDialog from "@/components/books/CreateBookDialog";
+import {BookDashed, Gauge, Inbox, LibraryBig} from "lucide-react";
 
 export default function LibrarianDashboard({
   metrics
@@ -14,16 +16,19 @@ export default function LibrarianDashboard({
   return <>
     <Tabs defaultValue={"dashboard"} className="w-full">
       <TabsList className={"mb-2"}>
-        <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-        <TabsTrigger value="reservations">Reservations</TabsTrigger>
-        <TabsTrigger value="borrows">Borrows</TabsTrigger>
-        <TabsTrigger value="inventory">Inventory</TabsTrigger>
+        <TabsTrigger value="dashboard"><Gauge className={"w-4 mr-2"} /> Dashboard</TabsTrigger>
+        <TabsTrigger value="reservations"><Inbox className={"w-4 mr-2"} /> Reservations</TabsTrigger>
+        <TabsTrigger value="borrows"><BookDashed className={"w-4 mr-2"} /> Borrows</TabsTrigger>
+        <TabsTrigger value="inventory"><LibraryBig className={"w-4 mr-2"} /> Inventory</TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard">
         {metrics}
+
+        <h1 className={"text-1xl mb-2"}>Quick actions</h1>
+        <CreateBookDialog/>
       </TabsContent>
       <TabsContent value="reservations">
-        <ReservationsDataTable />
+        <ReservationsDataTable/>
       </TabsContent>
       <TabsContent value="borrows">
         <BorrowingsDataTable />

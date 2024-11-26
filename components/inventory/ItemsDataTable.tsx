@@ -6,10 +6,11 @@ import {Badge} from "@/components/ui/badge";
 import CreateBorrowingDialog from "@/components/borrowings/CreateBorrowingDialog";
 import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {useItems} from "@/lib/queries/items";
+import CellActions from "@/components/CellActions";
 
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {
 
-  const { data, refetch } = useItems({ bookId });
+  const { data } = useItems({ bookId });
 
   return <Table>
     <TableHeader>
@@ -30,7 +31,7 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
           <TableCell>
             <BookBadgeInformation book={item.book} librarianLink />
           </TableCell>
-          <TableCell>
+          <TableCell className={"flex flex-row items-center gap-1 h-full"}>
             { item.reservation && <>Reserved by <UserBadgeInformation user={item.reservation.user}/></> }
             { item.borrowing && <>Borrowed by <UserBadgeInformation user={item.borrowing.user}/></> }
             { !item.borrowing && !item.reservation && <Badge>Available</Badge>}
@@ -39,7 +40,9 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
             <Badge variant={"secondary"}>Borrowed { item.stats.times } times</Badge>
           </TableCell>
           <TableCell>
-            { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} refreshData={refetch} />}
+            <CellActions>
+              { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} />}
+            </CellActions>
           </TableCell>
         </TableRow>
       )}
