@@ -7,6 +7,7 @@ import CreateBorrowingDialog from "@/components/borrowings/CreateBorrowingDialog
 import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {useItems} from "@/lib/queries/items";
 import CellActions from "@/components/CellActions";
+import DeleteItemDialog from "@/components/inventory/DeleteItemDialog";
 
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {
 
@@ -42,6 +43,7 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
           <TableCell>
             <CellActions>
               { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} />}
+              <DeleteItemDialog item={item} />
             </CellActions>
           </TableCell>
         </TableRow>

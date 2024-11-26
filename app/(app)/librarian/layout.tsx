@@ -1,9 +1,10 @@
 import "../../globals.css";
+import {ReactNode} from "react";
 
 export default function Layout({
                                      children,
                                    }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <div className={"px-3"}>

@@ -42,17 +42,15 @@ export default async function fetchApi<D>(
   })
   if (result.status.toString().startsWith("2")) {
     if (method != "GET") {
-      console.log("revalidating ", tags);
       tags.forEach(revalidateTag);
     }
 
     return {
       error: undefined,
-      data: await result.json() as D
+      data: method != 'DELETE' ? await result.json() as D : undefined
     }
   } else
     if (method == "GET" && path == "/auth" && authToken != undefined) {
-      console.log(method, path, authToken, result.status);
       redirect("/session-expired");
     }
     return {

@@ -6,7 +6,8 @@ import {ReactNode} from "react";
 import BorrowingsDataTable from "@/components/borrowings/BorrowingsDataTable";
 import ItemsDataTable from "@/components/inventory/ItemsDataTable";
 import CreateBookDialog from "@/components/books/CreateBookDialog";
-import {BookDashed, Gauge, Inbox, LibraryBig} from "lucide-react";
+import {Book, BookDashed, Gauge, Inbox, LibraryBig} from "lucide-react";
+import BooksDataTable from "@/components/books/BooksDataTable";
 
 export default function LibrarianDashboard({
   metrics
@@ -20,6 +21,7 @@ export default function LibrarianDashboard({
         <TabsTrigger value="reservations"><Inbox className={"w-4 mr-2"} /> Reservations</TabsTrigger>
         <TabsTrigger value="borrows"><BookDashed className={"w-4 mr-2"} /> Borrows</TabsTrigger>
         <TabsTrigger value="inventory"><LibraryBig className={"w-4 mr-2"} /> Inventory</TabsTrigger>
+        <TabsTrigger value="books"><Book className={"w-4 mr-2"} /> Books</TabsTrigger>
       </TabsList>
       <TabsContent value="dashboard">
         {metrics}
@@ -35,6 +37,9 @@ export default function LibrarianDashboard({
       </TabsContent>
       <TabsContent value="inventory">
         <ItemsDataTable />
+      </TabsContent>
+      <TabsContent value="books">
+        <BooksDataTable />
       </TabsContent>
     </Tabs>
   </>;

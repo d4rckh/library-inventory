@@ -1,7 +1,6 @@
 import "../globals.css";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import UserButtons from "@/components/users/UserButtons";
 
 export default function RootLayout({
                                      children,

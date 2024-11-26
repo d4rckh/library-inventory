@@ -3,6 +3,8 @@ import {useQuery} from "@tanstack/react-query";
 import {getItems, InventoryFilter} from "@/app/lib/actions/getItems";
 import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
 import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
+import fetchApi from "@/app/lib/fetchApi";
+import {getTags} from "@/app/lib/actions/getTags";
 
 export const useItems = (filters?: InventoryFilter) => {
   return useQuery({
@@ -29,5 +31,12 @@ export const useReservations = (filters?: ReservationFilters) => {
   return useQuery({
     queryKey: ["reservations", "list", filters],
     queryFn: () => getReservations(filters),
+  })
+}
+
+export const useTags = () => {
+  return useQuery({
+    queryKey: ["tags", "list"],
+    queryFn: () => getTags(),
   })
 }
