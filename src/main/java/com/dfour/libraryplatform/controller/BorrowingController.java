@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -27,7 +26,7 @@ public class BorrowingController {
     private final InventoryService inventoryService;
 
     @GetMapping
-    ArrayList<BorrowingEntity> findBorrowings(
+    List<BorrowingEntity> findBorrowings(
             @RequestParam(name = "userId", required = false) Long userId,
             @RequestParam(name = "itemId", required = false) Long itemId,
             @RequestParam(name = "isReturned", required = false) Boolean isReturned

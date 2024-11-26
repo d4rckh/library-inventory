@@ -63,8 +63,10 @@ public class BorrowingService {
                 .build();
     }
 
-    public ArrayList<BorrowingEntity> findFiltered(BorrowingFilterDto filter) {
-        return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned());
+    public List<BorrowingEntity> findFiltered(BorrowingFilterDto filter) {
+        return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned(),
+                PageRequest.of(0, 100,
+                        Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
     public BorrowingEntity extendBorrowing(ExtendBorrowingRequestDto requestDto) {

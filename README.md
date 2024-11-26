@@ -4,20 +4,30 @@
 ### Backend
 - Gradle, Spring, Spring Security, JWT, Liquibase, Hibernate, Postgresql
 ### Frontend
-- NextJS, Tailwind, Shadcn/ui
+- NextJS, Tanstack-query, Tailwind, Shadcn/ui
 
 ## Features
+
+### Authentication
 - Users can sign up and sign in
 - Stateless user authentication with JWTs
-- Keep inventory of different books
-- Users can reserve books to borrow at the library
-- Users can borrow books at the library
-- Books can be tagged
-- Librarians can view stats of active or late borrows
+
+### Inventory 
 - Librarians can view the inventory of books
-- Librarians can register borrows of books for users
+
+### Reservations
+- Users can reserve books to borrow at the library
 - Librarians can see active and expired reservations
+- Librarians can cancel reservations
+
+### Borrowing
+- Librarians can mark an item as borrowed by a specific user when a user comes at the library
+- Librarians can mark a borrowing as returned
+- Librarians can extend the return date for a borrowing
 - Librarians can see active, late and the history of borrows for each item
+
+### Dashboard and misc
+- Librarians can view stats of active or late borrows, total registered users, etc.
 
 ## Screenshots
 

@@ -27,7 +27,7 @@ public class BookService {
         return books.findFiltered(
                 filter.getTitleSearch().toLowerCase(),
                 PageRequest.of(0, 100,
-                        Sort.by(Sort.Direction.ASC, "id"))
+                        Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
     }
 

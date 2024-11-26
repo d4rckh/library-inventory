@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/reservation")
@@ -24,7 +24,7 @@ public class ReservationController {
     private final ReservationManager reservationManager;
 
     @GetMapping
-    ArrayList<ReservationEntity> findReservations(
+    List<ReservationEntity> findReservations(
             @RequestParam(name = "userId", required = false) Long userId,
             @RequestParam(name = "isActive", required = false) Boolean isActive,
             @RequestParam(name = "itemId", required = false) Long itemId
@@ -50,12 +50,6 @@ public class ReservationController {
         );
     }
 
-    @GetMapping("/item/{itemId}")
-    ArrayList<ReservationEntity> getReservationsByItemId(@PathVariable Long itemId) {
-        return reservationService.findByItemId(itemId);
-    }
-
-
     @PostMapping("/{id}/cancel")
     public ReservationEntity cancelReservation(
             @PathVariable Long id
@@ -72,11 +66,6 @@ public class ReservationController {
     ReservationEntity getValidReservationsByItemId(@PathVariable Long itemId) {
         return reservationService.getItemValidReservation(itemId)
                 .orElseThrow(NotFoundException::new);
-    }
-
-    @GetMapping("/user/{userId}")
-    ArrayList<ReservationEntity> getReservationsByUserId(@PathVariable Long userId) {
-        return reservationService.findByUserId(userId);
     }
 
     @GetMapping("/{id}")

@@ -6,6 +6,8 @@ import com.dfour.libraryplatform.entity.ReservationEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
@@ -24,14 +26,6 @@ public class ReservationService {
 
     public Optional<ReservationEntity> findById(Long id) {
         return reservations.findById(id);
-    }
-
-    public ArrayList<ReservationEntity> findByItemId(Long itemId) {
-        return reservations.findAllByItemId(itemId);
-    }
-
-    public ArrayList<ReservationEntity> findByUserId(Long userId) {
-        return reservations.findAllByUserId(userId);
     }
 
     public boolean isValid(ReservationEntity reservation) {
@@ -74,7 +68,9 @@ public class ReservationService {
                 .build();
     }
 
-    public ArrayList<ReservationEntity> findFiltered(ReservationFilterDto filters) {
-        return reservations.findFiltered(filters.getUserId(), filters.getItemId(), filters.getIsActive());
+    public List<ReservationEntity> findFiltered(ReservationFilterDto filters) {
+        return reservations.findFiltered(filters.getUserId(), filters.getItemId(), filters.getIsActive(),
+                PageRequest.of(0, 100,
+                        Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 }
