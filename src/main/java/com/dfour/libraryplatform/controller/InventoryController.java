@@ -10,6 +10,7 @@ import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,6 +48,14 @@ public class InventoryController {
     ) {
         return inventoryService.findById(itemId)
                 .orElseThrow(NotFoundException::new);
+    }
+
+    @DeleteMapping("/{itemId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void delete(
+            @PathVariable(name = "itemId") Long itemId
+    ) {
+        inventoryService.deleteById(itemId);
     }
 
     @PostMapping

@@ -12,4 +12,5 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     @Query(value = "SELECT b FROM BookEntity b WHERE (LOWER(b.title) LIKE %:titleSearch% OR :titleSearch IS NULL)")
     Slice<BookEntity> findFiltered(String titleSearch, Pageable pageable);
+
 }

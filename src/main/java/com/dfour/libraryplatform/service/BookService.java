@@ -31,6 +31,10 @@ public class BookService {
         ).getContent();
     }
 
+    public void deleteById(long id) {
+        books.deleteById(id);
+    }
+
     public Optional<BookEntity> findById(Long id) {
         return books.findById(id);
     }

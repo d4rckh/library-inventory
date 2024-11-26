@@ -29,8 +29,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(final HttpServletRequest request,
                                     final HttpServletResponse response,
                                     final FilterChain chain) throws IOException, ServletException {
-        log.info("Running filter on {}", request.getRequestURI());
-
         // look for Bearer auth header
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null || !header.startsWith("Bearer ")) {
@@ -53,8 +51,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 userDetails, null, userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        log.info("Authenticated user as {} on {}", userDetails.getUsername(), request.getRequestURI());
 
         // continue with authenticated user
         chain.doFilter(request, response);

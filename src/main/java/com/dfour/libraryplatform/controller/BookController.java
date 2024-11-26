@@ -1,9 +1,11 @@
 package com.dfour.libraryplatform.controller;
 
+import com.dfour.libraryplatform.domain.dto.BookResponseDto;
 import com.dfour.libraryplatform.domain.dto.filters.BookFilterDto;
 import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
+import com.dfour.libraryplatform.mapper.BookEntityMapper;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.security.authentication.AppAuthentication;
 import com.dfour.libraryplatform.service.BookService;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -21,39 +24,48 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final BookEntityMapper bookEntityMapper;
 
     @GetMapping
-    private List<BookEntity> findFiltered(
+    private List<BookResponseDto> findFiltered(
             @RequestParam(name = "titleSearch", required = false) String titleSearch
     ) {
         return bookService.findFiltered(
                 BookFilterDto.builder()
                         .titleSearch(titleSearch)
                         .build()
-        );
+        ).stream().map(bookEntityMapper::entityToDto).collect(Collectors.toList());
     }
 
     @PatchMapping("/{bookId}")
-    BookEntity patch(
+    BookResponseDto patch(
             @PathVariable Long bookId,
             @RequestBody BookEntity incompleteBookEntity
     ) {
-        return bookService.patch(bookId, incompleteBookEntity);
+        return bookEntityMapper.entityToDto(bookService.patch(bookId, incompleteBookEntity));
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{bookId}")
+    void delete(
+            @PathVariable Long bookId
+    ) {
+        bookService.deleteById(bookId);
     }
 
     @GetMapping("/{bookId}")
-    BookEntity getById(
+    BookResponseDto getById(
             @PathVariable Long bookId
     ) {
-        return bookService.findById(bookId)
-                .orElseThrow(NotFoundException::new);
+        return bookEntityMapper.entityToDto(bookService.findById(bookId)
+                .orElseThrow(NotFoundException::new));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    BookEntity create(@RequestBody BookEntity bookEntity) {
+    BookResponseDto create(@RequestBody BookEntity bookEntity) {
         AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
-        return bookService.createAsUser(bookEntity, appUserDetails.getEntity());
+        return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
     }
 
     @GetMapping("/stats")
