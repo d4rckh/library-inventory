@@ -1,6 +1,6 @@
 import {getBookById} from "@/app/lib/actions/getBookById";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import ItemsTable from "@/components/ItemsTable";
+import ItemsTable from "@/components/inventory/ItemsTable";
 import {getItems} from "@/app/lib/actions/getItems";
 
 export default async function Page({params}: {

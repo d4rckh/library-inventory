@@ -10,8 +10,8 @@ import {
   DialogTrigger
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
-import BookBadgeInformation from "@/components/BookBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
+import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {Badge} from "@/components/ui/badge";
 import {Reservation} from "@/app/lib/actions/getUserReservations";
 import {cancelReservation} from "@/app/lib/actions/cancelReservation";

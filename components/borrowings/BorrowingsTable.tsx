@@ -1,6 +1,6 @@
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
-import BorrowingTableRow from "@/components/BorrowingTableRow";
+import BorrowingTableRow from "@/components/borrowings/BorrowingTableRow";
 
 export default function BorrowingsTable({borrowings}: {
   borrowings: Borrowing[];

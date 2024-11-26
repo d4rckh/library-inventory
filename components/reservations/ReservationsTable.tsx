@@ -1,6 +1,6 @@
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Reservation} from "@/app/lib/actions/getUserReservations";
-import ReservationTableRow from "@/components/ReservationTableRow";
+import ReservationTableRow from "@/components/reservations/ReservationTableRow";
 
 export default function ReservationsTable({reservations}: {
   reservations: Reservation[];

@@ -1,6 +1,6 @@
 "use server";
 
-import ReserveItemButton from "@/components/ReserveItemButton";
+import ReserveItemButton from "@/components/reservations/ReserveItemButton";
 import {TableCell, TableRow} from "@/components/ui/table";
 import {Badge} from "@/components/ui/badge";
 import {InventoryItem} from "@/app/lib/actions/getItems";

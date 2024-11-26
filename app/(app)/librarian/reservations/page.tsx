@@ -1,4 +1,4 @@
-import ReservationsDataTable from "@/components/ReservationsDataTable";
+import ReservationsDataTable from "@/components/reservations/ReservationsDataTable";
 
 export default async function Page() {
 

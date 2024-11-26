@@ -11,42 +11,46 @@ import {
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
-import BookBadgeInformation from "@/components/BookBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
+import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {markBorrowingAsReturned} from "@/app/lib/actions/markBorrowingAsReturned";
 import {Badge} from "@/components/ui/badge";
+import {Input} from "@/components/ui/input";
+import {useState} from "react";
+import {extendBorrowing} from "@/app/lib/actions/extendBorrowing";
 import {useQueryClient} from "@tanstack/react-query";
 
-export default function MarkBorrowingAsReturnedDialog({
+export default function ExtendBorrowingDialog({
   borrowing
                                               }: {
   borrowing: Borrowing;
 }) {
   const query = useQueryClient();
 
+  const [days, setDays] = useState(3);
+
   return <Dialog>
     <DialogTrigger asChild>
-      <Button size={"sm"} variant={"secondary"}>Mark as returned</Button>
+      <Button size={"sm"} variant={"secondary"}>Extend</Button>
     </DialogTrigger>
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>Mark as returned</DialogTitle>
-        <DialogDescription>
-          Are you sure you want to mark this borrowing as returned?
-        </DialogDescription>
+        <DialogTitle>Extend this borrow</DialogTitle>
       </DialogHeader>
       <span>User: <UserBadgeInformation user={borrowing.user} /></span>
       <span>Book: <BookBadgeInformation book={borrowing.item.book} /></span>
       <span>Item ID: <Badge>{borrowing.itemId}</Badge></span>
+      Extend by how many days?
+      <Input type={"number"} value={days} onChange={(e) => setDays(parseInt(e.target.value))} />
       <DialogClose asChild>
         <Button
           onClick={() => {
-            markBorrowingAsReturned(borrowing.id).then(r => {
+            extendBorrowing(borrowing.id, days).then(r => {
               if (r.data) {
-                query.invalidateQueries({ queryKey: ['borrowings'] })
-                query.invalidateQueries({ queryKey: ["items"] });
-                query.invalidateQueries({ queryKey: ["reservations"] });
-                alert("Successfully marked as returned");
+                query.invalidateQueries({
+                  queryKey: ['borrowings']
+                })
+                alert("Successfully extended");
               }
               else if (r.error) alert(r.error.message);
             });

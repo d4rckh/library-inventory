@@ -1,7 +1,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {getBookById} from "@/app/lib/actions/getBookById";
-import ItemsDataTable from "@/components/ItemsDataTable";
-import CreateItemForm from "@/components/CreateItemForm";
+import ItemsDataTable from "@/components/inventory/ItemsDataTable";
+import CreateItemForm from "@/components/inventory/CreateItemForm";
 
 export default async function Page({params}: {
   params: Promise<{ bookId: number }>

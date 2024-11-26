@@ -3,8 +3,8 @@ import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import DateDisplay from "@/components/DateDisplay";
 import {Badge} from "@/components/ui/badge";
 import DurationDisplay from "@/components/DurationDisplay";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
-import BookBadgeInformation from "@/components/BookBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
+import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {ReactNode} from "react";
 
 export default function BorrowingTableRow({

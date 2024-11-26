@@ -1,10 +1,10 @@
 "use client";
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
-import ReservationsDataTable from "@/components/ReservationsDataTable";
+import ReservationsDataTable from "@/components/reservations/ReservationsDataTable";
 import {ReactNode} from "react";
-import BorrowingsDataTable from "@/components/BorrowingsDataTable";
-import ItemsDataTable from "@/components/ItemsDataTable";
+import BorrowingsDataTable from "@/components/borrowings/BorrowingsDataTable";
+import ItemsDataTable from "@/components/inventory/ItemsDataTable";
 
 export default function LibrarianDashboard({
   metrics

@@ -1,5 +1,5 @@
 import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
 import {EditIcon} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";

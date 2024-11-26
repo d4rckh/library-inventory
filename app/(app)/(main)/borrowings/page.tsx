@@ -1,9 +1,9 @@
 import {getLoggedInUser} from "@/app/lib/actions/getLoggedInUser";
 import {redirect} from "next/navigation";
 import {getUserBorrowings} from "@/app/lib/actions/getUserBorrowings";
-import BorrowingsTable from "@/components/BorrowingsTable";
+import BorrowingsTable from "@/components/borrowings/BorrowingsTable";
 import {getUserReservations} from "@/app/lib/actions/getUserReservations";
-import ReservationsTable from "@/components/ReservationsTable";
+import ReservationsTable from "@/components/reservations/ReservationsTable";
 
 export default async function Page() {
   const user = await getLoggedInUser();

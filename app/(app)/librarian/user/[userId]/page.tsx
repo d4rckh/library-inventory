@@ -1,7 +1,7 @@
 import {getUserById} from "@/app/lib/actions/getUserById";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import ReservationsDataTable from "@/components/ReservationsDataTable";
-import BorrowingsDataTable from "@/components/BorrowingsDataTable";
+import ReservationsDataTable from "@/components/reservations/ReservationsDataTable";
+import BorrowingsDataTable from "@/components/borrowings/BorrowingsDataTable";
 
 export default async function Page({params}: {
   params: Promise<{ userId: number }>

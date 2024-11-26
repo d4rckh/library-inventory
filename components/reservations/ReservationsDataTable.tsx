@@ -5,9 +5,9 @@ import {useEffect, useState} from "react";
 import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/ui/table";
-import ReservationTableRow from "@/components/ReservationTableRow";
-import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
-import CancelReservationDialog from "@/components/CancelReservationDialog";
+import ReservationTableRow from "@/components/reservations/ReservationTableRow";
+import CreateBorrowingDialog from "@/components/borrowings/CreateBorrowingDialog";
+import CancelReservationDialog from "@/components/reservations/CancelReservationDialog";
 import {useReservations} from "@/lib/queries/items";
 
 export default function ReservationsDataTable({

@@ -1,7 +1,7 @@
 import "../globals.css";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import UserButtons from "@/components/UserButtons";
+import UserButtons from "@/components/users/UserButtons";
 import QueryProvider from "@/lib/queryProvider";
 
 export default function RootLayout({

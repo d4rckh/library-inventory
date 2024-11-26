@@ -5,8 +5,8 @@ import {Reservation} from "@/app/lib/actions/getUserReservations";
 import {Badge} from "@/components/ui/badge";
 import DateDisplay from "@/components/DateDisplay";
 import {ReactNode} from "react";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
-import BookBadgeInformation from "@/components/BookBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
+import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 
 export default function ReservationTableRow({
                                                     reservation, userInfo, children

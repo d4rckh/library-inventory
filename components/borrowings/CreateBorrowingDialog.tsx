@@ -14,7 +14,7 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {useState} from "react";
 import {createBorrowing} from "@/app/lib/actions/createBorrowing";
-import UserSelectorFinder from "@/components/UserSelectorFinder";
+import UserSelectorFinder from "@/components/users/UserSelectorFinder";
 import {InventoryItem} from "@/app/lib/actions/getItems";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 import {useQueryClient} from "@tanstack/react-query";

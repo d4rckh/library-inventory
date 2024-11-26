@@ -1,4 +1,4 @@
-import ItemTableRow from "@/components/ItemTableRow";
+import ItemTableRow from "@/components/inventory/ItemTableRow";
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {InventoryItem} from "@/app/lib/actions/getItems";
 

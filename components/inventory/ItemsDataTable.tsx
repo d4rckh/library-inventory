@@ -1,10 +1,10 @@
 "use client";
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import UserBadgeInformation from "@/components/UserBadgeInformation";
+import UserBadgeInformation from "@/components/users/UserBadgeInformation";
 import {Badge} from "@/components/ui/badge";
-import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
-import BookBadgeInformation from "@/components/BookBadgeInformation";
+import CreateBorrowingDialog from "@/components/borrowings/CreateBorrowingDialog";
+import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {useItems} from "@/lib/queries/items";
 
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {

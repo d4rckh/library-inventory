@@ -3,10 +3,10 @@
 import {useState} from "react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {BorrowingFilters} from "@/app/lib/actions/getBorrowings";
-import BorrowingTableRow from "@/components/BorrowingTableRow";
+import BorrowingTableRow from "@/components/borrowings/BorrowingTableRow";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import MarkBorrowingAsReturnedDialog from "@/components/MarkBorrowingAsReturnedDialog";
-import ExtendBorrowingDialog from "@/components/ExtendBorrowingDialog";
+import MarkBorrowingAsReturnedDialog from "@/components/borrowings/MarkBorrowingAsReturnedDialog";
+import ExtendBorrowingDialog from "@/components/borrowings/ExtendBorrowingDialog";
 import {useBorrowings} from "@/lib/queries/items";
 
 export default function BorrowingsDataTable({ userId }: { userId?: number }) {
