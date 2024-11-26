@@ -1,34 +1,20 @@
 "use client";
 
-import {Suspense, useEffect, useState} from "react";
+import {useState} from "react";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
-import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
+import {BorrowingFilters} from "@/app/lib/actions/getBorrowings";
 import BorrowingTableRow from "@/components/BorrowingTableRow";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import MarkBorrowingAsReturnedDialog from "@/components/MarkBorrowingAsReturnedDialog";
 import ExtendBorrowingDialog from "@/components/ExtendBorrowingDialog";
+import {useBorrowings} from "@/lib/queries/items";
 
-export default function BorrowingsDataTable({
-  userId
-                                            }: {
-  userId?: number
-}) {
-  const [borrowings, setBorrowings] = useState<Borrowing[]>([]);
-
+export default function BorrowingsDataTable({ userId }: { userId?: number }) {
   const [borrowingFilters, setBorrowingFilters] = useState<BorrowingFilters>({
     userId
   });
 
-  const refreshData = () => {
-    getBorrowings(borrowingFilters).then((borrowings) => {
-      setBorrowings(borrowings);
-    });
-  }
-
-  useEffect(() => {
-    refreshData();
-  }, [borrowingFilters]);
+  const {data} = useBorrowings(borrowingFilters);
 
   return <>
     <Select value={ borrowingFilters.isReturned != undefined ? borrowingFilters.isReturned.toString() : "null" }
@@ -67,11 +53,11 @@ export default function BorrowingsDataTable({
       </TableHeader>
       <TableBody>
           {
-            borrowings.map(borrowing =>
+            data && data.map(borrowing =>
               <BorrowingTableRow borrowing={borrowing} userInfo librarianLink key={borrowing.id}>
                 <TableCell>
-                  {!borrowing.returnedDate && <MarkBorrowingAsReturnedDialog borrowing={borrowing} refreshData={refreshData}/>}
-                  {!borrowing.returnedDate && <ExtendBorrowingDialog borrowing={borrowing} refreshData={refreshData}/>}
+                  {!borrowing.returnedDate && <MarkBorrowingAsReturnedDialog borrowing={borrowing} />}
+                  {!borrowing.returnedDate && <ExtendBorrowingDialog borrowing={borrowing} />}
                 </TableCell>
               </BorrowingTableRow>
             )

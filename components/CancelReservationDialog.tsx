@@ -15,12 +15,14 @@ import BookBadgeInformation from "@/components/BookBadgeInformation";
 import {Badge} from "@/components/ui/badge";
 import {Reservation} from "@/app/lib/actions/getUserReservations";
 import {cancelReservation} from "@/app/lib/actions/cancelReservation";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function CancelReservationDialog({
-  reservation, refreshData
+  reservation
                                               }: {
-  reservation: Reservation; refreshData: () => void;
+  reservation: Reservation;
 }) {
+  const query = useQueryClient();
 
   return <Dialog>
     <DialogTrigger asChild>
@@ -42,7 +44,8 @@ export default function CancelReservationDialog({
           onClick={() => {
             cancelReservation(reservation.id).then(r => {
               if (r.data) {
-                refreshData();
+                query.invalidateQueries({ queryKey: ["reservations"] });
+                query.invalidateQueries({ queryKey: ["borrowings"] });
                 alert("Successfully cancelled reservation");
               }
               else if (r.error) alert(r.error.message);

@@ -15,12 +15,14 @@ import UserBadgeInformation from "@/components/UserBadgeInformation";
 import BookBadgeInformation from "@/components/BookBadgeInformation";
 import {markBorrowingAsReturned} from "@/app/lib/actions/markBorrowingAsReturned";
 import {Badge} from "@/components/ui/badge";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function MarkBorrowingAsReturnedDialog({
-  borrowing, refreshData
+  borrowing
                                               }: {
-  borrowing: Borrowing; refreshData: () => void;
+  borrowing: Borrowing;
 }) {
+  const query = useQueryClient();
 
   return <Dialog>
     <DialogTrigger asChild>
@@ -41,7 +43,9 @@ export default function MarkBorrowingAsReturnedDialog({
           onClick={() => {
             markBorrowingAsReturned(borrowing.id).then(r => {
               if (r.data) {
-                refreshData();
+                query.invalidateQueries({ queryKey: ['borrowings'] })
+                query.invalidateQueries({ queryKey: ["items"] });
+                query.invalidateQueries({ queryKey: ["reservations"] });
                 alert("Successfully marked as returned");
               }
               else if (r.error) alert(r.error.message);

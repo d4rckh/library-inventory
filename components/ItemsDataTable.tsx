@@ -5,13 +5,11 @@ import UserBadgeInformation from "@/components/UserBadgeInformation";
 import {Badge} from "@/components/ui/badge";
 import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
 import BookBadgeInformation from "@/components/BookBadgeInformation";
-import {useQuery} from "@tanstack/react-query";
-import {items} from "@/lib/queries/items";
-import {InventoryItem} from "@/app/lib/actions/getItems";
+import {useItems} from "@/lib/queries/items";
 
 export default function ItemsDataTable({ bookId }: { bookId?: number }) {
 
-  const { data } = useQuery(items.list({ bookId })) as { data: InventoryItem[] };
+  const { data, refetch } = useItems({ bookId });
 
   return <Table>
     <TableHeader>

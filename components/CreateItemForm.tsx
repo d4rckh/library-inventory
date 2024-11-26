@@ -14,7 +14,7 @@ export default function CreateItemForm({bookId}: { bookId: number }) {
       e.preventDefault();
       createItem(bookId).then(({error}) => {
         if (error) alert(error.message)
-        else query.invalidateQueries({ queryKey: [`items-${bookId}`] })
+        else query.invalidateQueries({ queryKey: ["items", "list", { bookId }] })
       });
     }}>
     <Button type={"submit"}>

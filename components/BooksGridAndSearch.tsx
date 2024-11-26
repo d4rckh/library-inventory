@@ -5,19 +5,14 @@ import {Card, CardHeader, CardTitle} from "@/components/ui/card";
 import Link from "next/link";
 import {useState} from "react";
 import {Input} from "@/components/ui/input";
-import {getBooks} from "@/app/lib/actions/getBooks";
-import {useQuery} from "@tanstack/react-query";
+import {useBooks} from "@/lib/queries/items";
 
 export default function BooksGridAndSearch({initialBooks}: {
   initialBooks: Book[];
 }) {
   const [titleSearch, setTitleSearch] = useState("");
 
-  const { data, isPending } = useQuery({
-    queryKey: [ "books", { titleSearch } ],
-    queryFn: () => getBooks({ titleSearch }),
-    placeholderData: initialBooks
-  })
+  const { data, isPending } = useBooks({ titleSearch });
 
   return <>
     <b>Title:</b>

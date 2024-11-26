@@ -4,6 +4,7 @@ import {FormEvent, useState} from "react";
 import {createBook} from "@/app/lib/actions/createBook";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function CreateBookForm() {
   const [title, setTitle] = useState("");
@@ -12,11 +13,14 @@ export default function CreateBookForm() {
   const [isbn, setIsbn] = useState("");
   const [publishedDate, setPublishedDate] = useState("");
 
+  const query = useQueryClient();
+
   return <form
     className={"flex flex-col gap-1"}
     onSubmit={(e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       createBook(title, publisher, author, isbn, [], publishedDate).then(({error}) => {
+        query.invalidateQueries({ queryKey: ['books'] })
         if (error) alert(error.message)
       });
     }}>

@@ -21,6 +21,7 @@ export type InventoryItem = {
 }
 
 export async function getItems(filters?: InventoryFilter): Promise<InventoryItem[]> {
+  console.log(filters);
   let params = "?";
   if (filters) {
     if (filters.bookId != undefined) params += "bookId=" + filters.bookId + "&";

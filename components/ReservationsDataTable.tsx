@@ -8,27 +8,24 @@ import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/u
 import ReservationTableRow from "@/components/ReservationTableRow";
 import CreateBorrowingDialog from "@/components/CreateBorrowingDialog";
 import CancelReservationDialog from "@/components/CancelReservationDialog";
+import {useReservations} from "@/lib/queries/items";
 
 export default function ReservationsDataTable({
   userId
                                               }: {
   userId?: number
 }) {
-  const [reservations, setReservations] = useState<Reservation[]>([]);
-
   const [reservationFilters, setReservationFilters] = useState<ReservationFilters>({
     userId
   });
 
-  const refreshData = () => {
-    getReservations(reservationFilters).then((reservations) => {
-      setReservations(reservations);
-    });
-  }
+  const { data, isPending, isSuccess } = useReservations(reservationFilters);
 
-  useEffect(() => {
-    refreshData();
-  }, [reservationFilters]);
+  if (isPending)
+    return <>Loading...</>;
+
+  if (!isSuccess)
+    return <>Error</>;
 
   return <>
     <Select value={ reservationFilters.isActive != undefined ? reservationFilters.isActive.toString() : "null" }
@@ -66,11 +63,11 @@ export default function ReservationsDataTable({
       </TableHeader>
       <TableBody>
           {
-            reservations.map(reservation =>
+            data.map(reservation =>
               <ReservationTableRow reservation={reservation} userInfo={true} key={reservation.id}>
                 <TableCell>
-                  <CreateBorrowingDialog user={reservation.user} item={reservation.item} refreshData={refreshData} />
-                  {!reservation.expiredAt && !reservation.cancelled && <CancelReservationDialog reservation={reservation} refreshData={refreshData}/>}
+                  <CreateBorrowingDialog user={reservation.user} item={reservation.item} />
+                  {!reservation.expiredAt && !reservation.cancelled && <CancelReservationDialog reservation={reservation} />}
                 </TableCell>
               </ReservationTableRow>
             )

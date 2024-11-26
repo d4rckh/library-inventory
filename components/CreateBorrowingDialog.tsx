@@ -17,14 +17,16 @@ import {createBorrowing} from "@/app/lib/actions/createBorrowing";
 import UserSelectorFinder from "@/components/UserSelectorFinder";
 import {InventoryItem} from "@/app/lib/actions/getItems";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function CreateBorrowingDialog({
-  user, item, refreshData
+  user, item
                                               }: {
-  user: UserInformation | null, item: InventoryItem | Inventory, refreshData: () => void
+  user: UserInformation | null, item: InventoryItem | Inventory
 }) {
   const [days, setDays] = useState(14);
   const [selectedUser, setSelectedUser] = useState(user);
+  const query = useQueryClient();
 
   return <Dialog>
     <DialogTrigger asChild>
@@ -52,7 +54,9 @@ export default function CreateBorrowingDialog({
             if (selectedUser == null) return alert("Select a user");
             createBorrowing(selectedUser.id, item.id, days).then(r => {
               if (r.data) {
-                refreshData();
+                query.invalidateQueries({ queryKey: ["reservations"] });
+                query.invalidateQueries({ queryKey: ["borrowings"] });
+                query.invalidateQueries({ queryKey: ["items"] });
                 alert("Successfully created borrowing");
               }
               else if (r.error) alert(r.error.message);

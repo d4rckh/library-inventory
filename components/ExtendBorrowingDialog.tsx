@@ -18,12 +18,15 @@ import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
 import {extendBorrowing} from "@/app/lib/actions/extendBorrowing";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function ExtendBorrowingDialog({
-  borrowing, refreshData
+  borrowing
                                               }: {
-  borrowing: Borrowing; refreshData: () => void;
+  borrowing: Borrowing;
 }) {
+  const query = useQueryClient();
+
   const [days, setDays] = useState(3);
 
   return <Dialog>
@@ -44,7 +47,9 @@ export default function ExtendBorrowingDialog({
           onClick={() => {
             extendBorrowing(borrowing.id, days).then(r => {
               if (r.data) {
-                refreshData();
+                query.invalidateQueries({
+                  queryKey: ['borrowings']
+                })
                 alert("Successfully extended");
               }
               else if (r.error) alert(r.error.message);
