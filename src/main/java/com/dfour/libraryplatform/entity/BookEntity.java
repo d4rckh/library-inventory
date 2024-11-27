@@ -33,6 +33,7 @@ public class BookEntity {
     @Column(nullable = false)
     private String publisher;
 
+    @Column(nullable = false)
     private Long year;
 
     @ManyToOne
