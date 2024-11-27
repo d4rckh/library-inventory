@@ -33,8 +33,7 @@ public class BookEntity {
     @Column(nullable = false)
     private String publisher;
 
-    @Column(nullable = false)
-    private OffsetDateTime publishedDate;
+    private Long year;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)

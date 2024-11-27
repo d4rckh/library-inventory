@@ -55,8 +55,8 @@ public class BookService {
         if (!Objects.isNull(incompleteBookEntity.getIsbn())) {
             book.setIsbn(incompleteBookEntity.getIsbn());
         }
-        if (!Objects.isNull(incompleteBookEntity.getPublishedDate())) {
-            book.setPublishedDate(incompleteBookEntity.getPublishedDate());
+        if (!Objects.isNull(incompleteBookEntity.getYear())) {
+            book.setYear(incompleteBookEntity.getYear());
         }
         if (!Objects.isNull(incompleteBookEntity.getPublisher())) {
             book.setPublisher(incompleteBookEntity.getPublisher());

@@ -18,7 +18,7 @@ public class BookResponseDto {
     private String author;
     private String isbn;
     private String publisher;
-    private OffsetDateTime publishedDate;
+    private Long year;
     private UserEntity user;
     private long userId;
     private List<TagEntity> tags;

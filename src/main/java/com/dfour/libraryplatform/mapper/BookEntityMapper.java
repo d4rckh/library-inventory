@@ -25,7 +25,7 @@ public class BookEntityMapper {
                 .publisher(entity.getPublisher())
                 .user(entity.getUser())
                 .userId(entity.getUserId())
-                .publishedDate(entity.getPublishedDate())
+                .year(entity.getYear())
                 .isbn(entity.getIsbn())
                 .tags(entity.getTags())
                 .totalItems(inventoryService.countByBookId(entity.getId()))
