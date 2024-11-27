@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -34,4 +35,11 @@ public interface BorrowingRepository extends JpaRepository<BorrowingEntity, Long
             "(borrowings.item_id = :itemId OR :itemId IS NULL) AND" +
             "(((borrowings.returned_date IS NOT NULL) = :isReturned) OR :isReturned IS NULL)", nativeQuery = true)
     Slice<BorrowingEntity> findFiltered(Long userId, Long itemId, Boolean isReturned, PageRequest pageRequest);
+
+    @Query("SELECT COUNT(r) FROM BorrowingEntity r WHERE DATE(r.borrowDate) = :date")
+    long countByBorrowingDate(LocalDate date);
+
+    @Query("SELECT COUNT(r) FROM BorrowingEntity r WHERE DATE(r.returnedDate) = :date")
+    long countByReturnDate(LocalDate date);
+
 }

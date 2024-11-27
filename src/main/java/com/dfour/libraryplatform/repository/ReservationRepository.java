@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Repository
@@ -23,4 +24,7 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
             "(reservations.item_id = :itemId OR :itemId IS NULL) AND" +
             "(reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND cancelled = false) = :isActive OR :isActive IS NULL", nativeQuery = true)
     Slice<ReservationEntity> findFiltered(Long userId, Long itemId, Boolean isActive, PageRequest pageRequest);
+
+    @Query("SELECT COUNT(r) FROM ReservationEntity r WHERE DATE(r.createdAt) = :date")
+    long countByReservationDate(LocalDate date);
 }

@@ -28,6 +28,7 @@
 
 ### Dashboard and misc
 - Librarians can view stats of active or late borrows, total registered users, etc.
+- Librarians can view graphs of reservations, borrows and returns made each day.
 
 ## Screenshots
 
