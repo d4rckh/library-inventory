@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.dfour.libraryplatform.security.authentication.AppAuthentication.GetLoggedUserDetails;
+
 @RestController
 @RequestMapping("/reservation")
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class ReservationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ReservationEntity reserve(@RequestBody ReservationRequestDto reservationRequestDto) {
-        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        AppUserDetails appUserDetails = GetLoggedUserDetails();
         return reservationManager.reserveItem(
                 ReservationRequestDto.builder()
                         .itemId(reservationRequestDto.getItemId())

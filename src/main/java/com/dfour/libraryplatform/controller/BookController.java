@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dfour.libraryplatform.security.authentication.AppAuthentication.GetLoggedUserDetails;
+
 @Slf4j
 @RestController
 @RequestMapping("/book")
@@ -64,7 +66,7 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     BookResponseDto create(@RequestBody BookEntity bookEntity) {
-        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        AppUserDetails appUserDetails = GetLoggedUserDetails();
         return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
     }
 
