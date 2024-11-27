@@ -2,7 +2,7 @@ import ReservationsDataTable from "@/components/reservations/ReservationsDataTab
 
 export default async function Page() {
 
-    return <>
-        <ReservationsDataTable/>
-    </>
+  return <>
+    <ReservationsDataTable/>
+  </>
 }

@@ -8,24 +8,24 @@ import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import {InventoryItemBorrowingStats} from "@/app/lib/actions/getItemBorrowingStats";
 
 export type InventoryFilter = {
-    bookId?: number;
+  bookId?: number;
 };
 
 export type InventoryItem = {
-    id: number;
-    book: Book;
-    user: UserInformation;
-    reservation: Reservation;
-    borrowing: Borrowing;
-    stats: InventoryItemBorrowingStats
+  id: number;
+  book: Book;
+  user: UserInformation;
+  reservation: Reservation;
+  borrowing: Borrowing;
+  stats: InventoryItemBorrowingStats
 }
 
 export async function getItems(filters?: InventoryFilter): Promise<InventoryItem[]> {
-    console.log(filters);
-    let params = "?";
-    if (filters) {
-        if (filters.bookId != undefined) params += "bookId=" + filters.bookId + "&";
-    }
+  console.log(filters);
+  let params = "?";
+  if (filters) {
+    if (filters.bookId != undefined) params += "bookId=" + filters.bookId + "&";
+  }
 
-    return (await fetchApi<InventoryItem[]>("/inventory" + params, ["inventory"])).data ?? [];
+  return (await fetchApi<InventoryItem[]>("/inventory" + params, ["inventory"])).data ?? [];
 }

@@ -4,28 +4,29 @@ import ItemsTable from "@/components/inventory/ItemsTable";
 import {getItems} from "@/app/lib/actions/getItems";
 
 export default async function Page({params}: {
-    params: Promise<{ bookId: number }>
+  params: Promise<{ bookId: number }>
 }) {
 
-    const {bookId} = await params;
+  const {bookId} = await params;
 
-    const items = await getItems({bookId});
-    const book = await getBookById(bookId);
+  const items = await getItems({bookId});
+  const book = await getBookById(bookId);
 
-    if (!book) return <>Not found</>;
+  if (!book) return <>Not found</>;
 
-    return <>
-        <Card>
-            <CardHeader>
-                <CardTitle>{book.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <p>Author: {book.author}</p>
-                <p>Publisher: {book.publisher}</p>
-                <p>ISBN: {book.isbn}</p>
-            </CardContent>
-        </Card>
-        <ItemsTable items={items}/>
-    </>
+  return <>
+    <Card>
+      <CardHeader>
+        <CardTitle>{book.title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p>Author: {book.author}</p>
+        <p>Publisher: {book.publisher}</p>
+        <p>ISBN: {book.isbn}</p>
+        <p>Year: {book.year}</p>
+      </CardContent>
+    </Card>
+    <ItemsTable items={items}/>
+  </>
 
 }

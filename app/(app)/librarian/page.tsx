@@ -7,14 +7,14 @@ import LibrarianDashboard from "@/components/LibrarianDashboard";
 import LibrarianMetrics from "@/components/LibrarianMetrics";
 
 export default async function Page() {
-    const borrowStats = await getBorrowingStats();
-    const reservationStats = await getReservationStats();
-    const bookStats = await getBookStats();
-    const inventoryStats = await getInventoryStats();
-    const userStats = await getUserStats();
+  const borrowStats = await getBorrowingStats();
+  const reservationStats = await getReservationStats();
+  const bookStats = await getBookStats();
+  const inventoryStats = await getInventoryStats();
+  const userStats = await getUserStats();
 
-    return <LibrarianDashboard
-        metrics={<LibrarianMetrics bookStats={bookStats} inventoryStats={inventoryStats} userStats={userStats}
-                                   borrowStats={borrowStats} reservationStats={reservationStats}/>}/>;
+  return <LibrarianDashboard
+    metrics={<LibrarianMetrics bookStats={bookStats} inventoryStats={inventoryStats} userStats={userStats}
+                               borrowStats={borrowStats} reservationStats={reservationStats}/>}/>;
 
 }

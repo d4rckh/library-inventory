@@ -5,11 +5,11 @@ import getApi, {APIResult} from "@/app/lib/fetchApi";
 import {revalidateTag} from "next/cache";
 
 export async function createItem(
-    bookId: number
+  bookId: number
 ): Promise<APIResult<Book>> {
-    const r = await getApi<Book>("/inventory", ["inventory"], "POST", {
-        bookId
-    });
-    revalidateTag("books");
-    return r;
+  const r = await getApi<Book>("/inventory", ["inventory"], "POST", {
+    bookId
+  });
+  revalidateTag("books");
+  return r;
 }

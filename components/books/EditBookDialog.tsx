@@ -29,11 +29,20 @@ export default function EditBookDialog({book}: { book: Book }) {
         Edit book
       </DialogTitle>
       <b>Title:</b>
-      <Input value={newBook.title} onChange={(e) => setNewBook({...newBook, title: e.target.value})} placeholder={"Title"}/>
+      <Input value={newBook.title} onChange={(e) => setNewBook({...newBook, title: e.target.value})}
+             placeholder={"Title"}/>
       <b>Author:</b>
-      <Input value={newBook.author} onChange={(e) => setNewBook({...newBook, author: e.target.value})} placeholder={"Author"}/>
+      <Input value={newBook.author} onChange={(e) => setNewBook({...newBook, author: e.target.value})}
+             placeholder={"Author"}/>
       <b>Publisher:</b>
-      <Input value={newBook.publisher} onChange={(e) => setNewBook({...newBook, publisher: e.target.value})} placeholder={"Publisher"}/>
+      <Input value={newBook.publisher} onChange={(e) => setNewBook({...newBook, publisher: e.target.value})}
+             placeholder={"Publisher"}/>
+      <b>ISBN:</b>
+      <Input value={newBook.isbn} onChange={(e) => setNewBook({...newBook, isbn: e.target.value})}
+             placeholder={"ISBN"}/>
+      <b>Year:</b>
+      <Input value={newBook.year} onChange={(e) => setNewBook({...newBook, year: parseInt(e.target.value)})}
+             placeholder={"Year"} type={"number"} />
       <DialogClose asChild>
         <Button onClick={() => {
           editBook(newBook).then(async r => {

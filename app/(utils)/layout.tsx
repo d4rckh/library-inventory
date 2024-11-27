@@ -3,28 +3,28 @@ import Link from "next/link";
 import {Button} from "@/components/ui/button";
 
 export default function RootLayout({
-                                       children,
+                                     children,
                                    }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
+  return (
+    <html lang="en">
 
-        <body>
+    <body>
 
-        <div className={"flex flex-row gap-1 p-1"}>
-            <Link href={"/"}>
-                <Button variant={"outline"}>
-                    Home
-                </Button>
-            </Link>
-        </div>
+    <div className={"flex flex-row gap-1 p-1"}>
+      <Link href={"/"}>
+        <Button variant={"outline"}>
+          Home
+        </Button>
+      </Link>
+    </div>
 
-        <div className={"px-3"}>
-            {children}
-        </div>
+    <div className={"px-3"}>
+      {children}
+    </div>
 
-        </body>
-        </html>
-    );
+    </body>
+    </html>
+  );
 }

@@ -14,7 +14,7 @@ export default function CreateBookDialog() {
   const [publisher, setPublisher] = useState("");
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState("");
-  const [publishedDate, setPublishedDate] = useState("");
+  const [year, setYear] = useState(2000);
 
   const query = useQueryClient();
   const { toast } = useToast();
@@ -31,7 +31,7 @@ export default function CreateBookDialog() {
         className={"flex flex-col gap-1"}
         onSubmit={(e: FormEvent<HTMLFormElement>) => {
           e.preventDefault();
-          createBook(title, publisher, author, isbn, [], publishedDate).then(async ({error}) => {
+          createBook({title, publisher, author, isbn, tags: [], year}).then(async ({error}) => {
             if (!error) await query.invalidateQueries({queryKey: ["books", "list"]});
 
             toast({
@@ -44,13 +44,7 @@ export default function CreateBookDialog() {
         <Input placeholder={"Publisher"} value={publisher} onChange={(e) => setPublisher(e.target.value)}/>
         <Input placeholder={"Author"} value={author} onChange={(e) => setAuthor(e.target.value)}/>
         <Input placeholder={"ISBN"} value={isbn} onChange={(e) => setIsbn(e.target.value)}/>
-
-        <Input type={"date"} placeholder={"Published Date"} value={publishedDate.split("T")[0]} onChange={(e) => {
-          const localDate = new Date(e.target.value); // Converts input to local date
-          const utcDate = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000); // Adjusts to UTC
-          const utcTimestamp = utcDate.toISOString(); // Converts to UTC format with timezone
-          setPublishedDate(utcTimestamp);
-        }}/>
+        <Input placeholder={"Year"} value={year} onChange={(e) => setYear(parseInt(e.target.value))} type={"number"} />
 
         <DialogClose asChild>
           <Button type={"submit"}>
