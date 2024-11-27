@@ -6,13 +6,13 @@ import {redirect} from "next/navigation";
 
 export default function Page() {
 
-  useEffect(() => {
-    logOut().then(() => {
-      redirect("/account");
-    });
-  }, []);
+    useEffect(() => {
+        logOut().then(() => {
+            redirect("/account");
+        });
+    }, []);
 
-  return <>
-    Your session expired, you will be redirected to the log in page...
-  </>
+    return <>
+        Your session expired, you will be redirected to the log in page...
+    </>
 }

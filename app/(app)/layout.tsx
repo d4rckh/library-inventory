@@ -5,31 +5,31 @@ import UserButtons from "@/components/users/UserButtons";
 import QueryProviderAndToaster from "@/lib/queryProviderAndToaster";
 
 export default function RootLayout({
-                                     children,
+                                       children,
                                    }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
+    return (
+        <html lang="en">
 
-    <body>
+        <body>
 
-    <div className={"flex flex-row gap-1 p-1"}>
-      <Link href={"/"}>
-        <Button variant={"outline"}>
-          Home
-        </Button>
-      </Link>
-      <UserButtons/>
-    </div>
+        <div className={"flex flex-row gap-1 p-1"}>
+            <Link href={"/"}>
+                <Button variant={"outline"}>
+                    Home
+                </Button>
+            </Link>
+            <UserButtons/>
+        </div>
 
-    <div className={"px-3"}>
-      <QueryProviderAndToaster>
-        {children}
-      </QueryProviderAndToaster>
-    </div>
+        <div className={"px-3"}>
+            <QueryProviderAndToaster>
+                {children}
+            </QueryProviderAndToaster>
+        </div>
 
-    </body>
-    </html>
-  );
+        </body>
+        </html>
+    );
 }

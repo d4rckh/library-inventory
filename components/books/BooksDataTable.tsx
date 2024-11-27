@@ -13,6 +13,7 @@ import {BookFilters} from "@/app/lib/actions/getBooks";
 import {Input} from "@/components/ui/input";
 import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import DeleteBookDialog from "@/components/books/DeleteBookDialog";
+import EditBookDialog from "@/components/books/EditBookDialog";
 
 export default function BooksDataTable() {
   const [bookFilters, setBookFilters] = useState<BookFilters>({
@@ -50,6 +51,7 @@ export default function BooksDataTable() {
                   <TableCell>
                     <CellActions>
                       <DeleteBookDialog book={book} />
+                      <EditBookDialog book={book} />
                     </CellActions>
                   </TableCell>
                 </TableRow>
