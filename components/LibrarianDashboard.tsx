@@ -9,6 +9,7 @@ import CreateBookDialog from "@/components/books/CreateBookDialog";
 import {Book, BookDashed, Gauge, Inbox, LibraryBig, Users} from "lucide-react";
 import BooksDataTable from "@/components/books/BooksDataTable";
 import UsersDataTable from "@/components/users/UsersDataTable";
+import LibrarianCharts from "@/components/charts/LibrarianCharts";
 
 export default function LibrarianDashboard({
   metrics
@@ -28,8 +29,11 @@ export default function LibrarianDashboard({
       <TabsContent value="dashboard">
         {metrics}
 
+        <LibrarianCharts />
+
         <h1 className={"text-1xl mb-2"}>Quick actions</h1>
         <CreateBookDialog/>
+
       </TabsContent>
       <TabsContent value="users">
         <UsersDataTable/>

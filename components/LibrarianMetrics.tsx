@@ -13,7 +13,7 @@ export default function LibrarianMetrics({
 }) {
   return <>
     <h2 className={"text-2xl mb-2"}>Stats</h2>
-    <div className={"grid sm:grid-cols-6 grid-cols-1 gap-3 mb-2"}>
+    <div className={"grid md:grid-cols-6 sm:grid-cols-3 grid-cols-1 gap-3 mb-3"}>
       <LibrarianMetric value={bookStats.uniqueTitles} title={"Unique titles"} />
       <LibrarianMetric value={inventoryStats.uniqueItems} title={"Items in inventory"} />
       <LibrarianMetric value={userStats.registeredUsers} title={"Registered users"} />
