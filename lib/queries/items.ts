@@ -5,6 +5,7 @@ import {BorrowingFilters, getBorrowings} from "@/app/lib/actions/getBorrowings";
 import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
 import fetchApi from "@/app/lib/fetchApi";
 import {getTags} from "@/app/lib/actions/getTags";
+import {getUsers, UserFilter} from "@/app/lib/actions/getUsers";
 
 export const useItems = (filters?: InventoryFilter) => {
   return useQuery({
@@ -17,6 +18,13 @@ export const useBooks = (filters?: BookFilters) => {
   return useQuery({
     queryKey: ["books", "list", filters],
     queryFn: () => getBooks(filters),
+  })
+}
+
+export const useUsers = (filters?: UserFilter) => {
+  return useQuery({
+    queryKey: ["users", "list", filters],
+    queryFn: () => getUsers(filters),
   })
 }
 

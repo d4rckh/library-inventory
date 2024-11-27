@@ -4,7 +4,7 @@ import {Reservation} from "@/app/lib/actions/getUserReservations";
 import {useEffect, useState} from "react";
 import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {Table, TableBody, TableCell, TableHeader, TableRow} from "@/components/ui/table";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import ReservationTableRow from "@/components/reservations/ReservationTableRow";
 import CreateBorrowingDialog from "@/components/borrowings/CreateBorrowingDialog";
 import CancelReservationDialog from "@/components/reservations/CancelReservationDialog";
@@ -50,14 +50,14 @@ export default function ReservationsDataTable({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Book</TableCell>
-            <TableCell>Item ID</TableCell>
-            <TableCell>User</TableCell>
-            <TableCell>Created at</TableCell>
-            <TableCell>Pick-up by</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableHead>ID</TableHead>
+            <TableHead>Book</TableHead>
+            <TableHead>Item ID</TableHead>
+            <TableHead>User</TableHead>
+            <TableHead>Created at</TableHead>
+            <TableHead>Pick-up by</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
