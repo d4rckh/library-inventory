@@ -21,8 +21,9 @@ export default function LibrarianCharts() {
     <CardContent className={"h-full w-full pr-2 pt-2 pb-2"}>
       <ChartContainer config={({
         dailyBorrowings: { label: "Borrowings", color: "hsl(var(--chart-1))" },
-        dailyReturns: { label: "Returns", color: "hsl(var(--chart-3))" },
         dailyReservations: { label: "Reservations", color: "hsl(var(--chart-2))" },
+        dailyReturns: { label: "Returns", color: "hsl(var(--chart-3))" },
+        dailyUsersRegistered: {label: "New users", color: "hsl(var(--chart-4))" },
       })} className="h-full w-full">
         <AreaChart accessibilityLayer data={data}>
           <ChartTooltip
@@ -44,9 +45,8 @@ export default function LibrarianCharts() {
           <Area dataKey={"dailyBorrowings"} fill={"var(--color-dailyBorrowings)"} stroke={"var(--color-dailyBorrowings)"} />
           <Area dataKey={"dailyReservations"} fill={"var(--color-dailyReservations)"} stroke={"var(--color-dailyReservations)"} />
           <Area dataKey={"dailyReturns"} fill={"var(--color-dailyReturns)"} stroke={"var(--color-dailyReturns)"} />
+          <Area dataKey={"dailyUsersRegistered"} fill={"var(--color-dailyUsersRegistered)"} stroke={"var(--color-dailyUsersRegistered)"} />
           <ChartLegend content={<ChartLegendContent />} />
-          {/*<Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />*/}
-          {/*<Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />*/}
         </AreaChart>
       </ChartContainer>
     </CardContent>

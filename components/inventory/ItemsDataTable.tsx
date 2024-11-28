@@ -35,9 +35,9 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
             <TableCell>
               <BookBadgeInformation book={item.book} librarianLink />
             </TableCell>
-            <TableCell className={"flex flex-row items-center gap-1 h-full"}>
-              { item.reservation && <>Reserved by <UserBadgeInformation user={item.reservation.user}/></> }
-              { item.borrowing && <>Borrowed by <UserBadgeInformation user={item.borrowing.user}/></> }
+            <TableCell>
+              { item.reservation && <span className={"flex flex-row gap-1"}>Reserved by <UserBadgeInformation user={item.reservation.user}/></span> }
+              { item.borrowing && <span className={"flex flex-row gap-1"}>Borrowed by <UserBadgeInformation user={item.borrowing.user}/></span> }
               { !item.borrowing && !item.reservation && <Badge>Available</Badge>}
             </TableCell>
             <TableCell>

@@ -28,23 +28,28 @@ export default function CreateBookDialog() {
         <DialogTitle>Create a new book</DialogTitle>
       </DialogHeader>
       <form
-        className={"flex flex-col gap-1"}
-        onSubmit={(e: FormEvent<HTMLFormElement>) => {
-          e.preventDefault();
-          createBook({title, publisher, author, isbn, tags: [], year}).then(async ({error}) => {
-            if (!error) await query.invalidateQueries({queryKey: ["books", "list"]});
+          className={"flex flex-col gap-1"}
+          onSubmit={(e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            createBook({title, publisher, author, isbn, tags: [], year}).then(async ({error}) => {
+              if (!error) await query.invalidateQueries({queryKey: ["books", "list"]});
 
-            toast({
-              title: error ? "Failed to create book" : "Created book successfully",
-              description: error ? error.message : "",
-            })
-          });
-        }}>
+              toast({
+                title: error ? "Failed to create book" : "Created book successfully",
+                description: error ? error.message : "",
+              })
+            });
+          }}>
+        <b>Title:</b>
         <Input placeholder={"Title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
+        <b>Publisher:</b>
         <Input placeholder={"Publisher"} value={publisher} onChange={(e) => setPublisher(e.target.value)}/>
+        <b>Author:</b>
         <Input placeholder={"Author"} value={author} onChange={(e) => setAuthor(e.target.value)}/>
+        <b>ISBN:</b>
         <Input placeholder={"ISBN"} value={isbn} onChange={(e) => setIsbn(e.target.value)}/>
-        <Input placeholder={"Year"} value={year} onChange={(e) => setYear(parseInt(e.target.value))} type={"number"} />
+        <b>Year:</b>
+        <Input placeholder={"Year"} value={year} onChange={(e) => setYear(parseInt(e.target.value))} type={"number"}/>
 
         <DialogClose asChild>
           <Button type={"submit"}>

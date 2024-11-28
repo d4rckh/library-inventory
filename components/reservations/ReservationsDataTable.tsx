@@ -1,8 +1,7 @@
 "use client";
 
-import {Reservation} from "@/app/lib/actions/getUserReservations";
-import {useEffect, useState} from "react";
-import {getReservations, ReservationFilters} from "@/app/lib/actions/getReservations";
+import {useState} from "react";
+import {ReservationFilters} from "@/app/lib/actions/getReservations";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import ReservationTableRow from "@/components/reservations/ReservationTableRow";

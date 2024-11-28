@@ -8,6 +8,7 @@ export type Stats = {
   dailyBorrowings: number;
   dailyReturns: number;
   dailyReservations: number;
+  dailyUsersRegistered: number;
 }
 
 export async function getStats(): Promise<Stats[]> {
