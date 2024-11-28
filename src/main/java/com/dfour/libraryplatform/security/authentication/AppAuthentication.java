@@ -1,5 +1,6 @@
 package com.dfour.libraryplatform.security.authentication;
 
+import com.dfour.libraryplatform.exception.UserIsNotAuthenticatedException;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,7 +14,7 @@ public class AppAuthentication {
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return (AppUserDetails) authentication.getPrincipal();
         }
-        throw new SecurityException("User is not authenticated");
+        throw new UserIsNotAuthenticatedException();
     }
 
 }

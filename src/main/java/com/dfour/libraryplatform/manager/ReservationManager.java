@@ -39,13 +39,15 @@ public class ReservationManager {
             }
         }
 
-        if (reservationService.getUserValidReservation(reservationRequestDto.getUserId()).size() > 3) {
+        // Maximum 3 reservations allowed
+        if (reservationService.getUserValidReservation(reservationRequestDto.getUserId()).size() > 2) {
             throw new TooManyReservationsException();
         }
 
         final ReservationEntity reservation = ReservationEntity.builder()
                 .expiresAt(OffsetDateTime.now(ZoneOffset.UTC).plusDays(2))
                 .expiredAt(null)
+                .cancelled(false)
                 .userId(reservationRequestDto.getUserId())
                 .itemId(reservationRequestDto.getItemId())
                 .createdAt(OffsetDateTime.now(ZoneOffset.UTC))
