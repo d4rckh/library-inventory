@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class ReservationStatsDto {
-    private long currentReservations;
+    private Long currentReservations;
 }

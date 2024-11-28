@@ -43,10 +43,10 @@ public class ReservationManagerTest {
     @Test
     void reservationManagerShouldReserve() {
         // Given
-        long itemId = 1;
-        long userId = 1;
+        final long itemId = 1;
+        final long userId = 1;
 
-        ReservationRequestDto reservationRequestDto =
+        final ReservationRequestDto reservationRequestDto =
                 ReservationRequestDto.builder()
                         .itemId(itemId)
                         .userId(userId)
@@ -65,7 +65,7 @@ public class ReservationManagerTest {
 
         // There should be a reservation
         verify(reservationService).save(reservationEntityArgumentCaptor.capture());
-        ReservationEntity reservationEntity = reservationEntityArgumentCaptor.getValue();
+        final ReservationEntity reservationEntity = reservationEntityArgumentCaptor.getValue();
 
         // That has
         assertEquals(itemId, reservationEntity.getItemId());
@@ -79,11 +79,11 @@ public class ReservationManagerTest {
 
     @Test
     void reservationManagerShouldNotReserveWhenItemReserved() {
-        long itemId = 1;
-        long userId = 1;
-        long userIdReserved = 1;
+        final long itemId = 1;
+        final long userId = 1;
+        final long userIdReserved = 1;
 
-        ReservationRequestDto reservationRequestDto =
+        final ReservationRequestDto reservationRequestDto =
                 ReservationRequestDto.builder()
                         .itemId(itemId)
                         .userId(userId)
@@ -109,11 +109,11 @@ public class ReservationManagerTest {
 
     @Test
     void reservationManagerShouldNotReserveWhenItemReservedBySomeoneElse() {
-        long itemId = 1;
-        long userId = 1;
-        long userIdReserved = 2;
+        final long itemId = 1;
+        final long userId = 1;
+        final long userIdReserved = 2;
 
-        ReservationRequestDto reservationRequestDto =
+        final ReservationRequestDto reservationRequestDto =
                 ReservationRequestDto.builder()
                         .itemId(itemId)
                         .userId(userId)
@@ -139,10 +139,10 @@ public class ReservationManagerTest {
 
     @Test
     void reservationManagerShouldNotReserveWhenItemBorrowed() {
-        long itemId = 1;
-        long userId = 1;
+        final long itemId = 1;
+        final long userId = 1;
 
-        ReservationRequestDto reservationRequestDto =
+        final ReservationRequestDto reservationRequestDto =
                 ReservationRequestDto.builder()
                         .itemId(itemId)
                         .userId(userId)

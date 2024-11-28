@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 public class InventoryResponseDto {
-    private long id;
+    private Long id;
 
     private UserEntity user;
     private BookEntity book;

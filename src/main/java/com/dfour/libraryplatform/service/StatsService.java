@@ -39,14 +39,13 @@ public class StatsService {
     @PostConstruct
     public void runOnStartup() {
         log.info("Running updateDailyStats on application startup...");
-
-        LocalDate today = LocalDate.now(ZoneId.of("UTC"));
+        final LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
         IntStream.range(0, 31).forEachOrdered(n -> this.calculateStats(today.minusDays(n)));
     }
 
-    private void calculateStats(LocalDate date) {
-        StatsEntity stats = statsRepository.findByStatDate(date)
+    private void calculateStats(final LocalDate date) {
+        final StatsEntity stats = statsRepository.findByStatDate(date)
                 .orElse(new StatsEntity());
 
         stats.setStatDate(date);
@@ -63,9 +62,8 @@ public class StatsService {
     @Scheduled(cron = "0 0 * * * ?") // Hourly
     @Transactional
     public void updateDailyStats() {
-        LocalDate today = LocalDate.now(ZoneId.of("UTC"));
+        final LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
         this.calculateStats(today);
-
     }
 }

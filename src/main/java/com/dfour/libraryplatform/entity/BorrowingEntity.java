@@ -18,21 +18,21 @@ import java.time.OffsetDateTime;
 public class BorrowingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
     private UserEntity user;
 
     @Column(name = "user_id", nullable = false)
-    private long userId;
+    private Long userId;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
     private InventoryEntity item;
 
     @Column(name = "item_id", nullable = false)
-    private long itemId;
+    private Long itemId;
 
     @Column(nullable = false)
     @CreationTimestamp

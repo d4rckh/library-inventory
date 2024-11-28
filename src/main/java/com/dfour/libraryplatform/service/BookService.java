@@ -31,7 +31,7 @@ public class BookService {
         ).getContent();
     }
 
-    public void deleteById(final long id) {
+    public void deleteById(final Long id) {
         books.deleteById(id);
     }
 
@@ -39,8 +39,8 @@ public class BookService {
         return books.findById(id);
     }
 
-    public BookEntity patch(final long bookId, final BookEntity incompleteBookEntity) {
-        BookEntity book = books.findById(bookId).orElseThrow(NotFoundException::new);
+    public BookEntity patch(final Long bookId, final BookEntity incompleteBookEntity) {
+        final BookEntity book = books.findById(bookId).orElseThrow(NotFoundException::new);
 
         if (!Objects.isNull(incompleteBookEntity.getTags())) {
             book.getTags().clear();

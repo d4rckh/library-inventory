@@ -37,8 +37,8 @@ public class UserService {
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
-    public Optional<UserEntity> findById(final Long id) {
-        return users.findById(id);
+    public Optional<UserEntity> findById(final Long userId) {
+        return users.findById(userId);
     }
 
     public boolean signUp(final UserSignUpRequestDto userSignUpRequestDto) {
@@ -56,8 +56,8 @@ public class UserService {
         return savedUser.getId() > 0;
     }
 
-    public AccessInformationResponseDto signIn(UserSignInRequestDto userSignInRequestDto) {
-        UserEntity user = users.findByEmail(userSignInRequestDto.getEmail())
+    public AccessInformationResponseDto signIn(final UserSignInRequestDto userSignInRequestDto) {
+        final UserEntity user = users.findByEmail(userSignInRequestDto.getEmail())
                 .orElseThrow(NotFoundException::new);
 
         if (!passwordEncoder.matches(userSignInRequestDto.getPassword(), user.getHashedPassword())) {

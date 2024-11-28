@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class UserStatsDto {
-    public long registeredUsers;
+    public Long registeredUsers;
 }

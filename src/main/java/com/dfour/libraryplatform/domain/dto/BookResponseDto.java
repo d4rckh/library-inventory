@@ -10,17 +10,17 @@ import java.util.List;
 @Data
 @Builder
 public class BookResponseDto {
-    private long id;
+    private Long id;
     private String title;
     private String author;
     private String isbn;
     private String publisher;
     private Long year;
     private UserEntity user;
-    private long userId;
+    private Long userId;
     private List<TagEntity> tags;
 
-    private long totalItems;
-    private long reservedItems;
-    private long borrowedItems;
+    private Long totalItems;
+    private Long reservedItems;
+    private Long borrowedItems;
 }

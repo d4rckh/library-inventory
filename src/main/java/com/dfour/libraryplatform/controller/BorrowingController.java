@@ -65,7 +65,7 @@ public class BorrowingController {
     }
 
     @GetMapping("/stats/{itemId}")
-    public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable final long itemId) {
+    public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable final Long itemId) {
         inventoryService.findById(itemId)
                 .orElseThrow(NotFoundException::new);
         return borrowingService.getStats(itemId);
@@ -78,7 +78,7 @@ public class BorrowingController {
 
     @GetMapping("/user/{userId}")
     public List<BorrowingEntity> getBorrowingsByUserId(
-            @PathVariable(name = "userId") final long userId
+            @PathVariable(name = "userId") final Long userId
     ) {
         return borrowingService.findByUserId(userId);
     }

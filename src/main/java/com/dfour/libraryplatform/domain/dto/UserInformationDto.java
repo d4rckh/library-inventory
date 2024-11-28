@@ -8,6 +8,6 @@ import lombok.Data;
 public class UserInformationDto {
 
     private final String email;
-    private final long id;
+    private final Long id;
 
 }

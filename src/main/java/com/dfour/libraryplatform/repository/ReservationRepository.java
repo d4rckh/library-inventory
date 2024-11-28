@@ -13,9 +13,9 @@ import java.util.ArrayList;
 @Repository
 public interface ReservationRepository extends JpaRepository<ReservationEntity, Long> {
 
-    ArrayList<ReservationEntity> findAllByItemId(long itemId);
+    ArrayList<ReservationEntity> findAllByItemId(Long itemId);
 
-    ArrayList<ReservationEntity> findAllByUserId(long userId);
+    ArrayList<ReservationEntity> findAllByUserId(Long userId);
 
     @Query(value = "SELECT COUNT(*) FROM reservations WHERE reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND reservations.cancelled = false", nativeQuery = true)
     long countValidReservations();

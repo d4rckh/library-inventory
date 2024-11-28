@@ -22,14 +22,14 @@ public class BorrowingService {
 
     private final BorrowingRepository borrowings;
 
-    public ItemBorrowingStatsDto getStats(final long itemId) {
+    public ItemBorrowingStatsDto getStats(final Long itemId) {
         return ItemBorrowingStatsDto.builder()
                 .borrowed(borrowings.getItemValidBorrowing(itemId).isPresent())
                 .times(borrowings.countByItemId(itemId))
                 .build();
     }
 
-    public BorrowingEntity markAsReturned(final long borrowingId) {
+    public BorrowingEntity markAsReturned(final Long borrowingId) {
         final BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
                 NotFoundException::new
         );
@@ -40,14 +40,14 @@ public class BorrowingService {
         return entity;
     }
 
-    public List<BorrowingEntity> findByUserId(final long userId) {
+    public List<BorrowingEntity> findByUserId(final Long userId) {
         return borrowings.findByUserId(userId,
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
     }
 
-    public Optional<BorrowingEntity> getItemValidBorrowing(final long itemId) {
+    public Optional<BorrowingEntity> getItemValidBorrowing(final Long itemId) {
         return borrowings.getItemValidBorrowing(itemId);
     }
 

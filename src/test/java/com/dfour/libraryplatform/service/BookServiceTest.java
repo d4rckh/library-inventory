@@ -34,7 +34,7 @@ public class BookServiceTest {
 
     @Test
     void whenFindById_thenReturnBook() {
-        Optional<BookEntity> book = bookService.findById(1L);
+        final Optional<BookEntity> book = bookService.findById(1L);
 
         assertTrue(book.isPresent());
         assertEquals("Title 1", book.get().getTitle());

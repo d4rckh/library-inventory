@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 public class BorrowingRequestDto {
 
-    private final long userId;
-    private final long itemId;
-    private final long borrowDays;
+    private final Long userId;
+    private final Long itemId;
+    private final Long borrowDays;
 
 }

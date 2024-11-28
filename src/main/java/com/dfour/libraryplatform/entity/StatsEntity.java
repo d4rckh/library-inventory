@@ -17,20 +17,20 @@ import java.time.LocalDate;
 public class StatsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private LocalDate statDate;
 
     @Column(nullable = false)
-    private long dailyBorrowings;
+    private Long dailyBorrowings;
 
     @Column(nullable = false)
-    private long dailyReturns;
+    private Long dailyReturns;
 
     @Column(nullable = false)
-    private long dailyReservations;
+    private Long dailyReservations;
 
     @Column(nullable = false)
-    private long dailyUsersRegistered;
+    private Long dailyUsersRegistered;
 }

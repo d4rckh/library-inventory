@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class ItemBorrowingStatsDto {
-    private final long times;
-    private final boolean borrowed;
+    private final Long times;
+    private final Boolean borrowed;
 }

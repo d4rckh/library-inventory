@@ -30,16 +30,16 @@ public class ReservationService {
     public boolean isValid(final ReservationEntity reservation) {
         return Objects.isNull(reservation.getExpiredAt()) &&
                 reservation.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC)) &&
-                !reservation.isCancelled();
+                Objects.equals(reservation.getCancelled(), false);
     }
 
-    public Optional<ReservationEntity> getItemValidReservation(final long itemId) {
+    public Optional<ReservationEntity> getItemValidReservation(final Long itemId) {
         return reservations.findAllByItemId(itemId)
                 .stream()
                 .filter(this::isValid).findFirst();
     }
 
-    public List<ReservationEntity> getUserValidReservation(final long userId) {
+    public List<ReservationEntity> getUserValidReservation(final Long userId) {
         return reservations.findAllByUserId(userId)
                 .stream()
                 .filter(this::isValid).collect(Collectors.toList());

@@ -18,25 +18,25 @@ import java.time.OffsetDateTime;
 public class ReservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     @ColumnDefault("false")
-    private boolean cancelled;
+    private Boolean cancelled;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
     private UserEntity user;
 
     @Column(name = "user_id", nullable = false)
-    private long userId;
+    private Long userId;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
     private InventoryEntity item;
 
     @Column(name = "item_id", nullable = false)
-    private long itemId;
+    private Long itemId;
 
     @Column(nullable = false)
     private OffsetDateTime createdAt;

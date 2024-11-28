@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -30,7 +31,8 @@ public class ReservationManager {
         }
 
         if (optionalReservationEntity.isPresent()) {
-            if (optionalReservationEntity.get().getUserId() == reservationRequestDto.getUserId()) {
+            if (Objects.equals(optionalReservationEntity.get().getUserId(),
+                    reservationRequestDto.getUserId())) {
                 throw new ItemIsReservedByYouException();
             } else {
                 throw new ItemIsReservedBySomeoneElseException();

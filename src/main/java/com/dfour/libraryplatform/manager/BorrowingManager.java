@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -27,7 +28,8 @@ public class BorrowingManager {
                 reservationService.getItemValidReservation(borrowingRequest.getItemId());
 
         if (optionalReservationEntity.isPresent()) {
-            if (optionalReservationEntity.get().getUserId() != borrowingRequest.getUserId()) {
+            if (!Objects.equals(optionalReservationEntity.get().getUserId(),
+                    borrowingRequest.getUserId())) {
                 throw new ItemIsBorrowedException();
             }
             reservationService.invalidateReservation(optionalReservationEntity.get());

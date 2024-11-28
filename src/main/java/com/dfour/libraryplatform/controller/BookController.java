@@ -65,7 +65,7 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     BookResponseDto create(@RequestBody final BookEntity bookEntity) {
-        AppUserDetails appUserDetails = GetLoggedUserDetails();
+        final AppUserDetails appUserDetails = GetLoggedUserDetails();
         return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
     }
 

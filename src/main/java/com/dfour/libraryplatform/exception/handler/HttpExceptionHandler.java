@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class HttpExceptionHandler {
 
     @ExceptionHandler(HttpException.class)
-    ResponseEntity<HttpExceptionResponse> handleHttpException(HttpException e) {
+    ResponseEntity<HttpExceptionResponse> handleHttpException(final HttpException e) {
         return ResponseEntity.status(e.getStatus()).body(new HttpExceptionResponse(e));
     }
 
     @ExceptionHandler(RuntimeException.class)
-    ResponseEntity<HttpExceptionResponse> handleHttpException(RuntimeException e) {
+    ResponseEntity<HttpExceptionResponse> handleHttpException(final RuntimeException e) {
         log.error(e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 new HttpExceptionResponse(new HttpException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()))

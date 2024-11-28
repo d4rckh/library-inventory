@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class BorrowingStatsDto {
-    private long currentBorrows;
-    private long currentLateBorrows;
+    private Long currentBorrows;
+    private Long currentLateBorrows;
 }

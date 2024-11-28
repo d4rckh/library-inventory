@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class BookStatsDto {
-    public long uniqueTitles;
+    public Long uniqueTitles;
 }

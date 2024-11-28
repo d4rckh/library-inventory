@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 @Builder
 public class InventoryStatsDto {
-    public long uniqueItems;
+    public Long uniqueItems;
 }

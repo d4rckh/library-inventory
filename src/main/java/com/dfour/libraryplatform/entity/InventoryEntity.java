@@ -18,7 +18,7 @@ public class InventoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(updatable = false, insertable = false)
@@ -26,16 +26,16 @@ public class InventoryEntity {
     private UserEntity user;
 
     @Column(name = "user_id", nullable = false)
-    private long userId;
+    private Long userId;
 
     @JoinColumn(name = "book_id", insertable = false, updatable = false, nullable = false)
     @ManyToOne(targetEntity = BookEntity.class, fetch = FetchType.EAGER)
     private BookEntity book;
 
     @Column(name = "book_id", nullable = false)
-    private long bookId;
+    private Long bookId;
 
     @Column(nullable = false)
     @ColumnDefault("false")
-    private boolean deleted;
+    private Boolean deleted;
 }

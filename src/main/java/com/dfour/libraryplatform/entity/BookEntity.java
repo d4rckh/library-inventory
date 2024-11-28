@@ -18,7 +18,7 @@ import java.util.List;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -41,7 +41,7 @@ public class BookEntity {
     private UserEntity user;
 
     @Column(name = "user_id")
-    private long userId;
+    private Long userId;
 
     @ManyToMany
     private List<TagEntity> tags;

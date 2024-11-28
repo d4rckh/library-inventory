@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 @Repository
 public interface InventoryRepository extends JpaRepository<InventoryEntity, Long> {
-    Slice<InventoryEntity> findByBookIdAndDeletedFalse(long bookId, Pageable pageable);
+    Slice<InventoryEntity> findByBookIdAndDeletedFalse(Long bookId, Pageable pageable);
 
     @Query(value = "SELECT * FROM inventory WHERE (inventory.book_id = :bookId OR :bookId IS NULL) AND deleted IS FALSE", nativeQuery = true)
     ArrayList<InventoryEntity> findFiltered(Long bookId);
 
-    long countByBookIdAndDeletedFalse(long bookId);
+    long countByBookIdAndDeletedFalse(Long bookId);
 }

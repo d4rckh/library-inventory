@@ -20,7 +20,7 @@ public class InventoryService {
 
     private final InventoryRepository inventory;
 
-    public long countByBookId(final long bookId) {
+    public long countByBookId(final Long bookId) {
         return inventory.countByBookIdAndDeletedFalse(bookId);
     }
 
@@ -28,7 +28,7 @@ public class InventoryService {
         return inventory.findFiltered(filter.getBookId());
     }
 
-    public List<InventoryEntity> findByBookId(final long bookId) {
+    public List<InventoryEntity> findByBookId(final Long bookId) {
         return inventory.findByBookIdAndDeletedFalse(bookId,
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();

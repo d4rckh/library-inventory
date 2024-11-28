@@ -16,11 +16,11 @@ public interface BorrowingRepository extends JpaRepository<BorrowingEntity, Long
 
     @Query(value = "SELECT * FROM borrowings WHERE " +
             "borrowings.item_id = :itemId AND public.borrowings.returned_date IS NULL", nativeQuery = true)
-    Optional<BorrowingEntity> getItemValidBorrowing(long itemId);
+    Optional<BorrowingEntity> getItemValidBorrowing(Long itemId);
 
     long countByItemId(long itemId);
 
-    Slice<BorrowingEntity> findByUserId(long userId, Pageable pageable);
+    Slice<BorrowingEntity> findByUserId(Long userId, Pageable pageable);
 
     @Query(value = "SELECT COUNT(*) FROM borrowings WHERE " +
             "public.borrowings.returned_date IS NULL", nativeQuery = true)
