@@ -14,7 +14,7 @@ public class InventoryEntityMapper {
     private final BorrowingService borrowingService;
     private final ReservationService reservationService;
 
-    public InventoryResponseDto entityToDto(InventoryEntity entity) {
+    public InventoryResponseDto entityToDto(final InventoryEntity entity) {
         return InventoryResponseDto.builder()
                 .id(entity.getId())
                 .book(entity.getBook())

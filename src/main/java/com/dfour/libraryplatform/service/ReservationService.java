@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -24,41 +23,41 @@ public class ReservationService {
 
     private final ReservationRepository reservations;
 
-    public Optional<ReservationEntity> findById(Long id) {
+    public Optional<ReservationEntity> findById(final Long id) {
         return reservations.findById(id);
     }
 
-    public boolean isValid(ReservationEntity reservation) {
+    public boolean isValid(final ReservationEntity reservation) {
         return Objects.isNull(reservation.getExpiredAt()) &&
                 reservation.getExpiresAt().isAfter(OffsetDateTime.now(ZoneOffset.UTC)) &&
                 !reservation.isCancelled();
     }
 
-    public Optional<ReservationEntity> getItemValidReservation(long itemId) {
+    public Optional<ReservationEntity> getItemValidReservation(final long itemId) {
         return reservations.findAllByItemId(itemId)
                 .stream()
                 .filter(this::isValid).findFirst();
     }
 
-    public List<ReservationEntity> getUserValidReservation(long userId) {
+    public List<ReservationEntity> getUserValidReservation(final long userId) {
         return reservations.findAllByUserId(userId)
                 .stream()
                 .filter(this::isValid).collect(Collectors.toList());
     }
 
-    public void invalidateReservation(ReservationEntity reservation) {
+    public void invalidateReservation(final ReservationEntity reservation) {
         reservation.setExpiredAt(OffsetDateTime.now(ZoneOffset.UTC));
         reservations.save(reservation);
     }
 
-    public ReservationEntity cancelReservation(Long reservationId) {
-        ReservationEntity reservation = reservations.findById(reservationId)
+    public ReservationEntity cancelReservation(final Long reservationId) {
+        final ReservationEntity reservation = reservations.findById(reservationId)
                 .orElseThrow(NotFoundException::new);
         reservation.setCancelled(true);
         return reservations.save(reservation);
     }
 
-    public ReservationEntity save(ReservationEntity reservation) {
+    public ReservationEntity save(final ReservationEntity reservation) {
         return reservations.save(reservation);
     }
 
@@ -68,7 +67,7 @@ public class ReservationService {
                 .build();
     }
 
-    public List<ReservationEntity> findFiltered(ReservationFilterDto filters) {
+    public List<ReservationEntity> findFiltered(final ReservationFilterDto filters) {
         return reservations.findFiltered(filters.getUserId(), filters.getItemId(), filters.getIsActive(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();

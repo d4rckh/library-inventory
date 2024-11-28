@@ -27,9 +27,9 @@ public class BorrowingController {
 
     @GetMapping
     List<BorrowingEntity> findBorrowings(
-            @RequestParam(name = "userId", required = false) Long userId,
-            @RequestParam(name = "itemId", required = false) Long itemId,
-            @RequestParam(name = "isReturned", required = false) Boolean isReturned
+            @RequestParam(name = "userId", required = false) final Long userId,
+            @RequestParam(name = "itemId", required = false) final Long itemId,
+            @RequestParam(name = "isReturned", required = false) final Boolean isReturned
     ) {
         return borrowingService.findFiltered(
                 BorrowingFilterDto.builder()
@@ -43,7 +43,7 @@ public class BorrowingController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BorrowingEntity borrow(
-            @RequestBody BorrowingRequestDto requestDto
+            @RequestBody final BorrowingRequestDto requestDto
     ) {
         inventoryService.findById(requestDto.getItemId())
                 .orElseThrow(NotFoundException::new);
@@ -52,20 +52,20 @@ public class BorrowingController {
 
     @PostMapping("/{id}/returned")
     public BorrowingEntity markAsReturned(
-            @PathVariable Long id
+            @PathVariable final Long id
     ) {
         return borrowingService.markAsReturned(id);
     }
 
     @PostMapping("/extend")
     public BorrowingEntity extendBorrowing(
-            @RequestBody ExtendBorrowingRequestDto requestDto
+            @RequestBody final ExtendBorrowingRequestDto requestDto
     ) {
         return borrowingService.extendBorrowing(requestDto);
     }
 
     @GetMapping("/stats/{itemId}")
-    public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable long itemId) {
+    public ItemBorrowingStatsDto itemBorrowingStats(@PathVariable final long itemId) {
         inventoryService.findById(itemId)
                 .orElseThrow(NotFoundException::new);
         return borrowingService.getStats(itemId);
@@ -78,7 +78,7 @@ public class BorrowingController {
 
     @GetMapping("/user/{userId}")
     public List<BorrowingEntity> getBorrowingsByUserId(
-            @PathVariable(name = "userId") long userId
+            @PathVariable(name = "userId") final long userId
     ) {
         return borrowingService.findByUserId(userId);
     }

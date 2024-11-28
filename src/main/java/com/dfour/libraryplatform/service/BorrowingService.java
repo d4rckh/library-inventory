@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,15 +22,15 @@ public class BorrowingService {
 
     private final BorrowingRepository borrowings;
 
-    public ItemBorrowingStatsDto getStats(long itemId) {
+    public ItemBorrowingStatsDto getStats(final long itemId) {
         return ItemBorrowingStatsDto.builder()
                 .borrowed(borrowings.getItemValidBorrowing(itemId).isPresent())
                 .times(borrowings.countByItemId(itemId))
                 .build();
     }
 
-    public BorrowingEntity markAsReturned(long borrowingId) {
-        BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
+    public BorrowingEntity markAsReturned(final long borrowingId) {
+        final BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
                 NotFoundException::new
         );
 
@@ -41,18 +40,18 @@ public class BorrowingService {
         return entity;
     }
 
-    public List<BorrowingEntity> findByUserId(long userId) {
+    public List<BorrowingEntity> findByUserId(final long userId) {
         return borrowings.findByUserId(userId,
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))
         ).getContent();
     }
 
-    public Optional<BorrowingEntity> getItemValidBorrowing(long itemId) {
+    public Optional<BorrowingEntity> getItemValidBorrowing(final long itemId) {
         return borrowings.getItemValidBorrowing(itemId);
     }
 
-    public BorrowingEntity save(BorrowingEntity borrowingEntity) {
+    public BorrowingEntity save(final BorrowingEntity borrowingEntity) {
         return borrowings.save(borrowingEntity);
     }
 
@@ -63,18 +62,18 @@ public class BorrowingService {
                 .build();
     }
 
-    public List<BorrowingEntity> findFiltered(BorrowingFilterDto filter) {
+    public List<BorrowingEntity> findFiltered(final BorrowingFilterDto filter) {
         return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
-    public BorrowingEntity extendBorrowing(ExtendBorrowingRequestDto requestDto) {
-        BorrowingEntity borrowingEntity = borrowings.findById(requestDto.getBorrowingId())
+    public BorrowingEntity extendBorrowing(final ExtendBorrowingRequestDto requestDto) {
+        final BorrowingEntity borrowingEntity = borrowings.findById(requestDto.getBorrowingId())
                 .orElseThrow(NotFoundException::new);
 
         borrowingEntity.setReturnDate(
-                borrowingEntity.getBorrowDate().plusDays(requestDto.getExtendDays())
+                borrowingEntity.getReturnDate().plusDays(requestDto.getExtendDays())
         );
 
         return borrowings.save(borrowingEntity);

@@ -17,13 +17,13 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping
-    AccessInformationResponseDto signIn(@RequestBody UserSignInRequestDto userSignInRequestDto) {
+    AccessInformationResponseDto signIn(@RequestBody final UserSignInRequestDto userSignInRequestDto) {
         return userService.signIn(userSignInRequestDto);
     }
 
     @GetMapping
     UserInformationDto userInformation() {
-        UserEntity user = AppAuthentication.GetLoggedUserDetails().getEntity();
+        final UserEntity user = AppAuthentication.GetLoggedUserDetails().getEntity();
 
         return UserInformationDto.builder()
                 .id(user.getId())

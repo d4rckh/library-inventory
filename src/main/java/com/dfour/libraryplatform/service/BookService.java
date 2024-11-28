@@ -23,7 +23,7 @@ public class BookService {
 
     private final BookRepository books;
 
-    public List<BookEntity> findFiltered(BookFilterDto filter) {
+    public List<BookEntity> findFiltered(final BookFilterDto filter) {
         return books.findFiltered(
                 filter.getTitleSearch().toLowerCase(),
                 PageRequest.of(0, 100,
@@ -31,15 +31,15 @@ public class BookService {
         ).getContent();
     }
 
-    public void deleteById(long id) {
+    public void deleteById(final long id) {
         books.deleteById(id);
     }
 
-    public Optional<BookEntity> findById(Long id) {
+    public Optional<BookEntity> findById(final Long id) {
         return books.findById(id);
     }
 
-    public BookEntity patch(long bookId, BookEntity incompleteBookEntity) {
+    public BookEntity patch(final long bookId, final BookEntity incompleteBookEntity) {
         BookEntity book = books.findById(bookId).orElseThrow(NotFoundException::new);
 
         if (!Objects.isNull(incompleteBookEntity.getTags())) {
@@ -65,11 +65,11 @@ public class BookService {
         return books.save(book);
     }
 
-    public BookEntity create(BookEntity bookEntity) {
+    public BookEntity create(final BookEntity bookEntity) {
         return books.save(bookEntity);
     }
 
-    public BookEntity createAsUser(BookEntity bookEntity, UserEntity userEntity) {
+    public BookEntity createAsUser(final BookEntity bookEntity, final UserEntity userEntity) {
         bookEntity.setUserId(userEntity.getId());
         bookEntity.setUser(userEntity);
         return books.save(bookEntity);

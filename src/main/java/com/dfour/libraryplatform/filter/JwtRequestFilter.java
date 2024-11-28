@@ -33,7 +33,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null || !header.startsWith("Bearer ")) {
             chain.doFilter(request, response);
-
             return;
         }
 

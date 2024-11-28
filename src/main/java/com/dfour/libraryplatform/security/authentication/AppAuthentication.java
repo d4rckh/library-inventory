@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class AppAuthentication {
 
     public static AppUserDetails GetLoggedUserDetails() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
             return (AppUserDetails) authentication.getPrincipal();

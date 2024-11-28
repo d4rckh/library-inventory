@@ -12,7 +12,7 @@ public class HttpExceptionResponse {
     final private String message;
     final private OffsetDateTime timestamp;
 
-    public HttpExceptionResponse(HttpException exception) {
+    public HttpExceptionResponse(final HttpException exception) {
         this.status = exception.getStatus();
         this.message = exception.getMessage();
         this.timestamp = OffsetDateTime.now();

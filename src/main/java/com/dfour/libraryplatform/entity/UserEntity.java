@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.OffsetDateTime;
 
 @Entity
 @Data
@@ -30,4 +33,9 @@ public class UserEntity {
     @Column(nullable = false)
     @JsonIgnore
     private String hashedPassword;
+
+    @Column(nullable = false)
+    @CreationTimestamp
+    private OffsetDateTime createdAt;
+
 }

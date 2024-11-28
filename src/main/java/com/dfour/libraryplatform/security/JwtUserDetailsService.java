@@ -16,7 +16,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) {
-        Optional<UserEntity> optionalUserEntity = userService.findByEmail(username);
+        final Optional<UserEntity> optionalUserEntity = userService.findByEmail(username);
         return optionalUserEntity.map(AppUserDetails::new).orElse(null);
     }
 

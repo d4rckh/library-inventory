@@ -20,25 +20,25 @@ public class InventoryService {
 
     private final InventoryRepository inventory;
 
-    public long countByBookId(long bookId) {
+    public long countByBookId(final long bookId) {
         return inventory.countByBookIdAndDeletedFalse(bookId);
     }
 
-    public List<InventoryEntity> findFiltered(InventoryFilterDto filter) {
+    public List<InventoryEntity> findFiltered(final InventoryFilterDto filter) {
         return inventory.findFiltered(filter.getBookId());
     }
 
-    public List<InventoryEntity> findByBookId(long bookId) {
+    public List<InventoryEntity> findByBookId(final long bookId) {
         return inventory.findByBookIdAndDeletedFalse(bookId,
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
-    public Optional<InventoryEntity> findById(Long id) {
+    public Optional<InventoryEntity> findById(final Long id) {
         return inventory.findById(id);
     }
 
-    public InventoryEntity createInventoryAsUser(InventoryEntity inventoryEntity, UserEntity userEntity) {
+    public InventoryEntity createInventoryAsUser(final InventoryEntity inventoryEntity, final UserEntity userEntity) {
         inventoryEntity.setUser(userEntity);
         inventoryEntity.setUserId(userEntity.getId());
         return inventory.save(inventoryEntity);
@@ -50,8 +50,8 @@ public class InventoryService {
                 .build();
     }
 
-    public void deleteById(Long id) {
-        InventoryEntity inventoryEntity = inventory.findById(id).orElseThrow(NotFoundException::new);
+    public void deleteById(final Long id) {
+        final InventoryEntity inventoryEntity = inventory.findById(id).orElseThrow(NotFoundException::new);
         inventoryEntity.setDeleted(true);
 
         inventory.save(inventoryEntity);

@@ -40,7 +40,6 @@ public class JwtService {
         try {
             return verifier.verify(token).getSubject();
         } catch (final JWTVerificationException verificationEx) {
-            log.warn("token invalid: {}", verificationEx.getMessage());
             return null;
         }
     }

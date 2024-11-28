@@ -21,8 +21,9 @@ public class ReservationManager {
     private final ReservationService reservationService;
     private final BorrowingService borrowingService;
 
-    public ReservationEntity reserveItem(ReservationRequestDto reservationRequestDto) {
-        Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(reservationRequestDto.getItemId());
+    public ReservationEntity reserveItem(final ReservationRequestDto reservationRequestDto) {
+        final Optional<ReservationEntity> optionalReservationEntity =
+                reservationService.getItemValidReservation(reservationRequestDto.getItemId());
 
         if (borrowingService.getItemValidBorrowing(reservationRequestDto.getItemId()).isPresent()) {
             throw new ItemIsBorrowedException();
@@ -40,7 +41,7 @@ public class ReservationManager {
             throw new TooManyReservationsException();
         }
 
-        ReservationEntity reservation = ReservationEntity.builder()
+        final ReservationEntity reservation = ReservationEntity.builder()
                 .expiresAt(OffsetDateTime.now(ZoneOffset.UTC).plusDays(2))
                 .expiredAt(null)
                 .userId(reservationRequestDto.getUserId())

@@ -19,7 +19,7 @@ public class SecurityConfig {
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
         return http
                 .csrf(
                         AbstractHttpConfigurer::disable

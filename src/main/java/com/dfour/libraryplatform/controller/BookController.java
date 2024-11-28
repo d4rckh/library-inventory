@@ -7,7 +7,6 @@ import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.BookEntityMapper;
 import com.dfour.libraryplatform.security.AppUserDetails;
-import com.dfour.libraryplatform.security.authentication.AppAuthentication;
 import com.dfour.libraryplatform.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +29,7 @@ public class BookController {
 
     @GetMapping
     private List<BookResponseDto> findFiltered(
-            @RequestParam(name = "titleSearch", required = false) String titleSearch
+            @RequestParam(name = "titleSearch", required = false) final String titleSearch
     ) {
         return bookService.findFiltered(
                 BookFilterDto.builder()
@@ -41,8 +40,8 @@ public class BookController {
 
     @PatchMapping("/{bookId}")
     BookResponseDto patch(
-            @PathVariable Long bookId,
-            @RequestBody BookEntity incompleteBookEntity
+            @PathVariable final Long bookId,
+            @RequestBody final BookEntity incompleteBookEntity
     ) {
         return bookEntityMapper.entityToDto(bookService.patch(bookId, incompleteBookEntity));
     }
@@ -50,14 +49,14 @@ public class BookController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{bookId}")
     void delete(
-            @PathVariable Long bookId
+            @PathVariable final Long bookId
     ) {
         bookService.deleteById(bookId);
     }
 
     @GetMapping("/{bookId}")
     BookResponseDto getById(
-            @PathVariable Long bookId
+            @PathVariable final Long bookId
     ) {
         return bookEntityMapper.entityToDto(bookService.findById(bookId)
                 .orElseThrow(NotFoundException::new));
@@ -65,7 +64,7 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    BookResponseDto create(@RequestBody BookEntity bookEntity) {
+    BookResponseDto create(@RequestBody final BookEntity bookEntity) {
         AppUserDetails appUserDetails = GetLoggedUserDetails();
         return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
     }

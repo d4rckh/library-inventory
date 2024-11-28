@@ -26,7 +26,7 @@ public class InventoryController {
 
     @GetMapping
     public List<InventoryResponseDto> findFiltered(
-            @RequestParam(name = "bookId", required = false) Long bookId
+            @RequestParam(name = "bookId", required = false) final Long bookId
     ) {
         return inventoryService.findFiltered(
                 InventoryFilterDto.builder()
@@ -37,14 +37,14 @@ public class InventoryController {
 
     @GetMapping("/book/{bookId}")
     private List<InventoryEntity> findByBookId(
-            @PathVariable(name = "bookId") Long bookId
+            @PathVariable(name = "bookId") final Long bookId
     ) {
         return inventoryService.findByBookId(bookId);
     }
 
     @GetMapping("/{itemId}")
     private InventoryEntity findById(
-            @PathVariable(name = "itemId") Long itemId
+            @PathVariable(name = "itemId") final Long itemId
     ) {
         return inventoryService.findById(itemId)
                 .orElseThrow(NotFoundException::new);
@@ -53,16 +53,16 @@ public class InventoryController {
     @DeleteMapping("/{itemId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void delete(
-            @PathVariable(name = "itemId") Long itemId
+            @PathVariable(name = "itemId") final Long itemId
     ) {
         inventoryService.deleteById(itemId);
     }
 
     @PostMapping
     private InventoryEntity createInventoryAsUser(
-            @RequestBody InventoryEntity inventoryEntity
+            @RequestBody final InventoryEntity inventoryEntity
     ) {
-        AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        final AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
         return inventoryService.createInventoryAsUser(inventoryEntity, appUserDetails.getEntity());
     }
 

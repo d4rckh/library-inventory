@@ -19,11 +19,12 @@ public class BorrowingManager {
     private final ReservationService reservationService;
     private final BorrowingService borrowingService;
 
-    public BorrowingEntity borrowBook(BorrowingRequestDto borrowingRequest) {
+    public BorrowingEntity borrowBook(final BorrowingRequestDto borrowingRequest) {
         if (borrowingService.getItemValidBorrowing(borrowingRequest.getItemId()).isPresent())
             throw new ItemIsBorrowedException();
 
-        Optional<ReservationEntity> optionalReservationEntity = reservationService.getItemValidReservation(borrowingRequest.getItemId());
+        final Optional<ReservationEntity> optionalReservationEntity =
+                reservationService.getItemValidReservation(borrowingRequest.getItemId());
 
         if (optionalReservationEntity.isPresent()) {
             if (optionalReservationEntity.get().getUserId() != borrowingRequest.getUserId()) {
@@ -32,7 +33,8 @@ public class BorrowingManager {
             reservationService.invalidateReservation(optionalReservationEntity.get());
         }
 
-        BorrowingEntity borrowingEntity = new BorrowingEntity();
+        final BorrowingEntity borrowingEntity = new BorrowingEntity();
+
         borrowingEntity.setBorrowDate(OffsetDateTime.now(ZoneOffset.UTC));
         borrowingEntity.setReturnDate(borrowingEntity.getBorrowDate().plusDays(borrowingRequest.getBorrowDays()).plusHours(12));
         borrowingEntity.setUserId(borrowingRequest.getUserId());

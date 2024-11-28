@@ -21,19 +21,19 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Boolean signUp(@RequestBody UserSignUpRequestDto userSignUpRequestDto) {
+    Boolean signUp(@RequestBody final UserSignUpRequestDto userSignUpRequestDto) {
         return userService.signUp(userSignUpRequestDto);
     }
 
     @GetMapping("/{userId}")
-    UserEntity getUser(@PathVariable Long userId) {
+    UserEntity getUser(@PathVariable final Long userId) {
         return userService.findById(userId)
                 .orElseThrow(NotFoundException::new);
     }
 
     @GetMapping
     List<UserEntity> getUsers(
-            @RequestParam(name = "email", required = false) String emailSearch
+            @RequestParam(name = "email", required = false) final String emailSearch
     ) {
         return userService.findFiltered(
                 UserFilterDto.builder()

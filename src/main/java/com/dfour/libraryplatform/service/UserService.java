@@ -27,25 +27,25 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public Optional<UserEntity> findByEmail(String email) {
+    public Optional<UserEntity> findByEmail(final String email) {
         return users.findByEmail(email);
     }
 
-    public List<UserEntity> findFiltered(UserFilterDto filter) {
+    public List<UserEntity> findFiltered(final UserFilterDto filter) {
         return users.findFiltered(filter.getEmailSearch(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }
 
-    public Optional<UserEntity> findById(Long id) {
+    public Optional<UserEntity> findById(final Long id) {
         return users.findById(id);
     }
 
-    public boolean signUp(UserSignUpRequestDto userSignUpRequestDto) {
+    public boolean signUp(final UserSignUpRequestDto userSignUpRequestDto) {
         if (users.findByEmail(userSignUpRequestDto.getEmail()).isPresent())
             throw new EmailAlreadyRegisteredException();
 
-        UserEntity savedUser = users.save(UserEntity.builder()
+        final UserEntity savedUser = users.save(UserEntity.builder()
                 .email(userSignUpRequestDto.getEmail())
                 .firstName(userSignUpRequestDto.getFirstName())
                 .lastName(userSignUpRequestDto.getLastName())

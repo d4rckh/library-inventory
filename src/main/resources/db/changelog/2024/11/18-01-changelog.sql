@@ -8,7 +8,8 @@ ALTER TABLE reservations
 ALTER TABLE reservations
     ALTER COLUMN cancelled SET DEFAULT FALSE;
 
-UPDATE reservations SET cancelled=false;
+UPDATE reservations
+SET cancelled= false;
 
 ALTER TABLE reservations
     ALTER COLUMN cancelled SET NOT NULL;

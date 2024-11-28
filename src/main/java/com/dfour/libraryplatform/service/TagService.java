@@ -13,8 +13,8 @@ public class TagService {
 
     private final TagRepository tags;
 
-    public TagEntity create(String name) {
-        TagEntity tag = new TagEntity();
+    public TagEntity create(final String name) {
+        final TagEntity tag = new TagEntity();
         tag.setName(name);
         return tags.save(tag);
     }

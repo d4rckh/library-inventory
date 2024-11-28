@@ -11,7 +11,7 @@ public class AppUserDetails extends User {
 
     private final UserEntity entity;
 
-    public AppUserDetails(UserEntity entity) {
+    public AppUserDetails(final UserEntity entity) {
         super(entity.getEmail(), "", Collections.emptyList());
         this.entity = entity;
     }

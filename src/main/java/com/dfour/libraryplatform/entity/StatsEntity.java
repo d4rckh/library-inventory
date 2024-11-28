@@ -30,4 +30,7 @@ public class StatsEntity {
 
     @Column(nullable = false)
     private long dailyReservations;
+
+    @Column(nullable = false)
+    private long dailyUsersRegistered;
 }

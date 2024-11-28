@@ -10,7 +10,7 @@ public class HttpException extends RuntimeException {
 
     final private HttpStatus status;
 
-    public HttpException(HttpStatus status, String message) {
+    public HttpException(final HttpStatus status, final String message) {
         super(message);
         this.status = status;
     }
