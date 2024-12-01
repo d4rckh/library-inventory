@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.dfour.libraryplatform.security.AppAuthentication.GetLoggedUserDetails;
 import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
 
 @RestController
@@ -58,6 +59,7 @@ public class InventoryController {
             @PathVariable(name = "itemId") final Long itemId
     ) {
         EnsureUserLibrarian();
+
         inventoryService.deleteById(itemId);
     }
 
@@ -65,9 +67,12 @@ public class InventoryController {
     private InventoryEntity createInventoryAsUser(
             @RequestBody final InventoryEntity inventoryEntity
     ) {
-        final AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
         EnsureUserLibrarian();
-        return inventoryService.createInventoryAsUser(inventoryEntity, appUserDetails.getEntity());
+
+        return inventoryService.createInventoryAsUser(
+                inventoryEntity,
+                GetLoggedUserDetails().getEntity()
+        );
     }
 
     @GetMapping("/stats")

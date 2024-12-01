@@ -33,6 +33,7 @@ public class ReservationController {
             @RequestParam(name = "itemId", required = false) final Long itemId
     ) {
         EnsureUserId(userId);
+
         return reservationService.findFiltered(
                 ReservationFilterDto.builder()
                         .userId(userId)
@@ -45,12 +46,12 @@ public class ReservationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     ReservationEntity reserve(@RequestBody final ReservationRequestDto reservationRequestDto) {
-        final AppUserDetails appUserDetails = GetLoggedUserDetails();
         EnsureUserLibrarian();
+
         return reservationManager.reserveItem(
                 ReservationRequestDto.builder()
                         .itemId(reservationRequestDto.getItemId())
-                        .userId(appUserDetails.getEntity().getId())
+                        .userId(GetLoggedUserDetails().getEntity().getId())
                         .build()
         );
     }
@@ -60,6 +61,7 @@ public class ReservationController {
             @PathVariable final Long id
     ) {
         EnsureUserLibrarian();
+
         return reservationService.cancelReservation(id);
     }
 
@@ -77,6 +79,7 @@ public class ReservationController {
     @GetMapping("/{id}")
     ReservationEntity getReservationById(@PathVariable final Long id) {
         EnsureUserLibrarian();
+
         return reservationService.findById(id)
                 .orElseThrow(NotFoundException::new);
     }

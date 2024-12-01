@@ -31,6 +31,7 @@ public class UserController {
     @GetMapping("/{userId}")
     UserEntity getUser(@PathVariable final Long userId) {
         EnsureUserId(userId);
+
         return userService.findById(userId)
                 .orElseThrow(NotFoundException::new);
     }
@@ -40,6 +41,7 @@ public class UserController {
             @RequestParam(name = "email", required = false) final String emailSearch
     ) {
         EnsureUserLibrarian();
+
         return userService.findFiltered(
                 UserFilterDto.builder()
                         .emailSearch(emailSearch)

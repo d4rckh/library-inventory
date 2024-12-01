@@ -28,6 +28,7 @@ public class ReportController {
             @RequestParam final Map<String, String> parameters
     ) throws IOException {
         EnsureUserLibrarian();
+
         reportFactoryService.generateReport(response.getOutputStream(),
                 ReportRequestDto.builder()
                         .reportId(reportId)

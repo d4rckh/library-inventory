@@ -21,6 +21,7 @@ public class StatsController {
     @GetMapping
     List<StatsEntity> getStats() {
         EnsureUserLibrarian();
+
         return statsService.getStats();
     }
 

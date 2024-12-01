@@ -35,6 +35,7 @@ public class BorrowingController {
             @RequestParam(name = "isReturned", required = false) final Boolean isReturned
     ) {
         EnsureUserId(userId);
+
         return borrowingService.findFiltered(
                 BorrowingFilterDto.builder()
                         .userId(userId)
@@ -50,6 +51,7 @@ public class BorrowingController {
             @RequestBody final BorrowingRequestDto requestDto
     ) {
         EnsureUserLibrarian();
+
         inventoryService.findById(requestDto.getItemId())
                 .orElseThrow(NotFoundException::new);
         return borrowingManager.borrowBook(requestDto);
@@ -60,6 +62,7 @@ public class BorrowingController {
             @PathVariable final Long id
     ) {
         EnsureUserLibrarian();
+
         return borrowingService.markAsReturned(id);
     }
 
@@ -68,6 +71,7 @@ public class BorrowingController {
             @RequestBody final ExtendBorrowingRequestDto requestDto
     ) {
         EnsureUserLibrarian();
+
         return borrowingService.extendBorrowing(requestDto);
     }
 
