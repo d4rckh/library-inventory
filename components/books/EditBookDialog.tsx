@@ -10,6 +10,7 @@ import {DialogTrigger} from "@radix-ui/react-dialog";
 import {useState} from "react";
 import {Input} from "@/components/ui/input";
 import {editBook} from "@/app/lib/actions/editBook";
+import TagsInput from "@/components/tags/TagsInput";
 
 export default function EditBookDialog({book}: { book: Book }) {
   const query = useQueryClient();
@@ -42,7 +43,12 @@ export default function EditBookDialog({book}: { book: Book }) {
              placeholder={"ISBN"}/>
       <b>Year:</b>
       <Input value={newBook.year} onChange={(e) => setNewBook({...newBook, year: parseInt(e.target.value)})}
-             placeholder={"Year"} type={"number"} />
+             placeholder={"Year"} type={"number"}/>
+      <b>Tags:</b>
+      <TagsInput value={newBook.tags} onChange={(tags) => {
+        setNewBook({...newBook, tags})
+      }}/>
+
       <DialogClose asChild>
         <Button onClick={() => {
           editBook(newBook).then(async r => {

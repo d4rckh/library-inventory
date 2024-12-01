@@ -8,6 +8,8 @@ import {useQueryClient} from "@tanstack/react-query";
 import {useToast} from "@/hooks/use-toast";
 import {Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {BookPlus} from "lucide-react";
+import TagsInput from "@/components/tags/TagsInput";
+import {Tag} from "@/app/lib/actions/getTags";
 
 export default function CreateBookDialog() {
   const [title, setTitle] = useState("");
@@ -15,6 +17,7 @@ export default function CreateBookDialog() {
   const [author, setAuthor] = useState("");
   const [isbn, setIsbn] = useState("");
   const [year, setYear] = useState(2000);
+  const [tags, setTags] = useState<Tag[]>([]);
 
   const query = useQueryClient();
   const { toast } = useToast();
@@ -28,18 +31,18 @@ export default function CreateBookDialog() {
         <DialogTitle>Create a new book</DialogTitle>
       </DialogHeader>
       <form
-          className={"flex flex-col gap-1"}
-          onSubmit={(e: FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            createBook({title, publisher, author, isbn, tags: [], year}).then(async ({error}) => {
-              if (!error) await query.invalidateQueries({queryKey: ["books", "list"]});
+        className={"flex flex-col gap-1"}
+        onSubmit={(e: FormEvent<HTMLFormElement>) => {
+          e.preventDefault();
+          createBook({title, publisher, author, isbn, year, tags}).then(async ({error}) => {
+            if (!error) await query.invalidateQueries({queryKey: ["books", "list"]});
 
-              toast({
-                title: error ? "Failed to create book" : "Created book successfully",
-                description: error ? error.message : "",
-              })
-            });
-          }}>
+            toast({
+              title: error ? "Failed to create book" : "Created book successfully",
+              description: error ? error.message : "",
+            })
+          });
+        }}>
         <b>Title:</b>
         <Input placeholder={"Title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
         <b>Publisher:</b>
@@ -50,6 +53,8 @@ export default function CreateBookDialog() {
         <Input placeholder={"ISBN"} value={isbn} onChange={(e) => setIsbn(e.target.value)}/>
         <b>Year:</b>
         <Input placeholder={"Year"} value={year} onChange={(e) => setYear(parseInt(e.target.value))} type={"number"}/>
+        <b>Tags:</b>
+        <TagsInput value={tags} onChange={setTags} />
 
         <DialogClose asChild>
           <Button type={"submit"}>

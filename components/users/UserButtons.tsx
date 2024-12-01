@@ -11,6 +11,14 @@ export default async function UserButtons() {
             My borrowings & reservations
         </Button>
     </Link>}
+    {
+      user?.isLibrarian &&
+        <Link href={"/librarian"}>
+            <Button variant={"outline"}>
+                Librarian Management
+            </Button>
+        </Link>
+    }
     <Link href={"/account"}>
       <Button variant="outline">
         {
