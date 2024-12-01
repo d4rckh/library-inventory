@@ -1,7 +1,6 @@
-package com.dfour.libraryplatform.security.authentication;
+package com.dfour.libraryplatform.security;
 
 import com.dfour.libraryplatform.exception.UserIsNotAuthenticatedException;
-import com.dfour.libraryplatform.security.AppUserDetails;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

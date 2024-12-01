@@ -39,12 +39,13 @@ public class StatsService {
     @PostConstruct
     public void runOnStartup() {
         log.info("Running updateDailyStats on application startup...");
+
         final LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
-        IntStream.range(0, 31).forEachOrdered(n -> this.calculateStats(today.minusDays(n)));
+        IntStream.range(0, 31).forEachOrdered(n -> this.aggregateStatsForDate(today.minusDays(n)));
     }
 
-    private void calculateStats(final LocalDate date) {
+    private void aggregateStatsForDate(final LocalDate date) {
         final StatsEntity stats = statsRepository.findByStatDate(date)
                 .orElse(new StatsEntity());
 
@@ -64,6 +65,6 @@ public class StatsService {
     public void updateDailyStats() {
         final LocalDate today = LocalDate.now(ZoneId.of("UTC"));
 
-        this.calculateStats(today);
+        this.aggregateStatsForDate(today);
     }
 }

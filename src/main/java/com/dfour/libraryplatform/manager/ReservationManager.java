@@ -32,17 +32,15 @@ public class ReservationManager {
 
         if (optionalReservationEntity.isPresent()) {
             if (Objects.equals(optionalReservationEntity.get().getUserId(),
-                    reservationRequestDto.getUserId())) {
+                    reservationRequestDto.getUserId()))
                 throw new ItemIsReservedByYouException();
-            } else {
+            else
                 throw new ItemIsReservedBySomeoneElseException();
-            }
         }
 
         // Maximum 3 reservations allowed
-        if (reservationService.getUserValidReservation(reservationRequestDto.getUserId()).size() > 2) {
+        if (reservationService.getUserValidReservation(reservationRequestDto.getUserId()).size() > 2)
             throw new TooManyReservationsException();
-        }
 
         final ReservationEntity reservation = ReservationEntity.builder()
                 .expiresAt(OffsetDateTime.now(ZoneOffset.UTC).plusDays(2))

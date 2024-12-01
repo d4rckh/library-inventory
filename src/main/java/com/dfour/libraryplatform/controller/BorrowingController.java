@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/borrowing")
@@ -31,6 +34,7 @@ public class BorrowingController {
             @RequestParam(name = "itemId", required = false) final Long itemId,
             @RequestParam(name = "isReturned", required = false) final Boolean isReturned
     ) {
+        EnsureUserId(userId);
         return borrowingService.findFiltered(
                 BorrowingFilterDto.builder()
                         .userId(userId)
@@ -45,6 +49,7 @@ public class BorrowingController {
     public BorrowingEntity borrow(
             @RequestBody final BorrowingRequestDto requestDto
     ) {
+        EnsureUserLibrarian();
         inventoryService.findById(requestDto.getItemId())
                 .orElseThrow(NotFoundException::new);
         return borrowingManager.borrowBook(requestDto);
@@ -54,6 +59,7 @@ public class BorrowingController {
     public BorrowingEntity markAsReturned(
             @PathVariable final Long id
     ) {
+        EnsureUserLibrarian();
         return borrowingService.markAsReturned(id);
     }
 
@@ -61,6 +67,7 @@ public class BorrowingController {
     public BorrowingEntity extendBorrowing(
             @RequestBody final ExtendBorrowingRequestDto requestDto
     ) {
+        EnsureUserLibrarian();
         return borrowingService.extendBorrowing(requestDto);
     }
 

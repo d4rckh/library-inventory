@@ -34,9 +34,12 @@ public class BorrowingService {
                 NotFoundException::new
         );
 
-        entity.setReturnedDate(OffsetDateTime.now());
+        entity.setReturnedDate(
+                OffsetDateTime.now()
+        );
 
         borrowings.save(entity);
+
         return entity;
     }
 

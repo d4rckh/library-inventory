@@ -32,6 +32,7 @@ public class BorrowingManager {
                     borrowingRequest.getUserId())) {
                 throw new ItemIsBorrowedException();
             }
+
             reservationService.invalidateReservation(optionalReservationEntity.get());
         }
 

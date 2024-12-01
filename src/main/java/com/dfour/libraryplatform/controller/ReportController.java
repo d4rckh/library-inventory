@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/report")
@@ -25,6 +27,7 @@ public class ReportController {
             @RequestParam(name = "format") final String format,
             @RequestParam final Map<String, String> parameters
     ) throws IOException {
+        EnsureUserLibrarian();
         reportFactoryService.generateReport(response.getOutputStream(),
                 ReportRequestDto.builder()
                         .reportId(reportId)

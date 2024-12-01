@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
+
 @RestController
 @RequestMapping("/tag")
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ public class TagController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TagEntity createTag(@RequestBody final TagEntity tag) {
+        EnsureUserLibrarian();
         return tagService.create(tag.getName());
     }
 

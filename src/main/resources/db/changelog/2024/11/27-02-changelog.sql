@@ -1,3 +1,7 @@
+-- noinspection SqlResolveForFile
+
+-- noinspection SqlResolveForFile
+
 -- liquibase formatted sql
 
 -- changeset andrei:1732737667840-1

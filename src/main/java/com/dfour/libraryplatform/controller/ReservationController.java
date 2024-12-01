@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.dfour.libraryplatform.security.authentication.AppAuthentication.GetLoggedUserDetails;
+import static com.dfour.libraryplatform.security.AppAuthentication.GetLoggedUserDetails;
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
 
 @RestController
 @RequestMapping("/reservation")
@@ -30,6 +32,7 @@ public class ReservationController {
             @RequestParam(name = "isActive", required = false) final Boolean isActive,
             @RequestParam(name = "itemId", required = false) final Long itemId
     ) {
+        EnsureUserId(userId);
         return reservationService.findFiltered(
                 ReservationFilterDto.builder()
                         .userId(userId)
@@ -43,6 +46,7 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.CREATED)
     ReservationEntity reserve(@RequestBody final ReservationRequestDto reservationRequestDto) {
         final AppUserDetails appUserDetails = GetLoggedUserDetails();
+        EnsureUserLibrarian();
         return reservationManager.reserveItem(
                 ReservationRequestDto.builder()
                         .itemId(reservationRequestDto.getItemId())
@@ -55,6 +59,7 @@ public class ReservationController {
     public ReservationEntity cancelReservation(
             @PathVariable final Long id
     ) {
+        EnsureUserLibrarian();
         return reservationService.cancelReservation(id);
     }
 
@@ -71,6 +76,7 @@ public class ReservationController {
 
     @GetMapping("/{id}")
     ReservationEntity getReservationById(@PathVariable final Long id) {
+        EnsureUserLibrarian();
         return reservationService.findById(id)
                 .orElseThrow(NotFoundException::new);
     }

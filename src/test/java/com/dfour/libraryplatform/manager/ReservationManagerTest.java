@@ -21,7 +21,6 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -102,9 +101,7 @@ public class ReservationManagerTest {
                         .expiredAt(null)
                         .build()));
 
-        assertThrows(ItemIsReservedByYouException.class, () -> {
-            reservationManager.reserveItem(reservationRequestDto);
-        });
+        assertThrows(ItemIsReservedByYouException.class, () -> reservationManager.reserveItem(reservationRequestDto));
     }
 
     @Test
@@ -132,9 +129,7 @@ public class ReservationManagerTest {
                         .expiredAt(null)
                         .build()));
 
-        assertThrows(ItemIsReservedBySomeoneElseException.class, () -> {
-            reservationManager.reserveItem(reservationRequestDto);
-        });
+        assertThrows(ItemIsReservedBySomeoneElseException.class, () -> reservationManager.reserveItem(reservationRequestDto));
     }
 
     @Test
@@ -158,9 +153,7 @@ public class ReservationManagerTest {
                         .returnedDate(null)
                         .build()));
 
-        assertThrows(ItemIsBorrowedException.class, () -> {
-            reservationManager.reserveItem(reservationRequestDto);
-        });
+        assertThrows(ItemIsBorrowedException.class, () -> reservationManager.reserveItem(reservationRequestDto));
     }
 
 }

@@ -20,6 +20,7 @@ public class HttpExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     ResponseEntity<HttpExceptionResponse> handleHttpException(final RuntimeException e) {
         log.error(e.getMessage(), e);
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 new HttpExceptionResponse(new HttpException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()))
         );

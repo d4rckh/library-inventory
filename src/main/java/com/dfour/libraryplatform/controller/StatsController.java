@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stats")
@@ -18,6 +20,7 @@ public class StatsController {
 
     @GetMapping
     List<StatsEntity> getStats() {
+        EnsureUserLibrarian();
         return statsService.getStats();
     }
 

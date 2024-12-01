@@ -6,6 +6,8 @@ import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.BookEntityMapper;
+import com.dfour.libraryplatform.security.AppAuthentication;
+import com.dfour.libraryplatform.security.AppAuthorization;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.dfour.libraryplatform.security.authentication.AppAuthentication.GetLoggedUserDetails;
+import static com.dfour.libraryplatform.security.AppAuthentication.GetLoggedUserDetails;
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
 
 @Slf4j
 @RestController
@@ -43,6 +46,7 @@ public class BookController {
             @PathVariable final Long bookId,
             @RequestBody final BookEntity incompleteBookEntity
     ) {
+        EnsureUserLibrarian();
         return bookEntityMapper.entityToDto(bookService.patch(bookId, incompleteBookEntity));
     }
 
@@ -51,6 +55,7 @@ public class BookController {
     void delete(
             @PathVariable final Long bookId
     ) {
+        EnsureUserLibrarian();
         bookService.deleteById(bookId);
     }
 
@@ -66,6 +71,7 @@ public class BookController {
     @ResponseStatus(HttpStatus.CREATED)
     BookResponseDto create(@RequestBody final BookEntity bookEntity) {
         final AppUserDetails appUserDetails = GetLoggedUserDetails();
+        EnsureUserLibrarian();
         return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
     }
 

@@ -15,7 +15,9 @@ public class TagService {
 
     public TagEntity create(final String name) {
         final TagEntity tag = new TagEntity();
+
         tag.setName(name);
+
         return tags.save(tag);
     }
 

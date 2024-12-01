@@ -47,13 +47,16 @@ public class ReservationService {
 
     public void invalidateReservation(final ReservationEntity reservation) {
         reservation.setExpiredAt(OffsetDateTime.now(ZoneOffset.UTC));
+
         reservations.save(reservation);
     }
 
     public ReservationEntity cancelReservation(final Long reservationId) {
         final ReservationEntity reservation = reservations.findById(reservationId)
                 .orElseThrow(NotFoundException::new);
+
         reservation.setCancelled(true);
+
         return reservations.save(reservation);
     }
 

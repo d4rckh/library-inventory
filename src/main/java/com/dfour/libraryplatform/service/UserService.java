@@ -60,9 +60,8 @@ public class UserService {
         final UserEntity user = users.findByEmail(userSignInRequestDto.getEmail())
                 .orElseThrow(NotFoundException::new);
 
-        if (!passwordEncoder.matches(userSignInRequestDto.getPassword(), user.getHashedPassword())) {
+        if (!passwordEncoder.matches(userSignInRequestDto.getPassword(), user.getHashedPassword()))
             throw new PasswordDoesNotMatchException();
-        }
 
         return new AccessInformationResponseDto(jwtService.generateToken(user));
     }

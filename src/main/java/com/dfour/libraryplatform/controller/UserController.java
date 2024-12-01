@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
+
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
@@ -27,6 +30,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     UserEntity getUser(@PathVariable final Long userId) {
+        EnsureUserId(userId);
         return userService.findById(userId)
                 .orElseThrow(NotFoundException::new);
     }
@@ -35,6 +39,7 @@ public class UserController {
     List<UserEntity> getUsers(
             @RequestParam(name = "email", required = false) final String emailSearch
     ) {
+        EnsureUserLibrarian();
         return userService.findFiltered(
                 UserFilterDto.builder()
                         .emailSearch(emailSearch)

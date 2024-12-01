@@ -7,7 +7,7 @@ import com.dfour.libraryplatform.entity.InventoryEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.InventoryEntityMapper;
 import com.dfour.libraryplatform.security.AppUserDetails;
-import com.dfour.libraryplatform.security.authentication.AppAuthentication;
+import com.dfour.libraryplatform.security.AppAuthentication;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserLibrarian;
 
 @RestController
 @RequestMapping("/inventory")
@@ -55,6 +57,7 @@ public class InventoryController {
     private void delete(
             @PathVariable(name = "itemId") final Long itemId
     ) {
+        EnsureUserLibrarian();
         inventoryService.deleteById(itemId);
     }
 
@@ -63,6 +66,7 @@ public class InventoryController {
             @RequestBody final InventoryEntity inventoryEntity
     ) {
         final AppUserDetails appUserDetails = AppAuthentication.GetLoggedUserDetails();
+        EnsureUserLibrarian();
         return inventoryService.createInventoryAsUser(inventoryEntity, appUserDetails.getEntity());
     }
 

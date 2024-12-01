@@ -4,7 +4,7 @@ import com.dfour.libraryplatform.domain.dto.AccessInformationResponseDto;
 import com.dfour.libraryplatform.domain.dto.UserInformationDto;
 import com.dfour.libraryplatform.domain.dto.requests.UserSignInRequestDto;
 import com.dfour.libraryplatform.entity.UserEntity;
-import com.dfour.libraryplatform.security.authentication.AppAuthentication;
+import com.dfour.libraryplatform.security.AppAuthentication;
 import com.dfour.libraryplatform.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

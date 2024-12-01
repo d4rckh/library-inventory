@@ -46,21 +46,21 @@ public class BookService {
             book.getTags().clear();
             book.getTags().addAll(incompleteBookEntity.getTags());
         }
-        if (!Objects.isNull(incompleteBookEntity.getTitle())) {
+
+        if (!Objects.isNull(incompleteBookEntity.getTitle()))
             book.setTitle(incompleteBookEntity.getTitle());
-        }
-        if (!Objects.isNull(incompleteBookEntity.getAuthor())) {
+
+        if (!Objects.isNull(incompleteBookEntity.getAuthor()))
             book.setAuthor(incompleteBookEntity.getAuthor());
-        }
-        if (!Objects.isNull(incompleteBookEntity.getIsbn())) {
+
+        if (!Objects.isNull(incompleteBookEntity.getIsbn()))
             book.setIsbn(incompleteBookEntity.getIsbn());
-        }
-        if (!Objects.isNull(incompleteBookEntity.getYear())) {
+
+        if (!Objects.isNull(incompleteBookEntity.getYear()))
             book.setYear(incompleteBookEntity.getYear());
-        }
-        if (!Objects.isNull(incompleteBookEntity.getPublisher())) {
+
+        if (!Objects.isNull(incompleteBookEntity.getPublisher()))
             book.setPublisher(incompleteBookEntity.getPublisher());
-        }
 
         return books.save(book);
     }
@@ -72,6 +72,7 @@ public class BookService {
     public BookEntity createAsUser(final BookEntity bookEntity, final UserEntity userEntity) {
         bookEntity.setUserId(userEntity.getId());
         bookEntity.setUser(userEntity);
+
         return books.save(bookEntity);
     }
 
