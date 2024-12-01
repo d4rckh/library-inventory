@@ -9,5 +9,6 @@ public class UserInformationDto {
 
     private final String email;
     private final Long id;
+    private final Boolean isLibrarian;
 
 }

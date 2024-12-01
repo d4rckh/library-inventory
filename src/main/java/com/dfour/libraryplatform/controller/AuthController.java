@@ -9,6 +9,8 @@ import com.dfour.libraryplatform.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import static com.dfour.libraryplatform.security.AppAuthentication.GetLoggedUserDetails;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
@@ -23,9 +25,10 @@ public class AuthController {
 
     @GetMapping
     UserInformationDto userInformation() {
-        final UserEntity user = AppAuthentication.GetLoggedUserDetails().getEntity();
+        final UserEntity user = GetLoggedUserDetails().getEntity();
 
         return UserInformationDto.builder()
+                .isLibrarian(user.getIsLibrarian())
                 .id(user.getId())
                 .email(user.getEmail())
                 .build();
