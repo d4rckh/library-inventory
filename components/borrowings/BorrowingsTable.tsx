@@ -1,10 +1,17 @@
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import BorrowingTableRow from "@/components/borrowings/BorrowingTableRow";
+import {useBorrowings} from "@/lib/queries/items";
+import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
 
-export default function BorrowingsTable({borrowings}: {
-  borrowings: Borrowing[];
+export default function BorrowingsTable({borrowings, user}: {
+  borrowings: Borrowing[]; user: UserInformation
 }) {
+  const {data, isSuccess} = useBorrowings({ userId: user.id });
+
+  if (!isSuccess)
+    return <>Failed to fetch borrowings</>;
+
   return <Table className={"mt-2"}>
     <TableHeader>
       <TableRow>
@@ -18,7 +25,7 @@ export default function BorrowingsTable({borrowings}: {
       </TableRow>
     </TableHeader>
     <TableBody>
-      {borrowings.map(borrowing =>
+      {data.map(borrowing =>
         <BorrowingTableRow borrowing={borrowing} key={borrowing.id}/>
       )}
     </TableBody>

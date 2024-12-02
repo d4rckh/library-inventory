@@ -15,7 +15,7 @@ export default async function Page() {
 
   return <>
     <h2 className={"text-2xl mt-5"}>My Borrowings</h2>
-    <BorrowingsTable borrowings={borrowings}/>
+    <BorrowingsTable user={user} borrowings={borrowings}/>
     <h2 className={"text-2xl mt-5"}>My Reservations</h2>
     <ReservationsTable reservations={reservations}/>
   </>
