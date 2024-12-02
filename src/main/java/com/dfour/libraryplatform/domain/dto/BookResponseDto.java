@@ -23,4 +23,6 @@ public class BookResponseDto {
     private Long totalItems;
     private Long reservedItems;
     private Long borrowedItems;
+
+    private Integer rating;
 }

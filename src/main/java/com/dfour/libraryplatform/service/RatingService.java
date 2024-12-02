@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +44,15 @@ public class RatingService {
         if (borrowingEntities.isEmpty())
             throw new RatingNotReturnedException();
 
+        Optional<RatingEntity> ratingEntities = this.find(
+                RatingFilterDto.builder().userId(userId).bookId(bookId).build()
+        ).stream().findFirst();
+
+        if (ratingEntities.isPresent()) {
+            ratingEntities.get().setRating(rating);
+            return ratingRepository.save(ratingEntities.get());
+        }
+
         RatingEntity ratingEntity = RatingEntity.builder()
                 .bookId(bookId)
                 .userId(userId)
@@ -51,4 +61,7 @@ public class RatingService {
         return ratingRepository.save(ratingEntity);
     }
 
+    public Integer averageRatingByBookId(Long bookId) {
+        return ratingRepository.averageRatingByBookId(bookId);
+    }
 }

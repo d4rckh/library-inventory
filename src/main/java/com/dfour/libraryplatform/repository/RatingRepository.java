@@ -18,4 +18,7 @@ public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
             Pageable pageable
     );
 
+    @Query("SELECT AVG(r.rating) FROM RatingEntity r WHERE r.bookId = :bookId")
+    Integer averageRatingByBookId(Long bookId);
+
 }

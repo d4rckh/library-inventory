@@ -3,6 +3,7 @@ package com.dfour.libraryplatform.mapper;
 import com.dfour.libraryplatform.domain.dto.BookResponseDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.service.InventoryService;
+import com.dfour.libraryplatform.service.RatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class BookEntityMapper {
 
     private final InventoryService inventoryService;
+    private final RatingService ratingService;
 
     public BookResponseDto entityToDto(final BookEntity entity) {
         return BookResponseDto.builder()
@@ -24,6 +26,7 @@ public class BookEntityMapper {
                 .isbn(entity.getIsbn())
                 .tags(entity.getTags())
                 .totalItems(inventoryService.countByBookId(entity.getId()))
+                .rating(ratingService.averageRatingByBookId(entity.getId()))
                 .build();
     }
 

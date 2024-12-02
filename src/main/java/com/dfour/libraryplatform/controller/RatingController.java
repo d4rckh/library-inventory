@@ -5,6 +5,8 @@ import com.dfour.libraryplatform.domain.dto.requests.RatingCreateRequestDto;
 import com.dfour.libraryplatform.entity.RatingEntity;
 import com.dfour.libraryplatform.service.RatingService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
 @RequestMapping("/rating")
 public class RatingController {
 
+    private static final Logger log = LoggerFactory.getLogger(RatingController.class);
     private final RatingService ratingService;
 
     @PostMapping
@@ -33,8 +36,8 @@ public class RatingController {
 
     @GetMapping
     List<RatingEntity> findRatings(
-            @RequestParam(name = "userId") final Long userId,
-            @RequestParam(name = "userId") final Long bookId
+            @RequestParam(name = "userId", required = false) final Long userId,
+            @RequestParam(name = "bookId", required = false) final Long bookId
     ) {
         return ratingService.find(
                 RatingFilterDto.builder()
