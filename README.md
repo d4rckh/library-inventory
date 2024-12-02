@@ -8,12 +8,14 @@
 
 ## Features
 
-### Authentication
+### Users
 - Users can sign up and sign in
 - Stateless user authentication with JWTs
+- Users can rate books they have borrowed and returned successfully
 
 ### Inventory 
 - Librarians can view the inventory of books
+- Librarians can create tags and tag books
 
 ### Reservations
 - Users can reserve books to borrow at the library
