@@ -30,10 +30,12 @@ public interface BorrowingRepository extends JpaRepository<BorrowingEntity, Long
             "public.borrowings.returned_date IS NULL AND NOW() > public.borrowings.return_date", nativeQuery = true)
     long countLateBorrows();
 
-    @Query(value = "SELECT * FROM borrowings WHERE (borrowings.user_id = :userId OR :userId IS NULL) AND " +
-            "(borrowings.item_id = :itemId OR :itemId IS NULL) AND" +
-            "(((borrowings.returned_date IS NOT NULL) = :isReturned) OR :isReturned IS NULL)", nativeQuery = true)
-    Slice<BorrowingEntity> findFiltered(Long userId, Long itemId, Boolean isReturned, PageRequest pageRequest);
+    @Query("SELECT b FROM BorrowingEntity b JOIN b.item i " +
+            "WHERE (:userId IS NULL OR b.userId = :userId) AND " +
+            "(:itemId IS NULL OR b.itemId = :itemId) AND " +
+            "(:bookId IS NULL OR i.bookId = :bookId) AND " +
+            "(:isReturned IS NULL OR (:isReturned = true AND b.returnedDate IS NOT NULL) OR (:isReturned = false AND b.returnedDate IS NULL))")
+    Slice<BorrowingEntity> findFiltered(Long userId, Long itemId, Long bookId, Boolean isReturned, PageRequest pageRequest);
 
     @Query("SELECT COUNT(r) FROM BorrowingEntity r WHERE DATE(r.borrowDate) = :date")
     long countByBorrowingDate(LocalDate date);

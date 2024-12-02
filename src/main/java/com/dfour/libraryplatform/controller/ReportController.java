@@ -2,11 +2,12 @@ package com.dfour.libraryplatform.controller;
 
 import com.dfour.libraryplatform.domain.dto.requests.ReportRequestDto;
 import com.dfour.libraryplatform.service.ReportFactoryService;
-import com.dfour.libraryplatform.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.Map;
@@ -35,7 +36,7 @@ public class ReportController {
                         .format(format)
                         .parameters(parameters)
                         .build()
-                );
+        );
     }
 
 }

@@ -5,9 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class BorrowingFilterDto {
+public class RatingFilterDto {
     private Long userId;
-    private Long itemId;
     private Long bookId;
-    private Boolean isReturned;
 }

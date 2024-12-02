@@ -1,15 +1,10 @@
 package com.dfour.libraryplatform.service.report;
 
 import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
-import com.dfour.libraryplatform.domain.dto.filters.ReservationFilterDto;
 import com.dfour.libraryplatform.domain.dto.requests.ReportRequestDto;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
-import com.dfour.libraryplatform.entity.ReservationEntity;
-import com.dfour.libraryplatform.exception.ReportMissingParamException;
 import com.dfour.libraryplatform.service.BorrowingService;
-import com.dfour.libraryplatform.service.ReservationService;
 import com.dfour.libraryplatform.service.report.common.AbstractBorrowingsReport;
-import com.dfour.libraryplatform.service.report.common.AbstractReservationsReport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

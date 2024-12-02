@@ -2,7 +2,6 @@ package com.dfour.libraryplatform.service.report.common;
 
 import com.dfour.libraryplatform.domain.dto.requests.ReportRequestDto;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
-import com.dfour.libraryplatform.entity.ReservationEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

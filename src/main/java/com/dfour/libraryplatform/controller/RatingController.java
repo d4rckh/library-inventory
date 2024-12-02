@@ -1,0 +1,46 @@
+package com.dfour.libraryplatform.controller;
+
+import com.dfour.libraryplatform.domain.dto.filters.RatingFilterDto;
+import com.dfour.libraryplatform.domain.dto.requests.RatingCreateRequestDto;
+import com.dfour.libraryplatform.entity.RatingEntity;
+import com.dfour.libraryplatform.service.RatingService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
+
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/rating")
+public class RatingController {
+
+    private final RatingService ratingService;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    RatingEntity createRating(@RequestBody final RatingCreateRequestDto ratingCreateRequestDto) {
+        EnsureUserId(ratingCreateRequestDto.getUserId());
+
+        return ratingService.createOrUpdateRating(
+                ratingCreateRequestDto.getUserId(),
+                ratingCreateRequestDto.getBookId(),
+                ratingCreateRequestDto.getRating()
+        );
+    }
+
+    @GetMapping
+    List<RatingEntity> findRatings(
+            @RequestParam(name = "userId") final Long userId,
+            @RequestParam(name = "userId") final Long bookId
+    ) {
+        return ratingService.find(
+                RatingFilterDto.builder()
+                        .bookId(bookId)
+                        .userId(userId)
+                        .build()
+        );
+    }
+}

@@ -27,17 +27,14 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ReservationManagerTest {
 
-    @Mock
-    private ReservationService reservationService;
-
-    @Mock
-    private BorrowingService borrowingService;
-
-    @InjectMocks
-    private ReservationManager reservationManager;
-
     @Captor
     ArgumentCaptor<ReservationEntity> reservationEntityArgumentCaptor;
+    @Mock
+    private ReservationService reservationService;
+    @Mock
+    private BorrowingService borrowingService;
+    @InjectMocks
+    private ReservationManager reservationManager;
 
     @Test
     void reservationManagerShouldReserve() {

@@ -2,7 +2,6 @@ package com.dfour.libraryplatform.service;
 
 import com.dfour.libraryplatform.domain.dto.requests.ReportRequestDto;
 import com.dfour.libraryplatform.exception.ReportFormatNotFoundException;
-import com.dfour.libraryplatform.exception.ReportGenerationErrorException;
 import com.dfour.libraryplatform.exception.ReportTypeNotFoundException;
 import com.dfour.libraryplatform.service.report.common.AbstractReportGeneratorService;
 import lombok.RequiredArgsConstructor;

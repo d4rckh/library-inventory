@@ -6,8 +6,6 @@ import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.BookEntityMapper;
-import com.dfour.libraryplatform.security.AppAuthentication;
-import com.dfour.libraryplatform.security.AppAuthorization;
 import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.service.BookService;
 import lombok.RequiredArgsConstructor;

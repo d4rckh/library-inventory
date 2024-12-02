@@ -3,7 +3,6 @@ package com.dfour.libraryplatform.service.report;
 import com.dfour.libraryplatform.domain.dto.filters.BorrowingFilterDto;
 import com.dfour.libraryplatform.domain.dto.requests.ReportRequestDto;
 import com.dfour.libraryplatform.entity.BorrowingEntity;
-import com.dfour.libraryplatform.exception.ReportMissingParamException;
 import com.dfour.libraryplatform.service.BorrowingService;
 import com.dfour.libraryplatform.service.report.common.AbstractBorrowingsReport;
 import lombok.RequiredArgsConstructor;

@@ -30,17 +30,12 @@ public class BorrowingService {
     }
 
     public BorrowingEntity markAsReturned(final Long borrowingId) {
-        final BorrowingEntity entity = borrowings.findById(borrowingId).orElseThrow(
-                NotFoundException::new
-        );
+        final BorrowingEntity entity = borrowings.findById(borrowingId)
+                .orElseThrow(NotFoundException::new);
 
-        entity.setReturnedDate(
-                OffsetDateTime.now()
-        );
+        entity.setReturnedDate(OffsetDateTime.now());
 
-        borrowings.save(entity);
-
-        return entity;
+        return borrowings.save(entity);
     }
 
     public List<BorrowingEntity> findByUserId(final Long userId) {
@@ -66,7 +61,7 @@ public class BorrowingService {
     }
 
     public List<BorrowingEntity> findFiltered(final BorrowingFilterDto filter) {
-        return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getIsReturned(),
+        return borrowings.findFiltered(filter.getUserId(), filter.getItemId(), filter.getBookId(), filter.getIsReturned(),
                 PageRequest.of(0, 100,
                         Sort.by(Sort.Direction.DESC, "id"))).getContent();
     }

@@ -6,8 +6,6 @@ import com.dfour.libraryplatform.domain.dto.stats.InventoryStatsDto;
 import com.dfour.libraryplatform.entity.InventoryEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.InventoryEntityMapper;
-import com.dfour.libraryplatform.security.AppUserDetails;
-import com.dfour.libraryplatform.security.AppAuthentication;
 import com.dfour.libraryplatform.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
