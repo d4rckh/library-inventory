@@ -8,6 +8,8 @@ import {getTags} from "@/app/lib/actions/getTags";
 import {getUsers, UserFilter} from "@/app/lib/actions/getUsers";
 import {getStats} from "@/app/lib/actions/getStats";
 import {getRatings, RatingFilters} from "@/app/lib/actions/getRatings";
+import {getBookById} from "@/app/lib/actions/getBookById";
+import {getLoggedInUser} from "@/app/lib/actions/getLoggedInUser";
 
 export const useItems = (filters?: InventoryFilter) => {
   return useQuery({
@@ -44,10 +46,18 @@ export const useReservations = (filters?: ReservationFilters) => {
   })
 }
 
-export const useRatings = (filters?: RatingFilters) => {
+export const useRatings = (filters?: RatingFilters, enabled?: boolean) => {
   return useQuery({
     queryKey: ["ratings", "list", filters],
     queryFn: () => getRatings(filters),
+    enabled
+  })
+}
+
+export const useBook = (id: number) => {
+  return useQuery({
+    queryKey: ["books", "detail", id],
+    queryFn: () => getBookById(id),
   })
 }
 
@@ -62,5 +72,12 @@ export const useStats = () => {
   return useQuery({
     queryKey: ["stats", "list"],
     queryFn: () => getStats(),
+  })
+}
+
+export const useLoggedUser = () => {
+  return useQuery({
+    queryKey: ["loggeduser", "detail"],
+    queryFn: () => getLoggedInUser(),
   })
 }

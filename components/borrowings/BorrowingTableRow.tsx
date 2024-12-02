@@ -6,6 +6,7 @@ import DurationDisplay from "@/components/DurationDisplay";
 import UserBadgeInformation from "@/components/users/UserBadgeInformation";
 import BookBadgeInformation from "@/components/books/BookBadgeInformation";
 import {ReactNode} from "react";
+import StarRatingSelect from "@/components/StarRatingSelect";
 
 export default function BorrowingTableRow({
                                                   borrowing, userInfo, librarianLink, children

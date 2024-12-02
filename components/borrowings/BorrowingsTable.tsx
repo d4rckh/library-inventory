@@ -1,11 +1,12 @@
+"use client";
+
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Borrowing} from "@/app/lib/actions/getUserBorrowings";
 import BorrowingTableRow from "@/components/borrowings/BorrowingTableRow";
 import {useBorrowings} from "@/lib/queries/items";
 import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
 
-export default function BorrowingsTable({borrowings, user}: {
-  borrowings: Borrowing[]; user: UserInformation
+export default function BorrowingsTable({user}: {
+  user: UserInformation
 }) {
   const {data, isSuccess} = useBorrowings({ userId: user.id });
 

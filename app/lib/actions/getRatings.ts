@@ -22,7 +22,7 @@ export async function getRatings(filters?: RatingFilters): Promise<Rating[]> {
   let params = "?";
   if (filters) {
     if (filters.userId != undefined) params += "userId=" + filters.userId + "&";
-    if (filters != undefined) params += "bookId=" + filters.bookId + "&";
+    if (filters.bookId != undefined) params += "bookId=" + filters.bookId + "&";
     if (filters.rating != undefined) params += "rating=" + filters.rating + "&";
   }
 

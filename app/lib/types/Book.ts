@@ -10,5 +10,6 @@ export type Book = {
   id: number,
   userId: number,
 
-  totalItems: number
+  totalItems: number,
+  rating: number
 }
