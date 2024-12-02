@@ -7,6 +7,7 @@ import fetchApi from "@/app/lib/fetchApi";
 import {getTags} from "@/app/lib/actions/getTags";
 import {getUsers, UserFilter} from "@/app/lib/actions/getUsers";
 import {getStats} from "@/app/lib/actions/getStats";
+import {getRatings, RatingFilters} from "@/app/lib/actions/getRatings";
 
 export const useItems = (filters?: InventoryFilter) => {
   return useQuery({
@@ -40,6 +41,13 @@ export const useReservations = (filters?: ReservationFilters) => {
   return useQuery({
     queryKey: ["reservations", "list", filters],
     queryFn: () => getReservations(filters),
+  })
+}
+
+export const useRatings = (filters?: RatingFilters) => {
+  return useQuery({
+    queryKey: ["ratings", "list", filters],
+    queryFn: () => getRatings(filters),
   })
 }
 
