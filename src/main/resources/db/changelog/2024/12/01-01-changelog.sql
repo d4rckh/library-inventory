@@ -6,7 +6,7 @@ ALTER TABLE users
 
 -- changeset andrei:1733073070361-2
 UPDATE users
-    SET is_librarian = false;
+SET is_librarian = false;
 
 -- changeset andrei:1733073070361-3
 ALTER TABLE users

@@ -20,6 +20,7 @@ public class TagController {
     @ResponseStatus(HttpStatus.CREATED)
     public TagEntity createTag(@RequestBody final TagEntity tag) {
         EnsureUserLibrarian();
+
         return tagService.create(tag.getName());
     }
 

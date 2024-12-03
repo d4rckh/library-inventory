@@ -6,7 +6,6 @@ import com.dfour.libraryplatform.domain.dto.stats.BookStatsDto;
 import com.dfour.libraryplatform.entity.BookEntity;
 import com.dfour.libraryplatform.exception.NotFoundException;
 import com.dfour.libraryplatform.mapper.BookEntityMapper;
-import com.dfour.libraryplatform.security.AppUserDetails;
 import com.dfour.libraryplatform.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,10 +32,12 @@ public class BookController {
             @RequestParam(name = "titleSearch", required = false) final String titleSearch
     ) {
         return bookService.findFiltered(
-                BookFilterDto.builder()
-                        .titleSearch(titleSearch)
-                        .build()
-        ).stream().map(bookEntityMapper::entityToDto).collect(Collectors.toList());
+                        BookFilterDto.builder()
+                                .titleSearch(titleSearch)
+                                .build()
+                ).stream()
+                .map(bookEntityMapper::entityToDto)
+                .collect(Collectors.toList());
     }
 
     @PatchMapping("/{bookId}")
@@ -45,6 +46,7 @@ public class BookController {
             @RequestBody final BookEntity incompleteBookEntity
     ) {
         EnsureUserLibrarian();
+
         return bookEntityMapper.entityToDto(bookService.patch(bookId, incompleteBookEntity));
     }
 
@@ -54,6 +56,7 @@ public class BookController {
             @PathVariable final Long bookId
     ) {
         EnsureUserLibrarian();
+
         bookService.deleteById(bookId);
     }
 
@@ -68,9 +71,14 @@ public class BookController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     BookResponseDto create(@RequestBody final BookEntity bookEntity) {
-        final AppUserDetails appUserDetails = GetLoggedUserDetails();
         EnsureUserLibrarian();
-        return bookEntityMapper.entityToDto(bookService.createAsUser(bookEntity, appUserDetails.getEntity()));
+
+        return bookEntityMapper.entityToDto(
+                bookService.createAsUser(
+                        bookEntity,
+                        GetLoggedUserDetails().getEntity()
+                )
+        );
     }
 
     @GetMapping("/stats")
