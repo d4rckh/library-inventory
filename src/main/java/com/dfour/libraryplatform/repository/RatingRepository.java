@@ -10,7 +10,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
 
-    @Query("SELECT r FROM RatingEntity r WHERE (:userId = r.userId OR :userId IS NULL) AND " +
+    @Query("SELECT r FROM RatingEntity r WHERE " +
+            "(:userId = r.userId OR :userId IS NULL) AND " +
             "(:bookId = r.bookId OR :bookId IS NULL)")
     Slice<RatingEntity> findFiltered(
             Long userId,
@@ -18,7 +19,8 @@ public interface RatingRepository extends JpaRepository<RatingEntity, Long> {
             Pageable pageable
     );
 
-    @Query("SELECT AVG(r.rating) FROM RatingEntity r WHERE r.bookId = :bookId")
+    @Query("SELECT AVG(r.rating) FROM RatingEntity r WHERE " +
+            "r.bookId = :bookId")
     Integer averageRatingByBookId(Long bookId);
 
 }

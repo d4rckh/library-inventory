@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query(value = "SELECT u FROM UserEntity u WHERE (u.email LIKE %:email% OR :email IS NULL)")
+    @Query("SELECT u FROM UserEntity u WHERE (u.email LIKE %:email% OR :email IS NULL)")
     Slice<UserEntity> findFiltered(String email, PageRequest pageRequest);
 
     Optional<UserEntity> findByEmail(String email);

@@ -6,7 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Entity
@@ -45,4 +48,10 @@ public class BookEntity {
 
     @ManyToMany
     private List<TagEntity> tags;
+
+    @CreatedDate
+    private OffsetDateTime createdAt;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 }

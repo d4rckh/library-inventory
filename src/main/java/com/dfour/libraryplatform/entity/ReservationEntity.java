@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.OffsetDateTime;
 
@@ -45,4 +47,7 @@ public class ReservationEntity {
     private OffsetDateTime expiresAt;
 
     private OffsetDateTime expiredAt;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 }

@@ -7,6 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.OffsetDateTime;
 
 @Entity
 @Data
@@ -38,4 +42,10 @@ public class InventoryEntity {
     @Column(nullable = false)
     @ColumnDefault("false")
     private Boolean deleted;
+
+    @CreatedDate
+    private OffsetDateTime createdAt;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 }

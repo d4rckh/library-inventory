@@ -13,7 +13,9 @@ import java.util.ArrayList;
 public interface InventoryRepository extends JpaRepository<InventoryEntity, Long> {
     Slice<InventoryEntity> findByBookIdAndDeletedFalse(Long bookId, Pageable pageable);
 
-    @Query(value = "SELECT * FROM inventory WHERE (inventory.book_id = :bookId OR :bookId IS NULL) AND deleted IS FALSE", nativeQuery = true)
+    @Query("SELECT i FROM InventoryEntity i WHERE " +
+            "(i.bookId = :bookId OR :bookId IS NULL) AND " +
+            "i.deleted IS FALSE")
     ArrayList<InventoryEntity> findFiltered(Long bookId);
 
     long countByBookIdAndDeletedFalse(Long bookId);

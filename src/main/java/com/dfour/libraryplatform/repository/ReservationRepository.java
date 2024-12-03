@@ -17,12 +17,18 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
 
     ArrayList<ReservationEntity> findAllByUserId(Long userId);
 
-    @Query(value = "SELECT COUNT(*) FROM reservations WHERE reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND reservations.cancelled = false", nativeQuery = true)
+    @Query("SELECT COUNT(r) FROM ReservationEntity r WHERE " +
+            "r.expiresAt > CURRENT TIMESTAMP AND " +
+            "r.expiredAt IS NULL AND " +
+            "r.cancelled = false")
     long countValidReservations();
 
-    @Query(value = "SELECT * FROM reservations WHERE (reservations.user_id = :userId OR :userId IS NULL) AND " +
-            "(reservations.item_id = :itemId OR :itemId IS NULL) AND" +
-            "(reservations.expires_at > NOW() AND reservations.expired_at IS NULL AND cancelled = false) = :isActive OR :isActive IS NULL", nativeQuery = true)
+    @Query("SELECT r FROM ReservationEntity r WHERE " +
+            "(:userId IS NULL OR r.userId = :userId) AND " +
+            "(:itemId IS NULL OR r.itemId = :itemId) AND " +
+            "(:isActive IS NULL OR " +
+            " (:isActive = true AND r.expiresAt > CURRENT_TIMESTAMP AND r.expiredAt IS NULL AND r.cancelled = false) OR " +
+            " (:isActive = false AND (r.expiresAt <= CURRENT_TIMESTAMP OR r.expiredAt IS NOT NULL OR r.cancelled = true)))")
     Slice<ReservationEntity> findFiltered(Long userId, Long itemId, Boolean isActive, PageRequest pageRequest);
 
     @Query("SELECT COUNT(r) FROM ReservationEntity r WHERE DATE(r.createdAt) = :date")

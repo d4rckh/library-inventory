@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.OffsetDateTime;
 
@@ -43,4 +45,7 @@ public class BorrowingEntity {
 
     @Column
     private OffsetDateTime returnedDate;
+
+    @UpdateTimestamp
+    private OffsetDateTime updatedAt;
 }
