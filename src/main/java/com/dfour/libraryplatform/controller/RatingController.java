@@ -19,7 +19,6 @@ import static com.dfour.libraryplatform.security.AppAuthorization.EnsureUserId;
 @RequestMapping("/rating")
 public class RatingController {
 
-    private static final Logger log = LoggerFactory.getLogger(RatingController.class);
     private final RatingService ratingService;
 
     @PostMapping

@@ -50,8 +50,8 @@ public class BookController {
         return bookEntityMapper.entityToDto(bookService.patch(bookId, incompleteBookEntity));
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{bookId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(
             @PathVariable final Long bookId
     ) {

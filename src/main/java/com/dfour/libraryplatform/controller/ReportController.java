@@ -23,7 +23,7 @@ public class ReportController {
 
     @GetMapping
     public void download(
-            HttpServletResponse response,
+            final HttpServletResponse response,
             @RequestParam(name = "reportId") final String reportId,
             @RequestParam(name = "format") final String format,
             @RequestParam final Map<String, String> parameters
