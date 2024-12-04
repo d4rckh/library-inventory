@@ -7,20 +7,20 @@ export default async function UserButtons() {
 
   return <>
     {user && <Link href={"/borrowings"}>
-        <Button variant={"outline"}>
+        <Button variant={"link"}>
             My borrowings & reservations
         </Button>
     </Link>}
     {
       user?.isLibrarian &&
         <Link href={"/librarian"}>
-            <Button variant={"outline"}>
+          <Button variant={"link"}>
                 Librarian Management
             </Button>
         </Link>
     }
     <Link href={"/account"}>
-      <Button variant="outline">
+      <Button variant={"link"}>
         {
           user ? "Logged in as " + user.email : "Log in"
         }

@@ -45,8 +45,8 @@ export default function ItemsDataTable({ bookId }: { bookId?: number }) {
             </TableCell>
             <TableCell>
               <CellActions>
-                { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} />}
                 <DeleteItemDialog item={item} />
+                { !item.borrowing && !item.reservation && <CreateBorrowingDialog user={null} item={item} />}
               </CellActions>
             </TableCell>
           </TableRow>

@@ -1,4 +1,3 @@
-import fetchApi from "@/app/lib/fetchApi";
 import {Inventory} from "@/app/lib/actions/getInventoryByBook";
 import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
 
@@ -13,7 +12,7 @@ export type Reservation = {
   expiredAt: string;
   cancelled: boolean
 }
-
-export async function getUserReservations(userId: number): Promise<Reservation[]> {
-  return (await fetchApi<Reservation[]>("/reservation/user/" + userId, ["reservation"])).data ?? [];
-}
+//
+// export async function getUserReservations(userId: number): Promise<Reservation[]> {
+//   return (await fetchApi<Reservation[]>("/reservation/user/" + userId, ["reservation"])).data ?? [];
+// }

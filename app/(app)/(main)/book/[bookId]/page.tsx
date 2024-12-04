@@ -26,11 +26,16 @@ export default async function Page({params}: {
         <p>Publisher: {book.publisher}</p>
         <p>ISBN: {book.isbn}</p>
         <p>Year: {book.year}</p>
-        <p className={"flex flex-row gap-1"}>Rating: <StarRatingSelect isClickable={false} value={book.rating} /></p>
-        <RateBookDialog bookId={book.id} />
+        <p className={"flex flex-row gap-1"}>Rating: <StarRatingSelect isClickable={false} value={book.rating} /> <RateBookDialog bookId={book.id} /></p>
+
       </CardContent>
     </Card>
-    <ItemsTable items={items}/>
-  </>
+    <Card className={"mt-2"}>
+      <CardHeader>
+        <CardTitle>All items</CardTitle>
+      </CardHeader>
+      <ItemsTable items={items} />
+    </Card>
+  </>;
 
 }

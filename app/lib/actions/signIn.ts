@@ -18,7 +18,7 @@ export async function signIn(email: string, password: string): Promise<APIError 
   if (access.data)
     set("auth", access.data.jwtToken, {
       httpOnly: true,
-      maxAge: 1800
+      maxAge: 7200
     });
 
   return null;

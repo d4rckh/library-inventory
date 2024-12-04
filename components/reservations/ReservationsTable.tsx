@@ -1,10 +1,18 @@
-import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {Reservation} from "@/app/lib/actions/getUserReservations";
-import ReservationTableRow from "@/components/reservations/ReservationTableRow";
+"use client";
 
-export default function ReservationsTable({reservations}: {
-  reservations: Reservation[];
+import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import ReservationTableRow from "@/components/reservations/ReservationTableRow";
+import {UserInformation} from "@/app/lib/actions/getLoggedInUser";
+import {useReservations} from "@/lib/queries/items";
+
+export default function ReservationsTable({user}: {
+  user: UserInformation;
 }) {
+  const {data: reservations, isSuccess, isPending} = useReservations({ userId: user.id });
+
+  if (isPending) return <>Fetching...</>;
+  if (!isSuccess && !isPending) return <>Failed to fetch reservations</>;
+
   return <Table className={"mt-2"}>
     <TableHeader>
       <TableRow>
